@@ -418,6 +418,24 @@ paths:
       responses:
         "200":
           description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  totalCount:
+                    type: number
+                  totalPages:
+                    type: number
+                  currentPage:
+                    type: number
+                  hasNextPage:
+                    type: boolean
+                  hasPrevPage:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
       tags: *a8
   /tasks/completed:
     get:
@@ -431,6 +449,24 @@ paths:
       responses:
         "200":
           description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  totalCount:
+                    type: number
+                  totalPages:
+                    type: number
+                  currentPage:
+                    type: number
+                  hasNextPage:
+                    type: boolean
+                  hasPrevPage:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
       tags: *a8
   /tasks/{githubId}:
     get:
@@ -484,23 +520,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-      tags: *a8
-  /tasks/claim:
-    patch:
-      operationId: TaskController_claimTask
-      parameters: []
-      responses:
-        "200":
-          description: ""
-      tags: *a8
-  /tasks/disclaim:
-    patch:
-      operationId: TaskController_disclaimTask
-      parameters: []
-      responses:
-        "200":
-          description: ""
+                  $ref: "#/components/schemas/TaskApply"
       tags: *a8
   /tasks/{taskId}/rewards:
     post:
@@ -512,6 +532,14 @@ paths:
           schema:
             type: string
       responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Receipt"
         "201":
           description: ""
           content:
@@ -519,7 +547,7 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
+                  $ref: "#/components/schemas/Receipt"
       tags: *a8
   /task-applies:
     get:
@@ -533,12 +561,32 @@ paths:
       responses:
         "200":
           description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  totalCount:
+                    type: number
+                  totalPages:
+                    type: number
+                  currentPage:
+                    type: number
+                  hasNextPage:
+                    type: boolean
+                  hasPrevPage:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/TaskApply"
       tags: &a9
-        - TaskApply
+        - task-applies
     post:
       operationId: TaskApplyController_applyTask
       parameters: []
       responses:
+        "200":
+          description: ""
         "201":
           description: ""
       tags: *a9
@@ -554,6 +602,24 @@ paths:
       responses:
         "200":
           description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  totalCount:
+                    type: number
+                  totalPages:
+                    type: number
+                  currentPage:
+                    type: number
+                  hasNextPage:
+                    type: boolean
+                  hasPrevPage:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/TaskApply"
       tags: *a9
   /task-applies/{id}/withdraw:
     patch:
@@ -885,6 +951,19 @@ components:
         - repo
         - title
         - body
+    GithubUser:
+      type: object
+      properties:
+        login:
+          type: string
+        htmlUrl:
+          type: string
+        avatarUrl:
+          type: string
+      required:
+        - login
+        - htmlUrl
+        - avatarUrl
     SchemaObjectId:
       type: object
       properties: {}
@@ -911,7 +990,7 @@ components:
           format: date-time
           type: string
         assignee:
-          type: object
+          $ref: "#/components/schemas/GithubUser"
         assignees:
           type: array
           items:
@@ -921,7 +1000,7 @@ components:
           items:
             type: string
         user:
-          type: object
+          $ref: "#/components/schemas/GithubUser"
         labelsWithColor:
           type: array
           items:
@@ -958,3 +1037,80 @@ components:
     TaskRequest:
       type: object
       properties: {}
+    TaskApply:
+      type: object
+      properties:
+        githubId:
+          type: number
+        project:
+          $ref: "#/components/schemas/SchemaObjectId"
+        task:
+          $ref: "#/components/schemas/SchemaObjectId"
+        user:
+          type: object
+        comment:
+          type: string
+        htmlUrl:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        canceledAt:
+          format: date-time
+          type: string
+        approvedAt:
+          format: date-time
+          type: string
+        namespace:
+          $ref: "#/components/schemas/SchemaObjectId"
+        projectName:
+          type: string
+        taskTitle:
+          type: string
+      required:
+        - githubId
+        - project
+        - task
+        - user
+        - comment
+        - htmlUrl
+        - createdAt
+        - updatedAt
+        - canceledAt
+        - approvedAt
+        - namespace
+        - projectName
+        - taskTitle
+    Receipt:
+      type: object
+      properties:
+        user:
+          type: string
+        source:
+          type: object
+        type:
+          type: string
+        detail:
+          type: object
+        transactionInfo:
+          type: object
+        status:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - user
+        - source
+        - type
+        - detail
+        - transactionInfo
+        - status
+        - createdAt
+        - updatedAt

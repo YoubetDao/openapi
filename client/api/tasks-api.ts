@@ -22,6 +22,12 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import type { Receipt } from '../models';
+// @ts-ignore
+import type { Task } from '../models';
+// @ts-ignore
+import type { TaskApply } from '../models';
+// @ts-ignore
 import type { TaskControllerGetTasks200Response } from '../models';
 /**
  * TasksApi - axios parameter creator
@@ -29,64 +35,6 @@ import type { TaskControllerGetTasks200Response } from '../models';
  */
 export const TasksApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        taskControllerClaimTask: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/tasks/claim`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        taskControllerDisclaimTask: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            const localVarPath = `/tasks/disclaim`;
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
         /**
          * 
          * @param {string} projectList 
@@ -373,33 +321,11 @@ export const TasksApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async taskControllerClaimTask(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerClaimTask(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TasksApi.taskControllerClaimTask']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async taskControllerDisclaimTask(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerDisclaimTask(options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['TasksApi.taskControllerDisclaimTask']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
-        /**
-         * 
          * @param {string} projectList 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetCompletedTasks(projectList: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async taskControllerGetCompletedTasks(projectList: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetCompletedTasks(projectList, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TasksApi.taskControllerGetCompletedTasks']?.[localVarOperationServerIndex]?.url;
@@ -411,7 +337,7 @@ export const TasksApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetTask(githubId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async taskControllerGetTask(githubId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Task>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetTask(githubId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TasksApi.taskControllerGetTask']?.[localVarOperationServerIndex]?.url;
@@ -439,7 +365,7 @@ export const TasksApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGrantRewards(taskId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async taskControllerGrantRewards(taskId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Receipt>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGrantRewards(taskId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TasksApi.taskControllerGrantRewards']?.[localVarOperationServerIndex]?.url;
@@ -451,7 +377,7 @@ export const TasksApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerMyTaskApply(taskGithubId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async taskControllerMyTaskApply(taskGithubId: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<TaskApply>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerMyTaskApply(taskGithubId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TasksApi.taskControllerMyTaskApply']?.[localVarOperationServerIndex]?.url;
@@ -463,7 +389,7 @@ export const TasksApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerMyTasks(states: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async taskControllerMyTasks(states: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerMyTasks(states, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TasksApi.taskControllerMyTasks']?.[localVarOperationServerIndex]?.url;
@@ -494,27 +420,11 @@ export const TasksApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        taskControllerClaimTask(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.taskControllerClaimTask(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        taskControllerDisclaimTask(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.taskControllerDisclaimTask(options).then((request) => request(axios, basePath));
-        },
-        /**
-         * 
          * @param {string} projectList 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetCompletedTasks(projectList: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        taskControllerGetCompletedTasks(projectList: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
             return localVarFp.taskControllerGetCompletedTasks(projectList, options).then((request) => request(axios, basePath));
         },
         /**
@@ -523,7 +433,7 @@ export const TasksApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetTask(githubId: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        taskControllerGetTask(githubId: number, options?: RawAxiosRequestConfig): AxiosPromise<Task> {
             return localVarFp.taskControllerGetTask(githubId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -545,7 +455,7 @@ export const TasksApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGrantRewards(taskId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        taskControllerGrantRewards(taskId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Receipt>> {
             return localVarFp.taskControllerGrantRewards(taskId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -554,7 +464,7 @@ export const TasksApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerMyTaskApply(taskGithubId: number, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        taskControllerMyTaskApply(taskGithubId: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<TaskApply>> {
             return localVarFp.taskControllerMyTaskApply(taskGithubId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -563,7 +473,7 @@ export const TasksApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerMyTasks(states: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        taskControllerMyTasks(states: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
             return localVarFp.taskControllerMyTasks(states, options).then((request) => request(axios, basePath));
         },
         /**
@@ -587,28 +497,12 @@ export const TasksApiFactory = function (configuration?: Configuration, basePath
 export interface TasksApiInterface {
     /**
      * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TasksApiInterface
-     */
-    taskControllerClaimTask(options?: RawAxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TasksApiInterface
-     */
-    taskControllerDisclaimTask(options?: RawAxiosRequestConfig): AxiosPromise<void>;
-
-    /**
-     * 
      * @param {string} projectList 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TasksApiInterface
      */
-    taskControllerGetCompletedTasks(projectList: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    taskControllerGetCompletedTasks(projectList: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -617,7 +511,7 @@ export interface TasksApiInterface {
      * @throws {RequiredError}
      * @memberof TasksApiInterface
      */
-    taskControllerGetTask(githubId: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    taskControllerGetTask(githubId: number, options?: RawAxiosRequestConfig): AxiosPromise<Task>;
 
     /**
      * 
@@ -639,7 +533,7 @@ export interface TasksApiInterface {
      * @throws {RequiredError}
      * @memberof TasksApiInterface
      */
-    taskControllerGrantRewards(taskId: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    taskControllerGrantRewards(taskId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Receipt>>;
 
     /**
      * 
@@ -648,7 +542,7 @@ export interface TasksApiInterface {
      * @throws {RequiredError}
      * @memberof TasksApiInterface
      */
-    taskControllerMyTaskApply(taskGithubId: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    taskControllerMyTaskApply(taskGithubId: number, options?: RawAxiosRequestConfig): AxiosPromise<Array<TaskApply>>;
 
     /**
      * 
@@ -657,7 +551,7 @@ export interface TasksApiInterface {
      * @throws {RequiredError}
      * @memberof TasksApiInterface
      */
-    taskControllerMyTasks(states: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    taskControllerMyTasks(states: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -678,26 +572,6 @@ export interface TasksApiInterface {
  * @extends {BaseAPI}
  */
 export class TasksApi extends BaseAPI implements TasksApiInterface {
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TasksApi
-     */
-    public taskControllerClaimTask(options?: RawAxiosRequestConfig) {
-        return TasksApiFp(this.configuration).taskControllerClaimTask(options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof TasksApi
-     */
-    public taskControllerDisclaimTask(options?: RawAxiosRequestConfig) {
-        return TasksApiFp(this.configuration).taskControllerDisclaimTask(options).then((request) => request(this.axios, this.basePath));
-    }
-
     /**
      * 
      * @param {string} projectList 

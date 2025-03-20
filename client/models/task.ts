@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GithubUser } from './github-user';
 
 /**
  * 
@@ -70,10 +73,10 @@ export interface Task {
     'closedAt': string;
     /**
      * 
-     * @type {object}
+     * @type {GithubUser}
      * @memberof Task
      */
-    'assignee': object;
+    'assignee': GithubUser;
     /**
      * 
      * @type {Array<string>}
@@ -88,10 +91,10 @@ export interface Task {
     'labels': Array<string>;
     /**
      * 
-     * @type {object}
+     * @type {GithubUser}
      * @memberof Task
      */
-    'user': object;
+    'user': GithubUser;
     /**
      * 
      * @type {Array<string>}

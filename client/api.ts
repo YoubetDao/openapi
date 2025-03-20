@@ -25,7 +25,7 @@ export * from './api/pull-request-api';
 export * from './api/receipt-api';
 export * from './api/report-api';
 export * from './api/reward-api';
-export * from './api/task-apply-api';
+export * from './api/task-applies-api';
 export * from './api/tasks-api';
 export * from './api/tutorial-api';
 export * from './api/user-api';
