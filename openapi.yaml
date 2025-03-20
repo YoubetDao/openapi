@@ -1,0 +1,960 @@
+openapi: 3.0.0
+paths:
+  /:
+    get:
+      operationId: AppController_getHello
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: string
+      tags:
+        - App
+  /github-webhook:
+    post:
+      operationId: GithubController_handleWebhook
+      parameters: []
+      responses:
+        "201":
+          description: ""
+      tags:
+        - Github
+  /receipts/mine:
+    get:
+      operationId: ReceiptController_myReceipts
+      parameters:
+        - name: type
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: &a1
+        - Receipt
+  /receipts:
+    get:
+      operationId: ReceiptController_getReceipts
+      parameters:
+        - name: namespace
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: periodId
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a1
+  /receipts/{id}/claim:
+    patch:
+      operationId: ReceiptController_claimReceipt
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: *a1
+  /youbet/wallet:
+    get:
+      operationId: YoubetController_getLinkedWallet
+      parameters:
+        - name: github
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: &a2
+        - Youbet
+    post:
+      operationId: YoubetController_linkWallet
+      parameters: []
+      responses:
+        "201":
+          description: ""
+      tags: *a2
+  /youbet/user-points:
+    get:
+      operationId: YoubetController_getUserPoints
+      parameters:
+        - name: address
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: number
+      tags: *a2
+  /youbet/all-tasks:
+    get:
+      operationId: YoubetController_getAllTasks
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags: *a2
+  /users/me:
+    get:
+      operationId: UserController_myInfo
+      parameters: []
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: &a3
+        - User
+  /users/leaderboard:
+    get:
+      operationId: UserController_leaderboard
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      tags: *a3
+  /rewards:
+    get:
+      operationId: RewardController_getRewards
+      parameters:
+        - name: status
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: projectList
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: recipientList
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: &a4
+        - Reward
+    post:
+      operationId: RewardController_createReward
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateRewardDto"
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: *a4
+  /my-rewards:
+    get:
+      operationId: RewardController_getMyRewards
+      parameters:
+        - name: status
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: projectList
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a4
+  /rewards/{uuid}/signature:
+    get:
+      operationId: RewardController_getRewardSignature
+      parameters:
+        - name: uuid
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a4
+  /github/orgs/{org}/repos:
+    get:
+      operationId: OrgController_getOrgRepos
+      parameters:
+        - name: org
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags: &a5
+        - Org
+  /github/orgs:
+    get:
+      operationId: OrgController_getUserOrgs
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      tags: *a5
+  /issues:
+    post:
+      operationId: IssueController_createIssue
+      parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/CreateIssueDto"
+      responses:
+        "201":
+          description: ""
+      tags:
+        - Issue
+  /periods:
+    post:
+      operationId: PeriodController_createPeriod
+      parameters: []
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: &a6
+        - Period
+    get:
+      operationId: PeriodController_getPeriods
+      parameters:
+        - name: projectId
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: sortDirection
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a6
+  /periods/{periodId}/grant-rewards:
+    post:
+      operationId: PeriodController_grantRewards
+      parameters:
+        - name: periodId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags: *a6
+  /project/{projectGithubId}/pull-requests:
+    get:
+      operationId: PullRequestController_getProjectPullRequests
+      parameters:
+        - name: projectGithubId
+          required: true
+          in: path
+          schema:
+            type: number
+        - name: state
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: &a7
+        - PullRequest
+  /pull-requests:
+    get:
+      operationId: PullRequestController_getPullRequests
+      parameters:
+        - name: projectList
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: state
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: namespace
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a7
+  /tasks:
+    get:
+      operationId: TaskController_getTasks
+      parameters:
+        - name: org
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: project
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: assignee
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: states
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: assignmentStatus
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  totalCount:
+                    type: number
+                  totalPages:
+                    type: number
+                  currentPage:
+                    type: number
+                  hasNextPage:
+                    type: boolean
+                  hasPrevPage:
+                    type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
+      tags: &a8
+        - tasks
+  /tasks/mine:
+    get:
+      operationId: TaskController_myTasks
+      parameters:
+        - name: states
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a8
+  /tasks/completed:
+    get:
+      operationId: TaskController_getCompletedTasks
+      parameters:
+        - name: projectList
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a8
+  /tasks/{githubId}:
+    get:
+      operationId: TaskController_getTask
+      parameters:
+        - name: githubId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Task"
+      tags: *a8
+    patch:
+      operationId: TaskController_updateTask
+      parameters:
+        - name: githubId
+          required: true
+          in: path
+          schema:
+            type: number
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TaskRequest"
+      responses:
+        "200":
+          description: ""
+      tags: *a8
+  /tasks/{taskGithubId}/my-applies:
+    get:
+      operationId: TaskController_myTaskApply
+      parameters:
+        - name: taskGithubId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags: *a8
+  /tasks/claim:
+    patch:
+      operationId: TaskController_claimTask
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      tags: *a8
+  /tasks/disclaim:
+    patch:
+      operationId: TaskController_disclaimTask
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      tags: *a8
+  /tasks/{taskId}/rewards:
+    post:
+      operationId: TaskController_grantRewards
+      parameters:
+        - name: taskId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags: *a8
+  /task-applies:
+    get:
+      operationId: TaskApplyController_getTaskApplies
+      parameters:
+        - name: namespace
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: &a9
+        - TaskApply
+    post:
+      operationId: TaskApplyController_applyTask
+      parameters: []
+      responses:
+        "201":
+          description: ""
+      tags: *a9
+  /task-applies/mine:
+    get:
+      operationId: TaskApplyController_myTaskApplies
+      parameters:
+        - name: project
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a9
+  /task-applies/{id}/withdraw:
+    patch:
+      operationId: TaskApplyController_withdrawApply
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a9
+  /task-applies/{id}/approve:
+    patch:
+      operationId: TaskApplyController_approveTaskApply
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a9
+  /task-applies/{id}/reject:
+    patch:
+      operationId: TaskApplyController_rejectTaskApply
+      parameters:
+        - name: id
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a9
+  /projects:
+    get:
+      operationId: ProjectController_getProjects
+      parameters:
+        - name: tags
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: namespace
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: onlyPeriodicReward
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: &a10
+        - Project
+  /projects/{githubId}:
+    get:
+      operationId: ProjectController_getProjectDetail
+      parameters:
+        - name: githubId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: *a10
+  /projects/{projectId}:
+    patch:
+      operationId: ProjectController_modifyProject
+      parameters:
+        - name: projectId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: *a10
+  /projects/import:
+    post:
+      operationId: ProjectController_importProjectForUser
+      parameters: []
+      responses:
+        "201":
+          description: ""
+      tags: *a10
+  /tutorials:
+    get:
+      operationId: TutorialController_getTutorials
+      parameters:
+        - name: categories
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: &a11
+        - Tutorial
+  /tutorials/{githubId}:
+    get:
+      operationId: TutorialController_getTutorialContent
+      parameters:
+        - name: githubId
+          required: true
+          in: path
+          schema:
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *a11
+  /tutorials/{owner}/{repo}/chapters:
+    get:
+      operationId: TutorialController_getMdbookChapters
+      parameters:
+        - name: owner
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: repo
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: *a11
+  /tutorials/{owner}/{repo}/content:
+    get:
+      operationId: TutorialController_fetchMarkdown
+      parameters:
+        - name: owner
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: repo
+          required: true
+          in: path
+          schema:
+            type: string
+        - name: path
+          required: true
+          in: query
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: string
+      tags: *a11
+  /projects/{projectId}/reports:
+    get:
+      operationId: ReportController_listReports
+      parameters:
+        - name: projectId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+      tags: &a12
+        - Report
+  /projects/{projectId}/reports/summarize:
+    post:
+      operationId: ReportController_summarizeProjectReport
+      parameters:
+        - name: projectId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "201":
+          description: ""
+          content:
+            application/json:
+              schema:
+                type: object
+      tags: *a12
+  /auth/github:
+    get:
+      operationId: AuthController_githubAuth
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      tags: &a13
+        - Auth
+  /auth/github/callback:
+    get:
+      operationId: AuthController_githubAuthRedirect
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      tags: *a13
+info:
+  title: YouBet Task API
+  description: YouBet Task RESTful API 文档
+  version: 1.0.0
+  contact: {}
+tags: []
+servers: []
+components:
+  securitySchemes:
+    bearer:
+      scheme: bearer
+      bearerFormat: JWT
+      type: http
+  schemas:
+    TransactionInfoDto:
+      type: object
+      properties:
+        network:
+          type: string
+        from:
+          type: string
+        to:
+          type: string
+        amount:
+          type: number
+        decimals:
+          type: number
+        symbol:
+          type: string
+        transactionId:
+          type: string
+      required:
+        - network
+        - from
+        - to
+        - amount
+        - decimals
+        - symbol
+        - transactionId
+    SourceDto:
+      type: object
+      properties:
+        pullRequestGithubId:
+          type: number
+        taskGithubId:
+          type: number
+        projectGithubId:
+          type: number
+    CreateRewardDto:
+      type: object
+      properties:
+        recipientName:
+          type: string
+        status:
+          type: string
+        type:
+          type: string
+        transactionInfo:
+          $ref: "#/components/schemas/TransactionInfoDto"
+        source:
+          $ref: "#/components/schemas/SourceDto"
+      required:
+        - recipientName
+        - status
+        - type
+        - transactionInfo
+        - source
+    CreateIssueDto:
+      type: object
+      properties:
+        owner:
+          type: string
+        repo:
+          type: string
+        title:
+          type: string
+        body:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        assignees:
+          type: array
+          items:
+            type: string
+      required:
+        - owner
+        - repo
+        - title
+        - body
+    SchemaObjectId:
+      type: object
+      properties: {}
+    Task:
+      type: object
+      properties:
+        githubId:
+          type: number
+        project:
+          type: object
+        title:
+          type: string
+        body:
+          type: string
+        state:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        closedAt:
+          format: date-time
+          type: string
+        assignee:
+          type: object
+        assignees:
+          type: array
+          items:
+            type: string
+        labels:
+          type: array
+          items:
+            type: string
+        user:
+          type: object
+        labelsWithColor:
+          type: array
+          items:
+            type: string
+        htmlUrl:
+          type: string
+        namespace:
+          $ref: "#/components/schemas/SchemaObjectId"
+        reward:
+          type: object
+        rewardGranted:
+          type: boolean
+        level:
+          type: string
+      required:
+        - githubId
+        - project
+        - title
+        - body
+        - state
+        - createdAt
+        - updatedAt
+        - closedAt
+        - assignee
+        - assignees
+        - labels
+        - user
+        - labelsWithColor
+        - htmlUrl
+        - namespace
+        - reward
+        - rewardGranted
+        - level
+    TaskRequest:
+      type: object
+      properties: {}
