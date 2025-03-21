@@ -14,12 +14,11 @@ async function getAllTasks() {
   try {
     const response = await taskApi.taskControllerGetTasks(
       'youbetdao',
-      '67862316d322f7e0a8f60ccd',
-      'wfnuser',
+      '',
+      '',
       '',
       '',
     );
-    console.log('任务列表:', response.data);
     return response.data;
   } catch (error) {
     console.error('获取任务失败:', error);
