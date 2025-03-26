@@ -29,6 +29,8 @@ import type { Task } from '../models';
 import type { TaskApply } from '../models';
 // @ts-ignore
 import type { TaskControllerGetTasks200Response } from '../models';
+// @ts-ignore
+import type { UpdateTaskDto } from '../models';
 /**
  * TasksApi - axios parameter creator
  * @export
@@ -110,10 +112,12 @@ export const TasksApiAxiosParamCreator = function (configuration?: Configuration
          * @param {string} assignee 
          * @param {string} states 
          * @param {string} assignmentStatus 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetTasks: async (project: string, assignee: string, states: string, assignmentStatus: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskControllerGetTasks: async (project: string, assignee: string, states: string, assignmentStatus: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'project' is not null or undefined
             assertParamExists('taskControllerGetTasks', 'project', project)
             // verify required parameter 'assignee' is not null or undefined
@@ -148,6 +152,14 @@ export const TasksApiAxiosParamCreator = function (configuration?: Configuration
 
             if (assignmentStatus !== undefined) {
                 localVarQueryParameter['assignmentStatus'] = assignmentStatus;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
 
@@ -266,15 +278,15 @@ export const TasksApiAxiosParamCreator = function (configuration?: Configuration
         /**
          * 
          * @param {number} githubId 
-         * @param {object} body 
+         * @param {UpdateTaskDto} updateTaskDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerUpdateTask: async (githubId: number, body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskControllerUpdateTask: async (githubId: number, updateTaskDto: UpdateTaskDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'githubId' is not null or undefined
             assertParamExists('taskControllerUpdateTask', 'githubId', githubId)
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('taskControllerUpdateTask', 'body', body)
+            // verify required parameter 'updateTaskDto' is not null or undefined
+            assertParamExists('taskControllerUpdateTask', 'updateTaskDto', updateTaskDto)
             const localVarPath = `/tasks/{githubId}`
                 .replace(`{${"githubId"}}`, encodeURIComponent(String(githubId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -295,7 +307,7 @@ export const TasksApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(updateTaskDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -342,11 +354,13 @@ export const TasksApiFp = function(configuration?: Configuration) {
          * @param {string} assignee 
          * @param {string} states 
          * @param {string} assignmentStatus 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetTasks(project, assignee, states, assignmentStatus, options);
+        async taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetTasks(project, assignee, states, assignmentStatus, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TasksApi.taskControllerGetTasks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -390,12 +404,12 @@ export const TasksApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {number} githubId 
-         * @param {object} body 
+         * @param {UpdateTaskDto} updateTaskDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerUpdateTask(githubId: number, body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerUpdateTask(githubId, body, options);
+        async taskControllerUpdateTask(githubId: number, updateTaskDto: UpdateTaskDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerUpdateTask(githubId, updateTaskDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TasksApi.taskControllerUpdateTask']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -434,11 +448,13 @@ export const TasksApiFactory = function (configuration?: Configuration, basePath
          * @param {string} assignee 
          * @param {string} states 
          * @param {string} assignmentStatus 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
-            return localVarFp.taskControllerGetTasks(project, assignee, states, assignmentStatus, options).then((request) => request(axios, basePath));
+        taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+            return localVarFp.taskControllerGetTasks(project, assignee, states, assignmentStatus, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -470,12 +486,12 @@ export const TasksApiFactory = function (configuration?: Configuration, basePath
         /**
          * 
          * @param {number} githubId 
-         * @param {object} body 
+         * @param {UpdateTaskDto} updateTaskDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerUpdateTask(githubId: number, body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.taskControllerUpdateTask(githubId, body, options).then((request) => request(axios, basePath));
+        taskControllerUpdateTask(githubId: number, updateTaskDto: UpdateTaskDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.taskControllerUpdateTask(githubId, updateTaskDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -510,11 +526,13 @@ export interface TasksApiInterface {
      * @param {string} assignee 
      * @param {string} states 
      * @param {string} assignmentStatus 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TasksApiInterface
      */
-    taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -546,12 +564,12 @@ export interface TasksApiInterface {
     /**
      * 
      * @param {number} githubId 
-     * @param {object} body 
+     * @param {UpdateTaskDto} updateTaskDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TasksApiInterface
      */
-    taskControllerUpdateTask(githubId: number, body: object, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    taskControllerUpdateTask(githubId: number, updateTaskDto: UpdateTaskDto, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
 }
 
@@ -590,12 +608,14 @@ export class TasksApi extends BaseAPI implements TasksApiInterface {
      * @param {string} assignee 
      * @param {string} states 
      * @param {string} assignmentStatus 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TasksApi
      */
-    public taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig) {
-        return TasksApiFp(this.configuration).taskControllerGetTasks(project, assignee, states, assignmentStatus, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return TasksApiFp(this.configuration).taskControllerGetTasks(project, assignee, states, assignmentStatus, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -634,13 +654,13 @@ export class TasksApi extends BaseAPI implements TasksApiInterface {
     /**
      * 
      * @param {number} githubId 
-     * @param {object} body 
+     * @param {UpdateTaskDto} updateTaskDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TasksApi
      */
-    public taskControllerUpdateTask(githubId: number, body: object, options?: RawAxiosRequestConfig) {
-        return TasksApiFp(this.configuration).taskControllerUpdateTask(githubId, body, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerUpdateTask(githubId: number, updateTaskDto: UpdateTaskDto, options?: RawAxiosRequestConfig) {
+        return TasksApiFp(this.configuration).taskControllerUpdateTask(githubId, updateTaskDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

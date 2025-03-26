@@ -223,8 +223,13 @@ paths:
             schema:
               $ref: "#/components/schemas/CreateIssueDto"
       responses:
-        "201":
+        default:
           description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GithubIssueDto"
+      summary: 创建Issue
       tags:
         - Issue
   /periods:
@@ -332,6 +337,20 @@ paths:
           in: query
           schema:
             type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
       responses:
         "200":
           description: ""
@@ -447,7 +466,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TaskRequest"
+              $ref: "#/components/schemas/UpdateTaskDto"
       responses:
         "200":
           description: ""
@@ -783,7 +802,228 @@ components:
       properties: {}
     CreateIssueDto:
       type: object
-      properties: {}
+      properties:
+        owner:
+          type: string
+        repo:
+          type: string
+        title:
+          type: string
+        body:
+          type: string
+        labels:
+          type: array
+          items:
+            type: string
+        assignees:
+          type: array
+          items:
+            type: string
+      required:
+        - owner
+        - repo
+        - title
+        - body
+        - labels
+        - assignees
+    GithubUserDto:
+      type: object
+      properties:
+        login:
+          type: string
+        id:
+          type: number
+        node_id:
+          type: string
+        avatar_url:
+          type: string
+        gravatar_id:
+          type: string
+        url:
+          type: string
+        html_url:
+          type: string
+        type:
+          type: string
+        site_admin:
+          type: boolean
+      required:
+        - login
+        - id
+        - node_id
+        - avatar_url
+        - url
+        - html_url
+        - type
+        - site_admin
+    GithubLabelDto:
+      type: object
+      properties:
+        id:
+          type: number
+        node_id:
+          type: string
+        url:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        color:
+          type: string
+        default:
+          type: boolean
+      required:
+        - id
+        - node_id
+        - url
+        - name
+        - color
+        - default
+    GithubMilestoneDto:
+      type: object
+      properties:
+        url:
+          type: string
+        html_url:
+          type: string
+        labels_url:
+          type: string
+        id:
+          type: number
+        node_id:
+          type: string
+        number:
+          type: number
+        state:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        creator:
+          $ref: "#/components/schemas/GithubUserDto"
+        open_issues:
+          type: number
+        closed_issues:
+          type: number
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        closed_at:
+          type: string
+        due_on:
+          type: string
+      required:
+        - url
+        - html_url
+        - labels_url
+        - id
+        - node_id
+        - number
+        - state
+        - title
+        - creator
+        - open_issues
+        - closed_issues
+        - created_at
+        - updated_at
+    GithubPullRequestRefDto:
+      type: object
+      properties:
+        url:
+          type: string
+        html_url:
+          type: string
+        diff_url:
+          type: string
+        patch_url:
+          type: string
+      required:
+        - url
+        - html_url
+        - diff_url
+        - patch_url
+    GithubIssueDto:
+      type: object
+      properties:
+        id:
+          type: number
+        node_id:
+          type: string
+        url:
+          type: string
+        repository_url:
+          type: string
+        labels_url:
+          type: string
+        comments_url:
+          type: string
+        events_url:
+          type: string
+        html_url:
+          type: string
+        number:
+          type: number
+        state:
+          type: string
+        title:
+          type: string
+        body:
+          type: string
+        user:
+          $ref: "#/components/schemas/GithubUserDto"
+        labels:
+          type: array
+          items:
+            $ref: "#/components/schemas/GithubLabelDto"
+        assignee:
+          $ref: "#/components/schemas/GithubUserDto"
+        assignees:
+          type: array
+          items:
+            $ref: "#/components/schemas/GithubUserDto"
+        milestone:
+          $ref: "#/components/schemas/GithubMilestoneDto"
+        locked:
+          type: boolean
+        active_lock_reason:
+          type: string
+        comments:
+          type: number
+        pull_request:
+          $ref: "#/components/schemas/GithubPullRequestRefDto"
+        closed_at:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        closed_by:
+          $ref: "#/components/schemas/GithubUserDto"
+        author_association:
+          type: string
+        state_reason:
+          type: string
+      required:
+        - id
+        - node_id
+        - url
+        - repository_url
+        - labels_url
+        - comments_url
+        - events_url
+        - html_url
+        - number
+        - state
+        - title
+        - body
+        - user
+        - comments
+        - created_at
+        - updated_at
+        - author_association
     GithubUser:
       type: object
       properties:
@@ -800,6 +1040,22 @@ components:
     SchemaObjectId:
       type: object
       properties: {}
+    RewardDetail:
+      type: object
+      properties:
+        amount:
+          type: number
+        decimals:
+          type: number
+        symbol:
+          type: string
+        tokenAddress:
+          type: string
+      required:
+        - amount
+        - decimals
+        - symbol
+        - tokenAddress
     Task:
       type: object
       properties:
@@ -845,7 +1101,7 @@ components:
         namespace:
           $ref: "#/components/schemas/SchemaObjectId"
         reward:
-          type: object
+          $ref: "#/components/schemas/RewardDetail"
         rewardGranted:
           type: boolean
         level:
@@ -870,9 +1126,16 @@ components:
         - reward
         - rewardGranted
         - level
-    TaskRequest:
+    UpdateTaskDto:
       type: object
-      properties: {}
+      properties:
+        reward:
+          $ref: "#/components/schemas/RewardDetail"
+        level:
+          type: string
+      required:
+        - reward
+        - level
     TaskApply:
       type: object
       properties:

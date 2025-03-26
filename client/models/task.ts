@@ -16,6 +16,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { GithubUser } from './github-user';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RewardDetail } from './reward-detail';
 
 /**
  * 
@@ -121,10 +124,10 @@ export interface Task {
     'namespace': object;
     /**
      * 
-     * @type {object}
+     * @type {RewardDetail}
      * @memberof Task
      */
-    'reward': object;
+    'reward': RewardDetail;
     /**
      * 
      * @type {boolean}

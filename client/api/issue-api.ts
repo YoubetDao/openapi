@@ -21,6 +21,10 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+// @ts-ignore
+import type { CreateIssueDto } from '../models';
+// @ts-ignore
+import type { GithubIssueDto } from '../models';
 /**
  * IssueApi - axios parameter creator
  * @export
@@ -29,13 +33,14 @@ export const IssueApiAxiosParamCreator = function (configuration?: Configuration
     return {
         /**
          * 
-         * @param {object} body 
+         * @summary 创建Issue
+         * @param {CreateIssueDto} createIssueDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        issueControllerCreateIssue: async (body: object, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'body' is not null or undefined
-            assertParamExists('issueControllerCreateIssue', 'body', body)
+        issueControllerCreateIssue: async (createIssueDto: CreateIssueDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'createIssueDto' is not null or undefined
+            assertParamExists('issueControllerCreateIssue', 'createIssueDto', createIssueDto)
             const localVarPath = `/issues`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -55,7 +60,7 @@ export const IssueApiAxiosParamCreator = function (configuration?: Configuration
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-            localVarRequestOptions.data = serializeDataIfNeeded(body, localVarRequestOptions, configuration)
+            localVarRequestOptions.data = serializeDataIfNeeded(createIssueDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -74,12 +79,13 @@ export const IssueApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {object} body 
+         * @summary 创建Issue
+         * @param {CreateIssueDto} createIssueDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async issueControllerCreateIssue(body: object, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.issueControllerCreateIssue(body, options);
+        async issueControllerCreateIssue(createIssueDto: CreateIssueDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GithubIssueDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.issueControllerCreateIssue(createIssueDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['IssueApi.issueControllerCreateIssue']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -96,12 +102,13 @@ export const IssueApiFactory = function (configuration?: Configuration, basePath
     return {
         /**
          * 
-         * @param {object} body 
+         * @summary 创建Issue
+         * @param {CreateIssueDto} createIssueDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        issueControllerCreateIssue(body: object, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.issueControllerCreateIssue(body, options).then((request) => request(axios, basePath));
+        issueControllerCreateIssue(createIssueDto: CreateIssueDto, options?: RawAxiosRequestConfig): AxiosPromise<GithubIssueDto> {
+            return localVarFp.issueControllerCreateIssue(createIssueDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -114,12 +121,13 @@ export const IssueApiFactory = function (configuration?: Configuration, basePath
 export interface IssueApiInterface {
     /**
      * 
-     * @param {object} body 
+     * @summary 创建Issue
+     * @param {CreateIssueDto} createIssueDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IssueApiInterface
      */
-    issueControllerCreateIssue(body: object, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    issueControllerCreateIssue(createIssueDto: CreateIssueDto, options?: RawAxiosRequestConfig): AxiosPromise<GithubIssueDto>;
 
 }
 
@@ -132,13 +140,14 @@ export interface IssueApiInterface {
 export class IssueApi extends BaseAPI implements IssueApiInterface {
     /**
      * 
-     * @param {object} body 
+     * @summary 创建Issue
+     * @param {CreateIssueDto} createIssueDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof IssueApi
      */
-    public issueControllerCreateIssue(body: object, options?: RawAxiosRequestConfig) {
-        return IssueApiFp(this.configuration).issueControllerCreateIssue(body, options).then((request) => request(this.axios, this.basePath));
+    public issueControllerCreateIssue(createIssueDto: CreateIssueDto, options?: RawAxiosRequestConfig) {
+        return IssueApiFp(this.configuration).issueControllerCreateIssue(createIssueDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
