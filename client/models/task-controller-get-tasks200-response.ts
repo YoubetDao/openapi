@@ -16,6 +16,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { Task } from './task';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TaskControllerGetTasks200ResponsePagination } from './task-controller-get-tasks200-response-pagination';
 
 /**
  * 
@@ -25,34 +28,10 @@ import type { Task } from './task';
 export interface TaskControllerGetTasks200Response {
     /**
      * 
-     * @type {number}
+     * @type {TaskControllerGetTasks200ResponsePagination}
      * @memberof TaskControllerGetTasks200Response
      */
-    'totalCount'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TaskControllerGetTasks200Response
-     */
-    'totalPages'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TaskControllerGetTasks200Response
-     */
-    'currentPage'?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof TaskControllerGetTasks200Response
-     */
-    'hasNextPage'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof TaskControllerGetTasks200Response
-     */
-    'hasPrevPage'?: boolean;
+    'pagination'?: TaskControllerGetTasks200ResponsePagination;
     /**
      * 
      * @type {Array<Task>}

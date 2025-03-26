@@ -34,6 +34,7 @@ models/receipt.ts
 models/reward-detail.ts
 models/task-apply-controller-get-task-applies200-response.ts
 models/task-apply.ts
+models/task-controller-get-tasks200-response-pagination.ts
 models/task-controller-get-tasks200-response.ts
 models/task.ts
 models/update-task-dto.ts

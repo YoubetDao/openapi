@@ -16,6 +16,9 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { TaskApply } from './task-apply';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { TaskControllerGetTasks200ResponsePagination } from './task-controller-get-tasks200-response-pagination';
 
 /**
  * 
@@ -25,34 +28,10 @@ import type { TaskApply } from './task-apply';
 export interface TaskApplyControllerGetTaskApplies200Response {
     /**
      * 
-     * @type {number}
+     * @type {TaskControllerGetTasks200ResponsePagination}
      * @memberof TaskApplyControllerGetTaskApplies200Response
      */
-    'totalCount'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TaskApplyControllerGetTaskApplies200Response
-     */
-    'totalPages'?: number;
-    /**
-     * 
-     * @type {number}
-     * @memberof TaskApplyControllerGetTaskApplies200Response
-     */
-    'currentPage'?: number;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof TaskApplyControllerGetTaskApplies200Response
-     */
-    'hasNextPage'?: boolean;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof TaskApplyControllerGetTaskApplies200Response
-     */
-    'hasPrevPage'?: boolean;
+    'pagination'?: TaskControllerGetTasks200ResponsePagination;
     /**
      * 
      * @type {Array<TaskApply>}
