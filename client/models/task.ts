@@ -25,6 +25,12 @@ import type { GithubUser } from './github-user';
 export interface Task {
     /**
      * 
+     * @type {string}
+     * @memberof Task
+     */
+    '_id': string;
+    /**
+     * 
      * @type {number}
      * @memberof Task
      */

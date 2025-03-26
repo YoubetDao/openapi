@@ -7,10 +7,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: string
       tags:
         - App
   /github-webhook:
@@ -66,10 +62,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
       tags: *a1
   /youbet/wallet:
     get:
@@ -83,10 +75,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: string
       tags: &a2
         - Youbet
     post:
@@ -108,10 +96,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: number
       tags: *a2
   /youbet/all-tasks:
     get:
@@ -120,12 +104,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
       tags: *a2
   /users/me:
     get:
@@ -134,10 +112,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
       tags: &a3
         - User
   /users/leaderboard:
@@ -184,10 +158,6 @@ paths:
       responses:
         "201":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
       tags: *a4
   /my-rewards:
     get:
@@ -232,12 +202,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
       tags: &a5
         - Org
   /github/orgs:
@@ -270,10 +234,6 @@ paths:
       responses:
         "201":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
       tags: &a6
         - Period
     get:
@@ -305,12 +265,6 @@ paths:
       responses:
         "201":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
       tags: *a6
   /project/{projectGithubId}/pull-requests:
     get:
@@ -358,11 +312,6 @@ paths:
     get:
       operationId: TaskController_getTasks
       parameters:
-        - name: org
-          required: true
-          in: query
-          schema:
-            type: string
         - name: project
           required: true
           in: query
@@ -540,14 +489,6 @@ paths:
                 type: array
                 items:
                   $ref: "#/components/schemas/Receipt"
-        "201":
-          description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/Receipt"
       tags: *a8
   /task-applies:
     get:
@@ -586,8 +527,6 @@ paths:
       parameters: []
       responses:
         "200":
-          description: ""
-        "201":
           description: ""
       tags: *a9
   /task-applies/mine:
@@ -696,10 +635,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
       tags: *a10
   /projects/{projectId}:
     patch:
@@ -713,10 +648,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
       tags: *a10
   /projects/import:
     post:
@@ -752,10 +683,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: string
       tags: *a11
   /tutorials/{owner}/{repo}/chapters:
     get:
@@ -774,10 +701,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
       tags: *a11
   /tutorials/{owner}/{repo}/content:
     get:
@@ -801,10 +724,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: string
       tags: *a11
   /projects/{projectId}/reports:
     get:
@@ -818,12 +737,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
       tags: &a12
         - Report
   /projects/{projectId}/reports/summarize:
@@ -838,10 +751,6 @@ paths:
       responses:
         "201":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
       tags: *a12
   /auth/github:
     get:
@@ -868,89 +777,13 @@ info:
 tags: []
 servers: []
 components:
-  securitySchemes:
-    bearer:
-      scheme: bearer
-      bearerFormat: JWT
-      type: http
   schemas:
-    TransactionInfoDto:
-      type: object
-      properties:
-        network:
-          type: string
-        from:
-          type: string
-        to:
-          type: string
-        amount:
-          type: number
-        decimals:
-          type: number
-        symbol:
-          type: string
-        transactionId:
-          type: string
-      required:
-        - network
-        - from
-        - to
-        - amount
-        - decimals
-        - symbol
-        - transactionId
-    SourceDto:
-      type: object
-      properties:
-        pullRequestGithubId:
-          type: number
-        taskGithubId:
-          type: number
-        projectGithubId:
-          type: number
     CreateRewardDto:
       type: object
-      properties:
-        recipientName:
-          type: string
-        status:
-          type: string
-        type:
-          type: string
-        transactionInfo:
-          $ref: "#/components/schemas/TransactionInfoDto"
-        source:
-          $ref: "#/components/schemas/SourceDto"
-      required:
-        - recipientName
-        - status
-        - type
-        - transactionInfo
-        - source
+      properties: {}
     CreateIssueDto:
       type: object
-      properties:
-        owner:
-          type: string
-        repo:
-          type: string
-        title:
-          type: string
-        body:
-          type: string
-        labels:
-          type: array
-          items:
-            type: string
-        assignees:
-          type: array
-          items:
-            type: string
-      required:
-        - owner
-        - repo
-        - title
-        - body
+      properties: {}
     GithubUser:
       type: object
       properties:
@@ -970,6 +803,8 @@ components:
     Task:
       type: object
       properties:
+        _id:
+          type: string
         githubId:
           type: number
         project:
@@ -1016,6 +851,7 @@ components:
         level:
           type: string
       required:
+        - _id
         - githubId
         - project
         - title

@@ -106,7 +106,6 @@ export const TasksApiAxiosParamCreator = function (configuration?: Configuration
         },
         /**
          * 
-         * @param {string} org 
          * @param {string} project 
          * @param {string} assignee 
          * @param {string} states 
@@ -114,9 +113,7 @@ export const TasksApiAxiosParamCreator = function (configuration?: Configuration
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetTasks: async (org: string, project: string, assignee: string, states: string, assignmentStatus: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'org' is not null or undefined
-            assertParamExists('taskControllerGetTasks', 'org', org)
+        taskControllerGetTasks: async (project: string, assignee: string, states: string, assignmentStatus: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'project' is not null or undefined
             assertParamExists('taskControllerGetTasks', 'project', project)
             // verify required parameter 'assignee' is not null or undefined
@@ -136,10 +133,6 @@ export const TasksApiAxiosParamCreator = function (configuration?: Configuration
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
-
-            if (org !== undefined) {
-                localVarQueryParameter['org'] = org;
-            }
 
             if (project !== undefined) {
                 localVarQueryParameter['project'] = project;
@@ -345,7 +338,6 @@ export const TasksApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} org 
          * @param {string} project 
          * @param {string} assignee 
          * @param {string} states 
@@ -353,8 +345,8 @@ export const TasksApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetTasks(org: string, project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetTasks(org, project, assignee, states, assignmentStatus, options);
+        async taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetTasks(project, assignee, states, assignmentStatus, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TasksApi.taskControllerGetTasks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -438,7 +430,6 @@ export const TasksApiFactory = function (configuration?: Configuration, basePath
         },
         /**
          * 
-         * @param {string} org 
          * @param {string} project 
          * @param {string} assignee 
          * @param {string} states 
@@ -446,8 +437,8 @@ export const TasksApiFactory = function (configuration?: Configuration, basePath
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetTasks(org: string, project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
-            return localVarFp.taskControllerGetTasks(org, project, assignee, states, assignmentStatus, options).then((request) => request(axios, basePath));
+        taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+            return localVarFp.taskControllerGetTasks(project, assignee, states, assignmentStatus, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -515,7 +506,6 @@ export interface TasksApiInterface {
 
     /**
      * 
-     * @param {string} org 
      * @param {string} project 
      * @param {string} assignee 
      * @param {string} states 
@@ -524,7 +514,7 @@ export interface TasksApiInterface {
      * @throws {RequiredError}
      * @memberof TasksApiInterface
      */
-    taskControllerGetTasks(org: string, project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -596,7 +586,6 @@ export class TasksApi extends BaseAPI implements TasksApiInterface {
 
     /**
      * 
-     * @param {string} org 
      * @param {string} project 
      * @param {string} assignee 
      * @param {string} states 
@@ -605,8 +594,8 @@ export class TasksApi extends BaseAPI implements TasksApiInterface {
      * @throws {RequiredError}
      * @memberof TasksApi
      */
-    public taskControllerGetTasks(org: string, project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig) {
-        return TasksApiFp(this.configuration).taskControllerGetTasks(org, project, assignee, states, assignmentStatus, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, options?: RawAxiosRequestConfig) {
+        return TasksApiFp(this.configuration).taskControllerGetTasks(project, assignee, states, assignmentStatus, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
