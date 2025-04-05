@@ -1,5 +1,22 @@
 openapi: 3.0.0
 paths:
+  /auth/github:
+    get:
+      operationId: AuthController_githubAuth
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      tags: &a1
+        - Auth
+  /auth/github/callback:
+    get:
+      operationId: AuthController_githubAuthRedirect
+      parameters: []
+      responses:
+        "200":
+          description: ""
+      tags: *a1
   /:
     get:
       operationId: AppController_getHello
@@ -7,10 +24,6 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: string
       tags:
         - App
   /github-webhook:
@@ -34,7 +47,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: &a1
+      tags: &a2
         - Receipt
   /receipts:
     get:
@@ -53,7 +66,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a1
+      tags: *a2
   /receipts/{id}/claim:
     patch:
       operationId: ReceiptController_claimReceipt
@@ -66,11 +79,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-      tags: *a1
+      tags: *a2
   /youbet/wallet:
     get:
       operationId: YoubetController_getLinkedWallet
@@ -83,11 +92,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: &a2
+      tags: &a3
         - Youbet
     post:
       operationId: YoubetController_linkWallet
@@ -95,7 +100,7 @@ paths:
       responses:
         "201":
           description: ""
-      tags: *a2
+      tags: *a3
   /youbet/user-points:
     get:
       operationId: YoubetController_getUserPoints
@@ -108,11 +113,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: number
-      tags: *a2
+      tags: *a3
   /youbet/all-tasks:
     get:
       operationId: YoubetController_getAllTasks
@@ -120,13 +121,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-      tags: *a2
+      tags: *a3
   /users/me:
     get:
       operationId: UserController_myInfo
@@ -134,11 +129,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-      tags: &a3
+      tags: &a4
         - User
   /users/leaderboard:
     get:
@@ -147,7 +138,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a3
+      tags: *a4
   /rewards:
     get:
       operationId: RewardController_getRewards
@@ -170,7 +161,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: &a4
+      tags: &a5
         - Reward
     post:
       operationId: RewardController_createReward
@@ -184,11 +175,7 @@ paths:
       responses:
         "201":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-      tags: *a4
+      tags: *a5
   /my-rewards:
     get:
       operationId: RewardController_getMyRewards
@@ -206,7 +193,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a4
+      tags: *a5
   /rewards/{uuid}/signature:
     get:
       operationId: RewardController_getRewardSignature
@@ -219,7 +206,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a4
+      tags: *a5
   /github/orgs/{org}/repos:
     get:
       operationId: OrgController_getOrgRepos
@@ -232,13 +219,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-      tags: &a5
+      tags: &a6
         - Org
   /github/orgs:
     get:
@@ -247,7 +228,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a5
+      tags: *a6
   /issues:
     post:
       operationId: IssueController_createIssue
@@ -259,8 +240,13 @@ paths:
             schema:
               $ref: "#/components/schemas/CreateIssueDto"
       responses:
-        "201":
+        default:
           description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GithubIssueDto"
+      summary: 创建Issue
       tags:
         - Issue
   /periods:
@@ -270,11 +256,7 @@ paths:
       responses:
         "201":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-      tags: &a6
+      tags: &a7
         - Period
     get:
       operationId: PeriodController_getPeriods
@@ -292,7 +274,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a6
+      tags: *a7
   /periods/{periodId}/grant-rewards:
     post:
       operationId: PeriodController_grantRewards
@@ -305,13 +287,7 @@ paths:
       responses:
         "201":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-      tags: *a6
+      tags: *a7
   /project/{projectGithubId}/pull-requests:
     get:
       operationId: PullRequestController_getProjectPullRequests
@@ -329,7 +305,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: &a7
+      tags: &a8
         - PullRequest
   /pull-requests:
     get:
@@ -353,16 +329,11 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a7
+      tags: *a8
   /tasks:
     get:
       operationId: TaskController_getTasks
       parameters:
-        - name: org
-          required: true
-          in: query
-          schema:
-            type: string
         - name: project
           required: true
           in: query
@@ -383,6 +354,20 @@ paths:
           in: query
           schema:
             type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
       responses:
         "200":
           description: ""
@@ -390,21 +375,24 @@ paths:
             application/json:
               schema:
                 properties:
-                  totalCount:
-                    type: number
-                  totalPages:
-                    type: number
-                  currentPage:
-                    type: number
-                  hasNextPage:
-                    type: boolean
-                  hasPrevPage:
-                    type: boolean
+                  pagination:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                      totalPages:
+                        type: number
+                      currentPage:
+                        type: number
+                      hasNextPage:
+                        type: boolean
+                      hasPrevPage:
+                        type: boolean
                   data:
                     type: array
                     items:
                       $ref: "#/components/schemas/Task"
-      tags: &a8
+      tags: &a9
         - tasks
   /tasks/mine:
     get:
@@ -418,7 +406,28 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a8
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                      totalPages:
+                        type: number
+                      currentPage:
+                        type: number
+                      hasNextPage:
+                        type: boolean
+                      hasPrevPage:
+                        type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
+      tags: *a9
   /tasks/completed:
     get:
       operationId: TaskController_getCompletedTasks
@@ -431,7 +440,28 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a8
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                      totalPages:
+                        type: number
+                      currentPage:
+                        type: number
+                      hasNextPage:
+                        type: boolean
+                      hasPrevPage:
+                        type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Task"
+      tags: *a9
   /tasks/{githubId}:
     get:
       operationId: TaskController_getTask
@@ -448,7 +478,7 @@ paths:
             application/json:
               schema:
                 $ref: "#/components/schemas/Task"
-      tags: *a8
+      tags: *a9
     patch:
       operationId: TaskController_updateTask
       parameters:
@@ -462,11 +492,11 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/TaskRequest"
+              $ref: "#/components/schemas/UpdateTaskDto"
       responses:
         "200":
           description: ""
-      tags: *a8
+      tags: *a9
   /tasks/{taskGithubId}/my-applies:
     get:
       operationId: TaskController_myTaskApply
@@ -484,24 +514,8 @@ paths:
               schema:
                 type: array
                 items:
-                  type: object
-      tags: *a8
-  /tasks/claim:
-    patch:
-      operationId: TaskController_claimTask
-      parameters: []
-      responses:
-        "200":
-          description: ""
-      tags: *a8
-  /tasks/disclaim:
-    patch:
-      operationId: TaskController_disclaimTask
-      parameters: []
-      responses:
-        "200":
-          description: ""
-      tags: *a8
+                  $ref: "#/components/schemas/TaskApply"
+      tags: *a9
   /tasks/{taskId}/rewards:
     post:
       operationId: TaskController_grantRewards
@@ -512,15 +526,15 @@ paths:
           schema:
             type: string
       responses:
-        "201":
+        "200":
           description: ""
           content:
             application/json:
               schema:
                 type: array
                 items:
-                  type: object
-      tags: *a8
+                  $ref: "#/components/schemas/Receipt"
+      tags: *a9
   /task-applies:
     get:
       operationId: TaskApplyController_getTaskApplies
@@ -533,15 +547,36 @@ paths:
       responses:
         "200":
           description: ""
-      tags: &a9
-        - TaskApply
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                      totalPages:
+                        type: number
+                      currentPage:
+                        type: number
+                      hasNextPage:
+                        type: boolean
+                      hasPrevPage:
+                        type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/TaskApply"
+      tags: &a10
+        - task-applies
     post:
       operationId: TaskApplyController_applyTask
       parameters: []
       responses:
-        "201":
+        "200":
           description: ""
-      tags: *a9
+      tags: *a10
   /task-applies/mine:
     get:
       operationId: TaskApplyController_myTaskApplies
@@ -554,7 +589,28 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a9
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                      totalPages:
+                        type: number
+                      currentPage:
+                        type: number
+                      hasNextPage:
+                        type: boolean
+                      hasPrevPage:
+                        type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/TaskApply"
+      tags: *a10
   /task-applies/{id}/withdraw:
     patch:
       operationId: TaskApplyController_withdrawApply
@@ -567,7 +623,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a9
+      tags: *a10
   /task-applies/{id}/approve:
     patch:
       operationId: TaskApplyController_approveTaskApply
@@ -580,7 +636,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a9
+      tags: *a10
   /task-applies/{id}/reject:
     patch:
       operationId: TaskApplyController_rejectTaskApply
@@ -593,7 +649,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: *a9
+      tags: *a10
   /projects:
     get:
       operationId: ProjectController_getProjects
@@ -616,7 +672,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: &a10
+      tags: &a11
         - Project
   /projects/{githubId}:
     get:
@@ -630,11 +686,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-      tags: *a10
+      tags: *a11
   /projects/{projectId}:
     patch:
       operationId: ProjectController_modifyProject
@@ -647,11 +699,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-      tags: *a10
+      tags: *a11
   /projects/import:
     post:
       operationId: ProjectController_importProjectForUser
@@ -659,7 +707,7 @@ paths:
       responses:
         "201":
           description: ""
-      tags: *a10
+      tags: *a11
   /tutorials:
     get:
       operationId: TutorialController_getTutorials
@@ -672,7 +720,7 @@ paths:
       responses:
         "200":
           description: ""
-      tags: &a11
+      tags: &a12
         - Tutorial
   /tutorials/{githubId}:
     get:
@@ -686,11 +734,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *a11
+      tags: *a12
   /tutorials/{owner}/{repo}/chapters:
     get:
       operationId: TutorialController_getMdbookChapters
@@ -708,11 +752,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-      tags: *a11
+      tags: *a12
   /tutorials/{owner}/{repo}/content:
     get:
       operationId: TutorialController_fetchMarkdown
@@ -735,11 +775,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: string
-      tags: *a11
+      tags: *a12
   /projects/{projectId}/reports:
     get:
       operationId: ReportController_listReports
@@ -752,13 +788,7 @@ paths:
       responses:
         "200":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  type: object
-      tags: &a12
+      tags: &a13
         - Report
   /projects/{projectId}/reports/summarize:
     post:
@@ -772,27 +802,6 @@ paths:
       responses:
         "201":
           description: ""
-          content:
-            application/json:
-              schema:
-                type: object
-      tags: *a12
-  /auth/github:
-    get:
-      operationId: AuthController_githubAuth
-      parameters: []
-      responses:
-        "200":
-          description: ""
-      tags: &a13
-        - Auth
-  /auth/github/callback:
-    get:
-      operationId: AuthController_githubAuthRedirect
-      parameters: []
-      responses:
-        "200":
-          description: ""
       tags: *a13
 info:
   title: YouBet Task API
@@ -802,65 +811,10 @@ info:
 tags: []
 servers: []
 components:
-  securitySchemes:
-    bearer:
-      scheme: bearer
-      bearerFormat: JWT
-      type: http
   schemas:
-    TransactionInfoDto:
-      type: object
-      properties:
-        network:
-          type: string
-        from:
-          type: string
-        to:
-          type: string
-        amount:
-          type: number
-        decimals:
-          type: number
-        symbol:
-          type: string
-        transactionId:
-          type: string
-      required:
-        - network
-        - from
-        - to
-        - amount
-        - decimals
-        - symbol
-        - transactionId
-    SourceDto:
-      type: object
-      properties:
-        pullRequestGithubId:
-          type: number
-        taskGithubId:
-          type: number
-        projectGithubId:
-          type: number
     CreateRewardDto:
       type: object
-      properties:
-        recipientName:
-          type: string
-        status:
-          type: string
-        type:
-          type: string
-        transactionInfo:
-          $ref: "#/components/schemas/TransactionInfoDto"
-        source:
-          $ref: "#/components/schemas/SourceDto"
-      required:
-        - recipientName
-        - status
-        - type
-        - transactionInfo
-        - source
+      properties: {}
     CreateIssueDto:
       type: object
       properties:
@@ -885,12 +839,243 @@ components:
         - repo
         - title
         - body
+        - labels
+        - assignees
+    GithubUserDto:
+      type: object
+      properties:
+        login:
+          type: string
+        id:
+          type: number
+        node_id:
+          type: string
+        avatar_url:
+          type: string
+        gravatar_id:
+          type: string
+        url:
+          type: string
+        html_url:
+          type: string
+        type:
+          type: string
+        site_admin:
+          type: boolean
+      required:
+        - login
+        - id
+        - node_id
+        - avatar_url
+        - url
+        - html_url
+        - type
+        - site_admin
+    GithubLabelDto:
+      type: object
+      properties:
+        id:
+          type: number
+        node_id:
+          type: string
+        url:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        color:
+          type: string
+        default:
+          type: boolean
+      required:
+        - id
+        - node_id
+        - url
+        - name
+        - color
+        - default
+    GithubMilestoneDto:
+      type: object
+      properties:
+        url:
+          type: string
+        html_url:
+          type: string
+        labels_url:
+          type: string
+        id:
+          type: number
+        node_id:
+          type: string
+        number:
+          type: number
+        state:
+          type: string
+        title:
+          type: string
+        description:
+          type: string
+        creator:
+          $ref: "#/components/schemas/GithubUserDto"
+        open_issues:
+          type: number
+        closed_issues:
+          type: number
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        closed_at:
+          type: string
+        due_on:
+          type: string
+      required:
+        - url
+        - html_url
+        - labels_url
+        - id
+        - node_id
+        - number
+        - state
+        - title
+        - creator
+        - open_issues
+        - closed_issues
+        - created_at
+        - updated_at
+    GithubPullRequestRefDto:
+      type: object
+      properties:
+        url:
+          type: string
+        html_url:
+          type: string
+        diff_url:
+          type: string
+        patch_url:
+          type: string
+      required:
+        - url
+        - html_url
+        - diff_url
+        - patch_url
+    GithubIssueDto:
+      type: object
+      properties:
+        id:
+          type: number
+        node_id:
+          type: string
+        url:
+          type: string
+        repository_url:
+          type: string
+        labels_url:
+          type: string
+        comments_url:
+          type: string
+        events_url:
+          type: string
+        html_url:
+          type: string
+        number:
+          type: number
+        state:
+          type: string
+        title:
+          type: string
+        body:
+          type: string
+        user:
+          $ref: "#/components/schemas/GithubUserDto"
+        labels:
+          type: array
+          items:
+            $ref: "#/components/schemas/GithubLabelDto"
+        assignee:
+          $ref: "#/components/schemas/GithubUserDto"
+        assignees:
+          type: array
+          items:
+            $ref: "#/components/schemas/GithubUserDto"
+        milestone:
+          $ref: "#/components/schemas/GithubMilestoneDto"
+        locked:
+          type: boolean
+        active_lock_reason:
+          type: string
+        comments:
+          type: number
+        pull_request:
+          $ref: "#/components/schemas/GithubPullRequestRefDto"
+        closed_at:
+          type: string
+        created_at:
+          type: string
+        updated_at:
+          type: string
+        closed_by:
+          $ref: "#/components/schemas/GithubUserDto"
+        author_association:
+          type: string
+        state_reason:
+          type: string
+      required:
+        - id
+        - node_id
+        - url
+        - repository_url
+        - labels_url
+        - comments_url
+        - events_url
+        - html_url
+        - number
+        - state
+        - title
+        - body
+        - user
+        - comments
+        - created_at
+        - updated_at
+        - author_association
+    GithubUser:
+      type: object
+      properties:
+        login:
+          type: string
+        htmlUrl:
+          type: string
+        avatarUrl:
+          type: string
+      required:
+        - login
+        - htmlUrl
+        - avatarUrl
     SchemaObjectId:
       type: object
       properties: {}
+    RewardDetail:
+      type: object
+      properties:
+        amount:
+          type: number
+        decimals:
+          type: number
+        symbol:
+          type: string
+        tokenAddress:
+          type: string
+      required:
+        - amount
+        - decimals
+        - symbol
+        - tokenAddress
     Task:
       type: object
       properties:
+        _id:
+          type: string
         githubId:
           type: number
         project:
@@ -911,7 +1096,7 @@ components:
           format: date-time
           type: string
         assignee:
-          type: object
+          $ref: "#/components/schemas/GithubUser"
         assignees:
           type: array
           items:
@@ -921,7 +1106,7 @@ components:
           items:
             type: string
         user:
-          type: object
+          $ref: "#/components/schemas/GithubUser"
         labelsWithColor:
           type: array
           items:
@@ -931,12 +1116,13 @@ components:
         namespace:
           $ref: "#/components/schemas/SchemaObjectId"
         reward:
-          type: object
+          $ref: "#/components/schemas/RewardDetail"
         rewardGranted:
           type: boolean
         level:
           type: string
       required:
+        - _id
         - githubId
         - project
         - title
@@ -955,6 +1141,90 @@ components:
         - reward
         - rewardGranted
         - level
-    TaskRequest:
+    UpdateTaskDto:
       type: object
-      properties: {}
+      properties:
+        reward:
+          $ref: "#/components/schemas/RewardDetail"
+        level:
+          type: string
+      required:
+        - reward
+        - level
+    TaskApply:
+      type: object
+      properties:
+        githubId:
+          type: number
+        project:
+          $ref: "#/components/schemas/SchemaObjectId"
+        task:
+          $ref: "#/components/schemas/SchemaObjectId"
+        user:
+          type: object
+        comment:
+          type: string
+        htmlUrl:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        canceledAt:
+          format: date-time
+          type: string
+        approvedAt:
+          format: date-time
+          type: string
+        namespace:
+          $ref: "#/components/schemas/SchemaObjectId"
+        projectName:
+          type: string
+        taskTitle:
+          type: string
+      required:
+        - githubId
+        - project
+        - task
+        - user
+        - comment
+        - htmlUrl
+        - createdAt
+        - updatedAt
+        - canceledAt
+        - approvedAt
+        - namespace
+        - projectName
+        - taskTitle
+    Receipt:
+      type: object
+      properties:
+        user:
+          type: string
+        source:
+          type: object
+        type:
+          type: string
+        detail:
+          type: object
+        transactionInfo:
+          type: object
+        status:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - user
+        - source
+        - type
+        - detail
+        - transactionInfo
+        - status
+        - createdAt
+        - updatedAt

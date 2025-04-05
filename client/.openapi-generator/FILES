@@ -1,6 +1,5 @@
 .gitignore
 .npmignore
-.openapi-generator-ignore
 api.ts
 api/app-api.ts
 api/auth-api.ts
@@ -13,7 +12,7 @@ api/pull-request-api.ts
 api/receipt-api.ts
 api/report-api.ts
 api/reward-api.ts
-api/task-apply-api.ts
+api/task-applies-api.ts
 api/tasks-api.ts
 api/tutorial-api.ts
 api/user-api.ts
@@ -23,6 +22,19 @@ common.ts
 configuration.ts
 git_push.sh
 index.ts
+models/create-issue-dto.ts
+models/github-issue-dto.ts
+models/github-label-dto.ts
+models/github-milestone-dto.ts
+models/github-pull-request-ref-dto.ts
+models/github-user-dto.ts
+models/github-user.ts
 models/index.ts
+models/receipt.ts
+models/reward-detail.ts
+models/task-apply-controller-get-task-applies200-response.ts
+models/task-apply.ts
+models/task-controller-get-tasks200-response-pagination.ts
 models/task-controller-get-tasks200-response.ts
 models/task.ts
+models/update-task-dto.ts

@@ -13,6 +13,12 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GithubUser } from './github-user';
+// May contain unused imports in some cases
+// @ts-ignore
+import type { RewardDetail } from './reward-detail';
 
 /**
  * 
@@ -20,6 +26,12 @@
  * @interface Task
  */
 export interface Task {
+    /**
+     * 
+     * @type {string}
+     * @memberof Task
+     */
+    '_id': string;
     /**
      * 
      * @type {number}
@@ -70,10 +82,10 @@ export interface Task {
     'closedAt': string;
     /**
      * 
-     * @type {object}
+     * @type {GithubUser}
      * @memberof Task
      */
-    'assignee': object;
+    'assignee': GithubUser;
     /**
      * 
      * @type {Array<string>}
@@ -88,10 +100,10 @@ export interface Task {
     'labels': Array<string>;
     /**
      * 
-     * @type {object}
+     * @type {GithubUser}
      * @memberof Task
      */
-    'user': object;
+    'user': GithubUser;
     /**
      * 
      * @type {Array<string>}
@@ -112,10 +124,10 @@ export interface Task {
     'namespace': object;
     /**
      * 
-     * @type {object}
+     * @type {RewardDetail}
      * @memberof Task
      */
-    'reward': object;
+    'reward': RewardDetail;
     /**
      * 
      * @type {boolean}
