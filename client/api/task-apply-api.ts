@@ -21,6 +21,8 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+// @ts-ignore
+import type { TaskApplyControllerGetTaskApplies200Response } from '../models';
 /**
  * TaskApplyApi - axios parameter creator
  * @export
@@ -266,7 +268,7 @@ export const TaskApplyApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskApplyControllerGetTaskApplies(namespace: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async taskApplyControllerGetTaskApplies(namespace: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskApplyControllerGetTaskApplies200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.taskApplyControllerGetTaskApplies(namespace, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApplyApi.taskApplyControllerGetTaskApplies']?.[localVarOperationServerIndex]?.url;
@@ -278,7 +280,7 @@ export const TaskApplyApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskApplyControllerMyTaskApplies(project: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async taskApplyControllerMyTaskApplies(project: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskApplyControllerGetTaskApplies200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.taskApplyControllerMyTaskApplies(project, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApplyApi.taskApplyControllerMyTaskApplies']?.[localVarOperationServerIndex]?.url;
@@ -341,7 +343,7 @@ export const TaskApplyApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskApplyControllerGetTaskApplies(namespace: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        taskApplyControllerGetTaskApplies(namespace: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response> {
             return localVarFp.taskApplyControllerGetTaskApplies(namespace, options).then((request) => request(axios, basePath));
         },
         /**
@@ -350,7 +352,7 @@ export const TaskApplyApiFactory = function (configuration?: Configuration, base
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskApplyControllerMyTaskApplies(project: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        taskApplyControllerMyTaskApplies(project: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response> {
             return localVarFp.taskApplyControllerMyTaskApplies(project, options).then((request) => request(axios, basePath));
         },
         /**
@@ -404,7 +406,7 @@ export interface TaskApplyApiInterface {
      * @throws {RequiredError}
      * @memberof TaskApplyApiInterface
      */
-    taskApplyControllerGetTaskApplies(namespace: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    taskApplyControllerGetTaskApplies(namespace: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response>;
 
     /**
      * 
@@ -413,7 +415,7 @@ export interface TaskApplyApiInterface {
      * @throws {RequiredError}
      * @memberof TaskApplyApiInterface
      */
-    taskApplyControllerMyTaskApplies(project: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    taskApplyControllerMyTaskApplies(project: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response>;
 
     /**
      * 

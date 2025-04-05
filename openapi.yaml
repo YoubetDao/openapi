@@ -393,7 +393,7 @@ paths:
                     items:
                       $ref: "#/components/schemas/Task"
       tags: &a9
-        - tasks
+        - Task
   /tasks/mine:
     get:
       operationId: TaskController_myTasks
@@ -569,7 +569,7 @@ paths:
                     items:
                       $ref: "#/components/schemas/TaskApply"
       tags: &a10
-        - task-applies
+        - TaskApply
     post:
       operationId: TaskApplyController_applyTask
       parameters: []

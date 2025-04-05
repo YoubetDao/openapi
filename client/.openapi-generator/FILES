@@ -12,8 +12,8 @@ api/pull-request-api.ts
 api/receipt-api.ts
 api/report-api.ts
 api/reward-api.ts
-api/task-applies-api.ts
-api/tasks-api.ts
+api/task-api.ts
+api/task-apply-api.ts
 api/tutorial-api.ts
 api/user-api.ts
 api/youbet-api.ts
