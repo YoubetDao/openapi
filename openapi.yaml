@@ -139,6 +139,32 @@ paths:
         "200":
           description: ""
       tags: *a4
+  /users/{username}/overview:
+    get:
+      operationId: UserController_getProfileOverview
+      parameters:
+        - name: username
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a4
+  /users/{username}/languages:
+    get:
+      operationId: UserController_getProfileLanguages
+      parameters:
+        - name: username
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a4
   /rewards:
     get:
       operationId: RewardController_getRewards
