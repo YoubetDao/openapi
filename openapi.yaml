@@ -165,6 +165,32 @@ paths:
         "200":
           description: ""
       tags: *a4
+  /users/{username}/skillsets:
+    get:
+      operationId: UserController_getProfileSkillsets
+      parameters:
+        - name: username
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a4
+  /users/{username}/achievements:
+    get:
+      operationId: UserController_getProfileAchievements
+      parameters:
+        - name: username
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a4
   /rewards:
     get:
       operationId: RewardController_getRewards
