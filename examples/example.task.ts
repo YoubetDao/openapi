@@ -1,5 +1,5 @@
 // example-usage.ts
-import { Configuration, TasksApi } from '../client';
+import { Configuration, TaskApi } from '../client';
 
 // 创建配置对象
 const configuration = new Configuration({
@@ -7,7 +7,7 @@ const configuration = new Configuration({
 });
 
 // 使用自定义的axios实例创建TaskApi对象
-const taskApi = new TasksApi(configuration, '');
+const taskApi = new TaskApi(configuration, '');
 
 // 示例函数：获取所有任务
 async function getAllTasks() {
