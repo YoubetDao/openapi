@@ -37,4 +37,5 @@ models/task-apply.ts
 models/task-controller-get-tasks200-response-pagination.ts
 models/task-controller-get-tasks200-response.ts
 models/task.ts
+models/update-report-dto.ts
 models/update-task-dto.ts

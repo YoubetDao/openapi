@@ -842,6 +842,37 @@ paths:
           description: ""
       tags: &a13
         - Report
+  /reports/{reportId}:
+    get:
+      operationId: ReportController_getReport
+      parameters:
+        - name: reportId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: ""
+      tags: *a13
+    patch:
+      operationId: ReportController_updateReport
+      parameters:
+        - name: reportId
+          required: true
+          in: path
+          schema:
+            type: string
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UpdateReportDto"
+      responses:
+        "200":
+          description: ""
+      tags: *a13
   /projects/{projectId}/reports/summarize:
     post:
       operationId: ReportController_summarizeProjectReport
@@ -1280,3 +1311,13 @@ components:
         - status
         - createdAt
         - updatedAt
+    UpdateReportDto:
+      type: object
+      properties:
+        title:
+          type: string
+        summary:
+          type: string
+      required:
+        - title
+        - summary

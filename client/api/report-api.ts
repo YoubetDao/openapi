@@ -21,12 +21,47 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+// @ts-ignore
+import type { UpdateReportDto } from '../models';
 /**
  * ReportApi - axios parameter creator
  * @export
  */
 export const ReportApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @param {string} reportId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportControllerGetReport: async (reportId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'reportId' is not null or undefined
+            assertParamExists('reportControllerGetReport', 'reportId', reportId)
+            const localVarPath = `/reports/{reportId}`
+                .replace(`{${"reportId"}}`, encodeURIComponent(String(reportId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @param {string} projectId 
@@ -93,6 +128,45 @@ export const ReportApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
+        /**
+         * 
+         * @param {string} reportId 
+         * @param {UpdateReportDto} updateReportDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportControllerUpdateReport: async (reportId: string, updateReportDto: UpdateReportDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'reportId' is not null or undefined
+            assertParamExists('reportControllerUpdateReport', 'reportId', reportId)
+            // verify required parameter 'updateReportDto' is not null or undefined
+            assertParamExists('reportControllerUpdateReport', 'updateReportDto', updateReportDto)
+            const localVarPath = `/reports/{reportId}`
+                .replace(`{${"reportId"}}`, encodeURIComponent(String(reportId)));
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'PATCH', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(updateReportDto, localVarRequestOptions, configuration)
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
     }
 };
 
@@ -103,6 +177,18 @@ export const ReportApiAxiosParamCreator = function (configuration?: Configuratio
 export const ReportApiFp = function(configuration?: Configuration) {
     const localVarAxiosParamCreator = ReportApiAxiosParamCreator(configuration)
     return {
+        /**
+         * 
+         * @param {string} reportId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async reportControllerGetReport(reportId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reportControllerGetReport(reportId, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ReportApi.reportControllerGetReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
         /**
          * 
          * @param {string} projectId 
@@ -127,6 +213,19 @@ export const ReportApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['ReportApi.reportControllerSummarizeProjectReport']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
+        /**
+         * 
+         * @param {string} reportId 
+         * @param {UpdateReportDto} updateReportDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async reportControllerUpdateReport(reportId: string, updateReportDto: UpdateReportDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.reportControllerUpdateReport(reportId, updateReportDto, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ReportApi.reportControllerUpdateReport']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
     }
 };
 
@@ -137,6 +236,15 @@ export const ReportApiFp = function(configuration?: Configuration) {
 export const ReportApiFactory = function (configuration?: Configuration, basePath?: string, axios?: AxiosInstance) {
     const localVarFp = ReportApiFp(configuration)
     return {
+        /**
+         * 
+         * @param {string} reportId 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportControllerGetReport(reportId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.reportControllerGetReport(reportId, options).then((request) => request(axios, basePath));
+        },
         /**
          * 
          * @param {string} projectId 
@@ -155,6 +263,16 @@ export const ReportApiFactory = function (configuration?: Configuration, basePat
         reportControllerSummarizeProjectReport(projectId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.reportControllerSummarizeProjectReport(projectId, options).then((request) => request(axios, basePath));
         },
+        /**
+         * 
+         * @param {string} reportId 
+         * @param {UpdateReportDto} updateReportDto 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        reportControllerUpdateReport(reportId: string, updateReportDto: UpdateReportDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.reportControllerUpdateReport(reportId, updateReportDto, options).then((request) => request(axios, basePath));
+        },
     };
 };
 
@@ -164,6 +282,15 @@ export const ReportApiFactory = function (configuration?: Configuration, basePat
  * @interface ReportApi
  */
 export interface ReportApiInterface {
+    /**
+     * 
+     * @param {string} reportId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportApiInterface
+     */
+    reportControllerGetReport(reportId: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+
     /**
      * 
      * @param {string} projectId 
@@ -182,6 +309,16 @@ export interface ReportApiInterface {
      */
     reportControllerSummarizeProjectReport(projectId: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
+    /**
+     * 
+     * @param {string} reportId 
+     * @param {UpdateReportDto} updateReportDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportApiInterface
+     */
+    reportControllerUpdateReport(reportId: string, updateReportDto: UpdateReportDto, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+
 }
 
 /**
@@ -191,6 +328,17 @@ export interface ReportApiInterface {
  * @extends {BaseAPI}
  */
 export class ReportApi extends BaseAPI implements ReportApiInterface {
+    /**
+     * 
+     * @param {string} reportId 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportApi
+     */
+    public reportControllerGetReport(reportId: string, options?: RawAxiosRequestConfig) {
+        return ReportApiFp(this.configuration).reportControllerGetReport(reportId, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {string} projectId 
@@ -211,6 +359,18 @@ export class ReportApi extends BaseAPI implements ReportApiInterface {
      */
     public reportControllerSummarizeProjectReport(projectId: string, options?: RawAxiosRequestConfig) {
         return ReportApiFp(this.configuration).reportControllerSummarizeProjectReport(projectId, options).then((request) => request(this.axios, this.basePath));
+    }
+
+    /**
+     * 
+     * @param {string} reportId 
+     * @param {UpdateReportDto} updateReportDto 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ReportApi
+     */
+    public reportControllerUpdateReport(reportId: string, updateReportDto: UpdateReportDto, options?: RawAxiosRequestConfig) {
+        return ReportApiFp(this.configuration).reportControllerUpdateReport(reportId, updateReportDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
