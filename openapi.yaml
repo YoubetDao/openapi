@@ -1202,6 +1202,8 @@ components:
           $ref: "#/components/schemas/RewardDetail"
         rewardGranted:
           type: boolean
+        rewardClaimed:
+          type: boolean
         level:
           type: string
       required:
@@ -1223,6 +1225,7 @@ components:
         - namespace
         - reward
         - rewardGranted
+        - rewardClaimed
         - level
     UpdateTaskDto:
       type: object

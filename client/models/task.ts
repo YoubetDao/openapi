@@ -136,6 +136,12 @@ export interface Task {
     'rewardGranted': boolean;
     /**
      * 
+     * @type {boolean}
+     * @memberof Task
+     */
+    'rewardClaimed': boolean;
+    /**
+     * 
      * @type {string}
      * @memberof Task
      */
