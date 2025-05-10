@@ -406,6 +406,11 @@ paths:
           in: query
           schema:
             type: string
+        - name: rewardGranted
+          required: true
+          in: query
+          schema:
+            type: boolean
         - name: offset
           required: false
           in: query
