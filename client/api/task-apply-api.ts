@@ -94,10 +94,12 @@ export const TaskApplyApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @param {string} namespace 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskApplyControllerGetTaskApplies: async (namespace: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskApplyControllerGetTaskApplies: async (namespace: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'namespace' is not null or undefined
             assertParamExists('taskApplyControllerGetTaskApplies', 'namespace', namespace)
             const localVarPath = `/task-applies`;
@@ -116,6 +118,14 @@ export const TaskApplyApiAxiosParamCreator = function (configuration?: Configura
                 localVarQueryParameter['namespace'] = namespace;
             }
 
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
 
     
             setSearchParams(localVarUrlObj, localVarQueryParameter);
@@ -130,10 +140,12 @@ export const TaskApplyApiAxiosParamCreator = function (configuration?: Configura
         /**
          * 
          * @param {string} project 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskApplyControllerMyTaskApplies: async (project: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskApplyControllerMyTaskApplies: async (project: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'project' is not null or undefined
             assertParamExists('taskApplyControllerMyTaskApplies', 'project', project)
             const localVarPath = `/task-applies/mine`;
@@ -150,6 +162,14 @@ export const TaskApplyApiAxiosParamCreator = function (configuration?: Configura
 
             if (project !== undefined) {
                 localVarQueryParameter['project'] = project;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
 
@@ -265,11 +285,13 @@ export const TaskApplyApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} namespace 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskApplyControllerGetTaskApplies(namespace: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskApplyControllerGetTaskApplies200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskApplyControllerGetTaskApplies(namespace, options);
+        async taskApplyControllerGetTaskApplies(namespace: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskApplyControllerGetTaskApplies200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskApplyControllerGetTaskApplies(namespace, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApplyApi.taskApplyControllerGetTaskApplies']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -277,11 +299,13 @@ export const TaskApplyApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} project 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskApplyControllerMyTaskApplies(project: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskApplyControllerGetTaskApplies200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskApplyControllerMyTaskApplies(project, options);
+        async taskApplyControllerMyTaskApplies(project: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskApplyControllerGetTaskApplies200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskApplyControllerMyTaskApplies(project, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApplyApi.taskApplyControllerMyTaskApplies']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -340,20 +364,24 @@ export const TaskApplyApiFactory = function (configuration?: Configuration, base
         /**
          * 
          * @param {string} namespace 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskApplyControllerGetTaskApplies(namespace: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response> {
-            return localVarFp.taskApplyControllerGetTaskApplies(namespace, options).then((request) => request(axios, basePath));
+        taskApplyControllerGetTaskApplies(namespace: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response> {
+            return localVarFp.taskApplyControllerGetTaskApplies(namespace, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
          * @param {string} project 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskApplyControllerMyTaskApplies(project: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response> {
-            return localVarFp.taskApplyControllerMyTaskApplies(project, options).then((request) => request(axios, basePath));
+        taskApplyControllerMyTaskApplies(project: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response> {
+            return localVarFp.taskApplyControllerMyTaskApplies(project, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -402,20 +430,24 @@ export interface TaskApplyApiInterface {
     /**
      * 
      * @param {string} namespace 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApplyApiInterface
      */
-    taskApplyControllerGetTaskApplies(namespace: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response>;
+    taskApplyControllerGetTaskApplies(namespace: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response>;
 
     /**
      * 
      * @param {string} project 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApplyApiInterface
      */
-    taskApplyControllerMyTaskApplies(project: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response>;
+    taskApplyControllerMyTaskApplies(project: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskApplyControllerGetTaskApplies200Response>;
 
     /**
      * 
@@ -468,23 +500,27 @@ export class TaskApplyApi extends BaseAPI implements TaskApplyApiInterface {
     /**
      * 
      * @param {string} namespace 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApplyApi
      */
-    public taskApplyControllerGetTaskApplies(namespace: string, options?: RawAxiosRequestConfig) {
-        return TaskApplyApiFp(this.configuration).taskApplyControllerGetTaskApplies(namespace, options).then((request) => request(this.axios, this.basePath));
+    public taskApplyControllerGetTaskApplies(namespace: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return TaskApplyApiFp(this.configuration).taskApplyControllerGetTaskApplies(namespace, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
      * 
      * @param {string} project 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApplyApi
      */
-    public taskApplyControllerMyTaskApplies(project: string, options?: RawAxiosRequestConfig) {
-        return TaskApplyApiFp(this.configuration).taskApplyControllerMyTaskApplies(project, options).then((request) => request(this.axios, this.basePath));
+    public taskApplyControllerMyTaskApplies(project: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return TaskApplyApiFp(this.configuration).taskApplyControllerMyTaskApplies(project, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -40,10 +40,12 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @param {string} projectList 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetCompletedTasks: async (projectList: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskControllerGetCompletedTasks: async (projectList: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'projectList' is not null or undefined
             assertParamExists('taskControllerGetCompletedTasks', 'projectList', projectList)
             const localVarPath = `/tasks/completed`;
@@ -60,6 +62,14 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (projectList !== undefined) {
                 localVarQueryParameter['projectList'] = projectList;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
 
@@ -249,10 +259,12 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @param {string} states 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerMyTasks: async (states: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskControllerMyTasks: async (states: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'states' is not null or undefined
             assertParamExists('taskControllerMyTasks', 'states', states)
             const localVarPath = `/tasks/mine`;
@@ -269,6 +281,14 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (states !== undefined) {
                 localVarQueryParameter['states'] = states;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
 
@@ -334,11 +354,13 @@ export const TaskApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} projectList 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetCompletedTasks(projectList: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetCompletedTasks(projectList, options);
+        async taskControllerGetCompletedTasks(projectList: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetCompletedTasks(projectList, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerGetCompletedTasks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -400,11 +422,13 @@ export const TaskApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} states 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerMyTasks(states: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerMyTasks(states, options);
+        async taskControllerMyTasks(states: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerMyTasks(states, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerMyTasks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -435,11 +459,13 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @param {string} projectList 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetCompletedTasks(projectList: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
-            return localVarFp.taskControllerGetCompletedTasks(projectList, options).then((request) => request(axios, basePath));
+        taskControllerGetCompletedTasks(projectList: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+            return localVarFp.taskControllerGetCompletedTasks(projectList, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -486,11 +512,13 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @param {string} states 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerMyTasks(states: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
-            return localVarFp.taskControllerMyTasks(states, options).then((request) => request(axios, basePath));
+        taskControllerMyTasks(states: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+            return localVarFp.taskControllerMyTasks(states, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -514,11 +542,13 @@ export interface TaskApiInterface {
     /**
      * 
      * @param {string} projectList 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerGetCompletedTasks(projectList: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerGetCompletedTasks(projectList: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -565,11 +595,13 @@ export interface TaskApiInterface {
     /**
      * 
      * @param {string} states 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerMyTasks(states: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerMyTasks(states: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -593,12 +625,14 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
     /**
      * 
      * @param {string} projectList 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApi
      */
-    public taskControllerGetCompletedTasks(projectList: string, options?: RawAxiosRequestConfig) {
-        return TaskApiFp(this.configuration).taskControllerGetCompletedTasks(projectList, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerGetCompletedTasks(projectList: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskControllerGetCompletedTasks(projectList, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -654,12 +688,14 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
     /**
      * 
      * @param {string} states 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApi
      */
-    public taskControllerMyTasks(states: string, options?: RawAxiosRequestConfig) {
-        return TaskApiFp(this.configuration).taskControllerMyTasks(states, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerMyTasks(states: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskControllerMyTasks(states, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

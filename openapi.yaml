@@ -465,6 +465,20 @@ paths:
           in: query
           schema:
             type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
       responses:
         "200":
           description: ""
@@ -499,6 +513,20 @@ paths:
           in: query
           schema:
             type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
       responses:
         "200":
           description: ""
@@ -606,6 +634,20 @@ paths:
           in: query
           schema:
             type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
       responses:
         "200":
           description: ""
@@ -648,6 +690,20 @@ paths:
           in: query
           schema:
             type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
       responses:
         "200":
           description: ""
