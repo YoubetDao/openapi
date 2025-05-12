@@ -12,7 +12,7 @@ const taskApi = new TaskApi(configuration, '');
 // 示例函数：获取所有任务
 async function getAllTasks() {
   try {
-    const response = await taskApi.taskControllerGetTasks('', '', '', '');
+    const response = await taskApi.taskControllerGetTasks('', '', '', '', false);
     return response.data;
   } catch (error) {
     console.error('获取任务失败:', error);
