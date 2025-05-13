@@ -1,5 +1,5 @@
 // example-usage.ts
-import { Configuration, TaskApi } from '../client';
+import { Configuration, TaskApi, PeriodControllerGetPeriodsRewardGrantedEnum } from '../client';
 
 // 创建配置对象
 const configuration = new Configuration({
@@ -12,7 +12,7 @@ const taskApi = new TaskApi(configuration, '');
 // 示例函数：获取所有任务
 async function getAllTasks() {
   try {
-    const response = await taskApi.taskControllerGetTasks('', '', '', '', false);
+    const response = await taskApi.taskControllerGetTasks('', '', '', '', PeriodControllerGetPeriodsRewardGrantedEnum.All);
     return response.data;
   } catch (error) {
     console.error('获取任务失败:', error);
