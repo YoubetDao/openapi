@@ -421,6 +421,11 @@ paths:
           in: query
           schema:
             type: string
+        - name: rewardClaimed
+          required: true
+          in: query
+          schema:
+            type: string
         - name: offset
           required: false
           in: query
@@ -514,6 +519,16 @@ paths:
       operationId: TaskController_getCompletedTasks
       parameters:
         - name: projectList
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: rewardGranted
+          required: true
+          in: query
+          schema:
+            type: string
+        - name: rewardClaimed
           required: true
           in: query
           schema:
