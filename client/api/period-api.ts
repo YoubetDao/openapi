@@ -59,12 +59,12 @@ export const PeriodApiAxiosParamCreator = function (configuration?: Configuratio
         /**
          * 
          * @param {string} projectId 
-         * @param {boolean} rewardGranted 
+         * @param {string} rewardGranted 
          * @param {string} sortDirection 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        periodControllerGetPeriods: async (projectId: string, rewardGranted: boolean, sortDirection: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        periodControllerGetPeriods: async (projectId: string, rewardGranted: string, sortDirection: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
             assertParamExists('periodControllerGetPeriods', 'projectId', projectId)
             // verify required parameter 'rewardGranted' is not null or undefined
@@ -163,12 +163,12 @@ export const PeriodApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} projectId 
-         * @param {boolean} rewardGranted 
+         * @param {string} rewardGranted 
          * @param {string} sortDirection 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async periodControllerGetPeriods(projectId: string, rewardGranted: boolean, sortDirection: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async periodControllerGetPeriods(projectId: string, rewardGranted: string, sortDirection: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.periodControllerGetPeriods(projectId, rewardGranted, sortDirection, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeriodApi.periodControllerGetPeriods']?.[localVarOperationServerIndex]?.url;
@@ -207,12 +207,12 @@ export const PeriodApiFactory = function (configuration?: Configuration, basePat
         /**
          * 
          * @param {string} projectId 
-         * @param {boolean} rewardGranted 
+         * @param {string} rewardGranted 
          * @param {string} sortDirection 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        periodControllerGetPeriods(projectId: string, rewardGranted: boolean, sortDirection: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        periodControllerGetPeriods(projectId: string, rewardGranted: string, sortDirection: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
             return localVarFp.periodControllerGetPeriods(projectId, rewardGranted, sortDirection, options).then((request) => request(axios, basePath));
         },
         /**
@@ -244,13 +244,13 @@ export interface PeriodApiInterface {
     /**
      * 
      * @param {string} projectId 
-     * @param {boolean} rewardGranted 
+     * @param {string} rewardGranted 
      * @param {string} sortDirection 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeriodApiInterface
      */
-    periodControllerGetPeriods(projectId: string, rewardGranted: boolean, sortDirection: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    periodControllerGetPeriods(projectId: string, rewardGranted: string, sortDirection: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
     /**
      * 
@@ -283,13 +283,13 @@ export class PeriodApi extends BaseAPI implements PeriodApiInterface {
     /**
      * 
      * @param {string} projectId 
-     * @param {boolean} rewardGranted 
+     * @param {string} rewardGranted 
      * @param {string} sortDirection 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeriodApi
      */
-    public periodControllerGetPeriods(projectId: string, rewardGranted: boolean, sortDirection: string, options?: RawAxiosRequestConfig) {
+    public periodControllerGetPeriods(projectId: string, rewardGranted: string, sortDirection: string, options?: RawAxiosRequestConfig) {
         return PeriodApiFp(this.configuration).periodControllerGetPeriods(projectId, rewardGranted, sortDirection, options).then((request) => request(this.axios, this.basePath));
     }
 

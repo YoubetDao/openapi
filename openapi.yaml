@@ -322,7 +322,7 @@ paths:
           required: true
           in: query
           schema:
-            type: boolean
+            type: string
         - name: sortDirection
           required: true
           in: query
@@ -415,7 +415,7 @@ paths:
           required: true
           in: query
           schema:
-            type: boolean
+            type: string
         - name: offset
           required: false
           in: query
