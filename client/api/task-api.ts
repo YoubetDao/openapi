@@ -40,20 +40,16 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @param {string} projectList 
-         * @param {string} rewardGranted 
-         * @param {string} rewardClaimed 
+         * @param {TaskControllerGetCompletedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
+         * @param {TaskControllerGetCompletedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetCompletedTasks: async (projectList: string, rewardGranted: string, rewardClaimed: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskControllerGetCompletedTasks: async (projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'projectList' is not null or undefined
             assertParamExists('taskControllerGetCompletedTasks', 'projectList', projectList)
-            // verify required parameter 'rewardGranted' is not null or undefined
-            assertParamExists('taskControllerGetCompletedTasks', 'rewardGranted', rewardGranted)
-            // verify required parameter 'rewardClaimed' is not null or undefined
-            assertParamExists('taskControllerGetCompletedTasks', 'rewardClaimed', rewardClaimed)
             const localVarPath = `/tasks/completed`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -375,14 +371,14 @@ export const TaskApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} projectList 
-         * @param {string} rewardGranted 
-         * @param {string} rewardClaimed 
+         * @param {TaskControllerGetCompletedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
+         * @param {TaskControllerGetCompletedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetCompletedTasks(projectList: string, rewardGranted: string, rewardClaimed: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+        async taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetCompletedTasks(projectList, rewardGranted, rewardClaimed, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerGetCompletedTasks']?.[localVarOperationServerIndex]?.url;
@@ -483,14 +479,14 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @param {string} projectList 
-         * @param {string} rewardGranted 
-         * @param {string} rewardClaimed 
+         * @param {TaskControllerGetCompletedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
+         * @param {TaskControllerGetCompletedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetCompletedTasks(projectList: string, rewardGranted: string, rewardClaimed: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+        taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
             return localVarFp.taskControllerGetCompletedTasks(projectList, rewardGranted, rewardClaimed, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -569,15 +565,15 @@ export interface TaskApiInterface {
     /**
      * 
      * @param {string} projectList 
-     * @param {string} rewardGranted 
-     * @param {string} rewardClaimed 
+     * @param {TaskControllerGetCompletedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
+     * @param {TaskControllerGetCompletedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerGetCompletedTasks(projectList: string, rewardGranted: string, rewardClaimed: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -655,15 +651,15 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
     /**
      * 
      * @param {string} projectList 
-     * @param {string} rewardGranted 
-     * @param {string} rewardClaimed 
+     * @param {TaskControllerGetCompletedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
+     * @param {TaskControllerGetCompletedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApi
      */
-    public taskControllerGetCompletedTasks(projectList: string, rewardGranted: string, rewardClaimed: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+    public taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
         return TaskApiFp(this.configuration).taskControllerGetCompletedTasks(projectList, rewardGranted, rewardClaimed, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
@@ -744,3 +740,21 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
     }
 }
 
+/**
+ * @export
+ */
+export const TaskControllerGetCompletedTasksRewardGrantedEnum = {
+    All: 'all',
+    Granted: 'granted',
+    Ungranted: 'ungranted'
+} as const;
+export type TaskControllerGetCompletedTasksRewardGrantedEnum = typeof TaskControllerGetCompletedTasksRewardGrantedEnum[keyof typeof TaskControllerGetCompletedTasksRewardGrantedEnum];
+/**
+ * @export
+ */
+export const TaskControllerGetCompletedTasksRewardClaimedEnum = {
+    All: 'all',
+    Claimed: 'claimed',
+    Unclaimed: 'unclaimed'
+} as const;
+export type TaskControllerGetCompletedTasksRewardClaimedEnum = typeof TaskControllerGetCompletedTasksRewardClaimedEnum[keyof typeof TaskControllerGetCompletedTasksRewardClaimedEnum];

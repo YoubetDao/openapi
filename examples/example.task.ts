@@ -1,9 +1,9 @@
 // example-usage.ts
-import { RewardClaimedFilter } from 'src/common/dto/sort.dto';
 import {
   Configuration,
   TaskApi,
   PeriodControllerGetPeriodsRewardGrantedEnum,
+  TaskControllerGetCompletedTasksRewardGrantedEnum,
 } from '../client';
 
 // 创建配置对象
@@ -23,7 +23,7 @@ async function getAllTasks() {
       '',
       '',
       PeriodControllerGetPeriodsRewardGrantedEnum.All,
-      RewardClaimedFilter.ALL,
+      TaskControllerGetCompletedTasksRewardGrantedEnum.All,
     );
     return response.data;
   } catch (error) {

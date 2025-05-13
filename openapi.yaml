@@ -524,14 +524,24 @@ paths:
           schema:
             type: string
         - name: rewardGranted
-          required: true
+          required: false
           in: query
+          description: "Filter by reward granted status: all, granted, ungranted"
           schema:
+            enum:
+              - all
+              - granted
+              - ungranted
             type: string
         - name: rewardClaimed
-          required: true
+          required: false
           in: query
+          description: "Filter by reward claimed status: all, claimed, unclaimed"
           schema:
+            enum:
+              - all
+              - claimed
+              - unclaimed
             type: string
         - name: offset
           required: false
