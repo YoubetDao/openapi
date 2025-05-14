@@ -16,27 +16,24 @@
 // May contain unused imports in some cases
 // @ts-ignore
 import type { PeriodControllerGetPeriods200ResponsePagination } from './period-controller-get-periods200-response-pagination';
-// May contain unused imports in some cases
-// @ts-ignore
-import type { TaskApply } from './task-apply';
 
 /**
  * 
  * @export
- * @interface TaskApplyControllerGetTaskApplies200Response
+ * @interface PeriodControllerGetPeriods200Response
  */
-export interface TaskApplyControllerGetTaskApplies200Response {
+export interface PeriodControllerGetPeriods200Response {
     /**
      * 
      * @type {PeriodControllerGetPeriods200ResponsePagination}
-     * @memberof TaskApplyControllerGetTaskApplies200Response
+     * @memberof PeriodControllerGetPeriods200Response
      */
     'pagination'?: PeriodControllerGetPeriods200ResponsePagination;
     /**
      * 
-     * @type {Array<TaskApply>}
-     * @memberof TaskApplyControllerGetTaskApplies200Response
+     * @type {Array<object>}
+     * @memberof PeriodControllerGetPeriods200Response
      */
-    'data'?: Array<TaskApply>;
+    'data'?: Array<object>;
 }
 

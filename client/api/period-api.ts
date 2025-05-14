@@ -21,6 +21,8 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+// @ts-ignore
+import type { PeriodControllerGetPeriods200Response } from '../models';
 /**
  * PeriodApi - axios parameter creator
  * @export
@@ -61,10 +63,12 @@ export const PeriodApiAxiosParamCreator = function (configuration?: Configuratio
          * @param {string} projectId 
          * @param {string} sortDirection 
          * @param {PeriodControllerGetPeriodsRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        periodControllerGetPeriods: async (projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        periodControllerGetPeriods: async (projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'projectId' is not null or undefined
             assertParamExists('periodControllerGetPeriods', 'projectId', projectId)
             // verify required parameter 'sortDirection' is not null or undefined
@@ -91,6 +95,14 @@ export const PeriodApiAxiosParamCreator = function (configuration?: Configuratio
 
             if (sortDirection !== undefined) {
                 localVarQueryParameter['sortDirection'] = sortDirection;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
 
@@ -163,11 +175,13 @@ export const PeriodApiFp = function(configuration?: Configuration) {
          * @param {string} projectId 
          * @param {string} sortDirection 
          * @param {PeriodControllerGetPeriodsRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async periodControllerGetPeriods(projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.periodControllerGetPeriods(projectId, sortDirection, rewardGranted, options);
+        async periodControllerGetPeriods(projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<PeriodControllerGetPeriods200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.periodControllerGetPeriods(projectId, sortDirection, rewardGranted, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['PeriodApi.periodControllerGetPeriods']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -207,11 +221,13 @@ export const PeriodApiFactory = function (configuration?: Configuration, basePat
          * @param {string} projectId 
          * @param {string} sortDirection 
          * @param {PeriodControllerGetPeriodsRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        periodControllerGetPeriods(projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.periodControllerGetPeriods(projectId, sortDirection, rewardGranted, options).then((request) => request(axios, basePath));
+        periodControllerGetPeriods(projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<PeriodControllerGetPeriods200Response> {
+            return localVarFp.periodControllerGetPeriods(projectId, sortDirection, rewardGranted, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -244,11 +260,13 @@ export interface PeriodApiInterface {
      * @param {string} projectId 
      * @param {string} sortDirection 
      * @param {PeriodControllerGetPeriodsRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeriodApiInterface
      */
-    periodControllerGetPeriods(projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    periodControllerGetPeriods(projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<PeriodControllerGetPeriods200Response>;
 
     /**
      * 
@@ -283,12 +301,14 @@ export class PeriodApi extends BaseAPI implements PeriodApiInterface {
      * @param {string} projectId 
      * @param {string} sortDirection 
      * @param {PeriodControllerGetPeriodsRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof PeriodApi
      */
-    public periodControllerGetPeriods(projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, options?: RawAxiosRequestConfig) {
-        return PeriodApiFp(this.configuration).periodControllerGetPeriods(projectId, sortDirection, rewardGranted, options).then((request) => request(this.axios, this.basePath));
+    public periodControllerGetPeriods(projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return PeriodApiFp(this.configuration).periodControllerGetPeriods(projectId, sortDirection, rewardGranted, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

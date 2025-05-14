@@ -30,11 +30,12 @@ models/github-pull-request-ref-dto.ts
 models/github-user-dto.ts
 models/github-user.ts
 models/index.ts
+models/period-controller-get-periods200-response-pagination.ts
+models/period-controller-get-periods200-response.ts
 models/receipt.ts
 models/reward-detail.ts
 models/task-apply-controller-get-task-applies200-response.ts
 models/task-apply.ts
-models/task-controller-get-tasks200-response-pagination.ts
 models/task-controller-get-tasks200-response.ts
 models/task.ts
 models/update-report-dto.ts
