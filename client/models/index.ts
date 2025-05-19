@@ -5,6 +5,7 @@ export * from './github-milestone-dto';
 export * from './github-pull-request-ref-dto';
 export * from './github-user';
 export * from './github-user-dto';
+export * from './period';
 export * from './period-controller-get-periods200-response';
 export * from './period-controller-get-periods200-response-pagination';
 export * from './receipt';

@@ -32,6 +32,7 @@ models/github-user.ts
 models/index.ts
 models/period-controller-get-periods200-response-pagination.ts
 models/period-controller-get-periods200-response.ts
+models/period.ts
 models/receipt.ts
 models/reward-detail.ts
 models/task-apply-controller-get-task-applies200-response.ts

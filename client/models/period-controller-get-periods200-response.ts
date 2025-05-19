@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { Period } from './period';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { PeriodControllerGetPeriods200ResponsePagination } from './period-controller-get-periods200-response-pagination';
 
 /**
@@ -31,9 +34,9 @@ export interface PeriodControllerGetPeriods200Response {
     'pagination'?: PeriodControllerGetPeriods200ResponsePagination;
     /**
      * 
-     * @type {Array<object>}
+     * @type {Array<Period>}
      * @memberof PeriodControllerGetPeriods200Response
      */
-    'data'?: Array<object>;
+    'data'?: Array<Period>;
 }
 
