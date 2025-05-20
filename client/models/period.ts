@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GithubUser } from './github-user';
 
 /**
  * 
@@ -20,6 +23,12 @@
  * @interface Period
  */
 export interface Period {
+    /**
+     * 
+     * @type {string}
+     * @memberof Period
+     */
+    '_id': string;
     /**
      * 
      * @type {string}
@@ -52,10 +61,10 @@ export interface Period {
     'commits': Array<string>;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<GithubUser>}
      * @memberof Period
      */
-    'contributors': Array<string>;
+    'contributors': Array<GithubUser>;
     /**
      * 
      * @type {boolean}

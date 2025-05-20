@@ -1263,9 +1263,24 @@ components:
         - created_at
         - updated_at
         - author_association
+    GithubUser:
+      type: object
+      properties:
+        login:
+          type: string
+        htmlUrl:
+          type: string
+        avatarUrl:
+          type: string
+      required:
+        - login
+        - htmlUrl
+        - avatarUrl
     Period:
       type: object
       properties:
+        _id:
+          type: string
         projectId:
           type: string
         from:
@@ -1285,7 +1300,7 @@ components:
         contributors:
           type: array
           items:
-            type: string
+            $ref: "#/components/schemas/GithubUser"
         rewardGranted:
           type: boolean
         createdAt:
@@ -1295,6 +1310,7 @@ components:
           format: date-time
           type: string
       required:
+        - _id
         - projectId
         - from
         - to
@@ -1304,19 +1320,6 @@ components:
         - rewardGranted
         - createdAt
         - updatedAt
-    GithubUser:
-      type: object
-      properties:
-        login:
-          type: string
-        htmlUrl:
-          type: string
-        avatarUrl:
-          type: string
-      required:
-        - login
-        - htmlUrl
-        - avatarUrl
     SchemaObjectId:
       type: object
       properties: {}
