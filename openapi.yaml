@@ -67,19 +67,6 @@ paths:
         "200":
           description: ""
       tags: *a2
-  /receipts/{id}/claim:
-    patch:
-      operationId: ReceiptController_claimReceipt
-      parameters:
-        - name: id
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        "200":
-          description: ""
-      tags: *a2
   /youbet/wallet:
     get:
       operationId: YoubetController_getLinkedWallet
