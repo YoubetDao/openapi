@@ -88,10 +88,10 @@ export interface Task {
     'assignee': GithubUser;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<GithubUser>}
      * @memberof Task
      */
-    'assignees': Array<string>;
+    'assignees': Array<GithubUser>;
     /**
      * 
      * @type {Array<string>}

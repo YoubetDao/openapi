@@ -1355,7 +1355,7 @@ components:
         assignees:
           type: array
           items:
-            type: string
+            $ref: "#/components/schemas/GithubUser"
         labels:
           type: array
           items:
