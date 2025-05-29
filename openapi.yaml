@@ -1307,9 +1307,89 @@ components:
         - rewardGranted
         - createdAt
         - updatedAt
+    YoubetExtra:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+      required:
+        - tags
     SchemaObjectId:
       type: object
       properties: {}
+    Project:
+      type: object
+      properties:
+        _id:
+          type: string
+        githubId:
+          type: number
+        name:
+          type: string
+        fullName:
+          type: string
+        owner:
+          $ref: "#/components/schemas/GithubUser"
+        language:
+          type: string
+        openIssuesCount:
+          type: number
+        forksCount:
+          type: number
+        stargazersCount:
+          type: number
+        contributorsCount:
+          type: number
+        description:
+          type: string
+        htmlUrl:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        tutorial:
+          type: object
+        youbetExtra:
+          $ref: "#/components/schemas/YoubetExtra"
+        namespace:
+          $ref: "#/components/schemas/SchemaObjectId"
+        approvedAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        periodicReward:
+          type: object
+        priority:
+          type: number
+      required:
+        - _id
+        - githubId
+        - name
+        - fullName
+        - owner
+        - language
+        - openIssuesCount
+        - forksCount
+        - stargazersCount
+        - contributorsCount
+        - description
+        - htmlUrl
+        - createdAt
+        - updatedAt
+        - tutorial
+        - youbetExtra
+        - namespace
+        - approvedAt
+        - deletedAt
+        - periodicReward
+        - priority
     RewardDetail:
       type: object
       properties:
@@ -1334,7 +1414,7 @@ components:
         githubId:
           type: number
         project:
-          type: object
+          $ref: "#/components/schemas/Project"
         title:
           type: string
         body:
@@ -1412,6 +1492,8 @@ components:
     TaskApply:
       type: object
       properties:
+        _id:
+          type: string
         githubId:
           type: number
         project:
@@ -1443,6 +1525,7 @@ components:
         taskTitle:
           type: string
       required:
+        - _id
         - githubId
         - project
         - task

@@ -22,6 +22,12 @@
 export interface TaskApply {
     /**
      * 
+     * @type {string}
+     * @memberof TaskApply
+     */
+    '_id': string;
+    /**
+     * 
      * @type {number}
      * @memberof TaskApply
      */

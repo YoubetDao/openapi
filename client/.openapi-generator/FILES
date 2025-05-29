@@ -33,6 +33,7 @@ models/index.ts
 models/period-controller-get-periods200-response-pagination.ts
 models/period-controller-get-periods200-response.ts
 models/period.ts
+models/project.ts
 models/receipt.ts
 models/reward-detail.ts
 models/task-apply-controller-get-task-applies200-response.ts
@@ -41,3 +42,4 @@ models/task-controller-get-tasks200-response.ts
 models/task.ts
 models/update-report-dto.ts
 models/update-task-dto.ts
+models/youbet-extra.ts

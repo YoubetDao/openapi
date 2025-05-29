@@ -18,6 +18,9 @@
 import type { GithubUser } from './github-user';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { Project } from './project';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { RewardDetail } from './reward-detail';
 
 /**
@@ -40,10 +43,10 @@ export interface Task {
     'githubId': number;
     /**
      * 
-     * @type {object}
+     * @type {Project}
      * @memberof Task
      */
-    'project': object;
+    'project': Project;
     /**
      * 
      * @type {string}
