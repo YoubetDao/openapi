@@ -33,10 +33,12 @@ models/index.ts
 models/period-controller-get-periods200-response-pagination.ts
 models/period-controller-get-periods200-response.ts
 models/period.ts
+models/populated-task-apply-dto.ts
 models/project.ts
 models/receipt.ts
 models/reward-detail.ts
 models/task-apply-controller-get-task-applies200-response.ts
+models/task-apply-controller-my-task-applies200-response.ts
 models/task-apply.ts
 models/task-controller-get-tasks200-response.ts
 models/task.ts

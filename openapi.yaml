@@ -733,7 +733,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: "#/components/schemas/TaskApply"
+                      $ref: "#/components/schemas/PopulatedTaskApplyDto"
       tags: &a10
         - TaskApply
     post:
@@ -1569,6 +1569,56 @@ components:
         - status
         - createdAt
         - updatedAt
+    PopulatedTaskApplyDto:
+      type: object
+      properties:
+        _id:
+          type: string
+        githubId:
+          type: number
+        project:
+          $ref: "#/components/schemas/SchemaObjectId"
+        user:
+          type: object
+        comment:
+          type: string
+        htmlUrl:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        canceledAt:
+          format: date-time
+          type: string
+        approvedAt:
+          format: date-time
+          type: string
+        namespace:
+          $ref: "#/components/schemas/SchemaObjectId"
+        projectName:
+          type: string
+        taskTitle:
+          type: string
+        task:
+          $ref: "#/components/schemas/Task"
+      required:
+        - _id
+        - githubId
+        - project
+        - user
+        - comment
+        - htmlUrl
+        - createdAt
+        - updatedAt
+        - canceledAt
+        - approvedAt
+        - namespace
+        - projectName
+        - taskTitle
+        - task
     UpdateReportDto:
       type: object
       properties:
