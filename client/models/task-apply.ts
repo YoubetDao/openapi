@@ -13,6 +13,9 @@
  */
 
 
+// May contain unused imports in some cases
+// @ts-ignore
+import type { GithubUser } from './github-user';
 
 /**
  * 
@@ -46,10 +49,10 @@ export interface TaskApply {
     'task': object;
     /**
      * 
-     * @type {object}
+     * @type {GithubUser}
      * @memberof TaskApply
      */
-    'user': object;
+    'user': GithubUser;
     /**
      * 
      * @type {string}

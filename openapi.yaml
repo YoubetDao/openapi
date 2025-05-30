@@ -1501,7 +1501,7 @@ components:
         task:
           $ref: "#/components/schemas/SchemaObjectId"
         user:
-          type: object
+          $ref: "#/components/schemas/GithubUser"
         comment:
           type: string
         htmlUrl:
@@ -1579,7 +1579,7 @@ components:
         project:
           $ref: "#/components/schemas/SchemaObjectId"
         user:
-          type: object
+          $ref: "#/components/schemas/GithubUser"
         comment:
           type: string
         htmlUrl:

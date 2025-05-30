@@ -15,6 +15,9 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
+import type { GithubUser } from './github-user';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { Task } from './task';
 
 /**
@@ -43,10 +46,10 @@ export interface PopulatedTaskApplyDto {
     'project': object;
     /**
      * 
-     * @type {object}
+     * @type {GithubUser}
      * @memberof PopulatedTaskApplyDto
      */
-    'user': object;
+    'user': GithubUser;
     /**
      * 
      * @type {string}
