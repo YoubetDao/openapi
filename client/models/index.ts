@@ -1,3 +1,4 @@
+export * from './contributor-reward-body-dto';
 export * from './contributor-reward-dto';
 export * from './create-issue-dto';
 export * from './github-issue-dto';

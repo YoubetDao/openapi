@@ -707,9 +707,7 @@ paths:
         content:
           application/json:
             schema:
-              type: array
-              items:
-                $ref: "#/components/schemas/ContributorRewardDto"
+              $ref: "#/components/schemas/ContributorRewardBodyDto"
       responses:
         "200":
           description: ""
@@ -1678,6 +1676,15 @@ components:
         - amount
         - symbol
         - decimals
+    ContributorRewardBodyDto:
+      type: object
+      properties:
+        contributorRewards:
+          type: array
+          items:
+            $ref: "#/components/schemas/ContributorRewardDto"
+      required:
+        - contributorRewards
     Receipt:
       type: object
       properties:
