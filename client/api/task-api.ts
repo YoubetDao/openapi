@@ -206,12 +206,15 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
         /**
          * 
          * @param {string} taskId 
+         * @param {Array<string>} requestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGrantRewards: async (taskId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskControllerGrantRewards: async (taskId: string, requestBody: Array<string>, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'taskId' is not null or undefined
             assertParamExists('taskControllerGrantRewards', 'taskId', taskId)
+            // verify required parameter 'requestBody' is not null or undefined
+            assertParamExists('taskControllerGrantRewards', 'requestBody', requestBody)
             const localVarPath = `/tasks/{taskId}/rewards`
                 .replace(`{${"taskId"}}`, encodeURIComponent(String(taskId)));
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
@@ -227,9 +230,12 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(requestBody, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -414,11 +420,12 @@ export const TaskApiFp = function(configuration?: Configuration) {
         /**
          * 
          * @param {string} taskId 
+         * @param {Array<string>} requestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGrantRewards(taskId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Receipt>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGrantRewards(taskId, options);
+        async taskControllerGrantRewards(taskId: string, requestBody: Array<string>, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Receipt>>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGrantRewards(taskId, requestBody, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerGrantRewards']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -513,11 +520,12 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
         /**
          * 
          * @param {string} taskId 
+         * @param {Array<string>} requestBody 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGrantRewards(taskId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Receipt>> {
-            return localVarFp.taskControllerGrantRewards(taskId, options).then((request) => request(axios, basePath));
+        taskControllerGrantRewards(taskId: string, requestBody: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<Receipt>> {
+            return localVarFp.taskControllerGrantRewards(taskId, requestBody, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -599,11 +607,12 @@ export interface TaskApiInterface {
     /**
      * 
      * @param {string} taskId 
+     * @param {Array<string>} requestBody 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerGrantRewards(taskId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Receipt>>;
+    taskControllerGrantRewards(taskId: string, requestBody: Array<string>, options?: RawAxiosRequestConfig): AxiosPromise<Array<Receipt>>;
 
     /**
      * 
@@ -691,12 +700,13 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
     /**
      * 
      * @param {string} taskId 
+     * @param {Array<string>} requestBody 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApi
      */
-    public taskControllerGrantRewards(taskId: string, options?: RawAxiosRequestConfig) {
-        return TaskApiFp(this.configuration).taskControllerGrantRewards(taskId, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerGrantRewards(taskId: string, requestBody: Array<string>, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskControllerGrantRewards(taskId, requestBody, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
