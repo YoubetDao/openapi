@@ -22,6 +22,7 @@ common.ts
 configuration.ts
 git_push.sh
 index.ts
+models/contributor-reward-dto.ts
 models/create-issue-dto.ts
 models/github-issue-dto.ts
 models/github-label-dto.ts
