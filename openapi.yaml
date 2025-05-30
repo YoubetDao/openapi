@@ -1495,6 +1495,16 @@ components:
         - deletedAt
         - periodicReward
         - priority
+    LabelWithColorDto:
+      type: object
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+      required:
+        - name
+        - color
     RewardDetail:
       type: object
       properties:
@@ -1550,7 +1560,7 @@ components:
         labelsWithColor:
           type: array
           items:
-            type: string
+            $ref: "#/components/schemas/LabelWithColorDto"
         htmlUrl:
           type: string
         namespace:

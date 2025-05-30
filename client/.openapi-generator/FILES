@@ -30,6 +30,7 @@ models/github-pull-request-ref-dto.ts
 models/github-user-dto.ts
 models/github-user.ts
 models/index.ts
+models/label-with-color-dto.ts
 models/period-controller-get-periods200-response.ts
 models/period.ts
 models/populated-task-apply-dto.ts

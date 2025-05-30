@@ -18,6 +18,9 @@
 import type { GithubUser } from './github-user';
 // May contain unused imports in some cases
 // @ts-ignore
+import type { LabelWithColorDto } from './label-with-color-dto';
+// May contain unused imports in some cases
+// @ts-ignore
 import type { Project } from './project';
 // May contain unused imports in some cases
 // @ts-ignore
@@ -109,10 +112,10 @@ export interface Task {
     'user': GithubUser;
     /**
      * 
-     * @type {Array<string>}
+     * @type {Array<LabelWithColorDto>}
      * @memberof Task
      */
-    'labelsWithColor': Array<string>;
+    'labelsWithColor': Array<LabelWithColorDto>;
     /**
      * 
      * @type {string}
