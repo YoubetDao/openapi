@@ -30,7 +30,6 @@ models/github-pull-request-ref-dto.ts
 models/github-user-dto.ts
 models/github-user.ts
 models/index.ts
-models/period-controller-get-periods200-response-pagination.ts
 models/period-controller-get-periods200-response.ts
 models/period.ts
 models/populated-task-apply-dto.ts
@@ -44,4 +43,8 @@ models/task-controller-get-tasks200-response.ts
 models/task.ts
 models/update-report-dto.ts
 models/update-task-dto.ts
+models/user-controller-leaderboard200-response-pagination.ts
+models/user-controller-leaderboard200-response.ts
+models/user-task-completion-dto.ts
+models/user.ts
 models/youbet-extra.ts

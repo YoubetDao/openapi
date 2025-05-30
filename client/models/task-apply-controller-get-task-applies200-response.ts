@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PeriodControllerGetPeriods200ResponsePagination } from './period-controller-get-periods200-response-pagination';
+import type { PopulatedTaskApplyDto } from './populated-task-apply-dto';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PopulatedTaskApplyDto } from './populated-task-apply-dto';
+import type { UserControllerLeaderboard200ResponsePagination } from './user-controller-leaderboard200-response-pagination';
 
 /**
  * 
@@ -28,10 +28,10 @@ import type { PopulatedTaskApplyDto } from './populated-task-apply-dto';
 export interface TaskApplyControllerGetTaskApplies200Response {
     /**
      * 
-     * @type {PeriodControllerGetPeriods200ResponsePagination}
+     * @type {UserControllerLeaderboard200ResponsePagination}
      * @memberof TaskApplyControllerGetTaskApplies200Response
      */
-    'pagination'?: PeriodControllerGetPeriods200ResponsePagination;
+    'pagination'?: UserControllerLeaderboard200ResponsePagination;
     /**
      * 
      * @type {Array<PopulatedTaskApplyDto>}

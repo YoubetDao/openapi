@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { PeriodControllerGetPeriods200ResponsePagination } from './period-controller-get-periods200-response-pagination';
+import type { TaskApply } from './task-apply';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TaskApply } from './task-apply';
+import type { UserControllerLeaderboard200ResponsePagination } from './user-controller-leaderboard200-response-pagination';
 
 /**
  * 
@@ -28,10 +28,10 @@ import type { TaskApply } from './task-apply';
 export interface TaskApplyControllerMyTaskApplies200Response {
     /**
      * 
-     * @type {PeriodControllerGetPeriods200ResponsePagination}
+     * @type {UserControllerLeaderboard200ResponsePagination}
      * @memberof TaskApplyControllerMyTaskApplies200Response
      */
-    'pagination'?: PeriodControllerGetPeriods200ResponsePagination;
+    'pagination'?: UserControllerLeaderboard200ResponsePagination;
     /**
      * 
      * @type {Array<TaskApply>}

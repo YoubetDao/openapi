@@ -15,28 +15,28 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Period } from './period';
+import type { UserControllerLeaderboard200ResponsePagination } from './user-controller-leaderboard200-response-pagination';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { UserControllerLeaderboard200ResponsePagination } from './user-controller-leaderboard200-response-pagination';
+import type { UserTaskCompletionDto } from './user-task-completion-dto';
 
 /**
  * 
  * @export
- * @interface PeriodControllerGetPeriods200Response
+ * @interface UserControllerLeaderboard200Response
  */
-export interface PeriodControllerGetPeriods200Response {
+export interface UserControllerLeaderboard200Response {
     /**
      * 
      * @type {UserControllerLeaderboard200ResponsePagination}
-     * @memberof PeriodControllerGetPeriods200Response
+     * @memberof UserControllerLeaderboard200Response
      */
     'pagination'?: UserControllerLeaderboard200ResponsePagination;
     /**
      * 
-     * @type {Array<Period>}
-     * @memberof PeriodControllerGetPeriods200Response
+     * @type {Array<UserTaskCompletionDto>}
+     * @memberof UserControllerLeaderboard200Response
      */
-    'data'?: Array<Period>;
+    'data'?: Array<UserTaskCompletionDto>;
 }
 
