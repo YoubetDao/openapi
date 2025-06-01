@@ -770,6 +770,12 @@ paths:
     post:
       operationId: TaskApplyController_applyTask
       parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ApplyTaskDto"
       responses:
         "200":
           description: ""
@@ -1765,6 +1771,16 @@ components:
         - projectName
         - taskTitle
         - task
+    ApplyTaskDto:
+      type: object
+      properties:
+        taskGithubId:
+          type: number
+        comment:
+          type: string
+      required:
+        - taskGithubId
+        - comment
     UpdateReportDto:
       type: object
       properties:
