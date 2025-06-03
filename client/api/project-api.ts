@@ -21,6 +21,8 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+// @ts-ignore
+import type { ProjectControllerGetProjects200Response } from '../models';
 /**
  * ProjectApi - axios parameter creator
  * @export
@@ -65,10 +67,12 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} tags 
          * @param {string} namespace 
          * @param {string} onlyPeriodicReward 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectControllerGetProjects: async (tags: string, namespace: string, onlyPeriodicReward: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectControllerGetProjects: async (tags: string, namespace: string, onlyPeriodicReward: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tags' is not null or undefined
             assertParamExists('projectControllerGetProjects', 'tags', tags)
             // verify required parameter 'namespace' is not null or undefined
@@ -97,6 +101,14 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
 
             if (onlyPeriodicReward !== undefined) {
                 localVarQueryParameter['onlyPeriodicReward'] = onlyPeriodicReward;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
 
@@ -199,11 +211,13 @@ export const ProjectApiFp = function(configuration?: Configuration) {
          * @param {string} tags 
          * @param {string} namespace 
          * @param {string} onlyPeriodicReward 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectControllerGetProjects(tags, namespace, onlyPeriodicReward, options);
+        async projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectControllerGetProjects200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectControllerGetProjects(tags, namespace, onlyPeriodicReward, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProjectApi.projectControllerGetProjects']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -255,11 +269,13 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
          * @param {string} tags 
          * @param {string} namespace 
          * @param {string} onlyPeriodicReward 
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.projectControllerGetProjects(tags, namespace, onlyPeriodicReward, options).then((request) => request(axios, basePath));
+        projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProjectControllerGetProjects200Response> {
+            return localVarFp.projectControllerGetProjects(tags, namespace, onlyPeriodicReward, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -301,11 +317,13 @@ export interface ProjectApiInterface {
      * @param {string} tags 
      * @param {string} namespace 
      * @param {string} onlyPeriodicReward 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectApiInterface
      */
-    projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProjectControllerGetProjects200Response>;
 
     /**
      * 
@@ -349,12 +367,14 @@ export class ProjectApi extends BaseAPI implements ProjectApiInterface {
      * @param {string} tags 
      * @param {string} namespace 
      * @param {string} onlyPeriodicReward 
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectApi
      */
-    public projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, options?: RawAxiosRequestConfig) {
-        return ProjectApiFp(this.configuration).projectControllerGetProjects(tags, namespace, onlyPeriodicReward, options).then((request) => request(this.axios, this.basePath));
+    public projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return ProjectApiFp(this.configuration).projectControllerGetProjects(tags, namespace, onlyPeriodicReward, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

@@ -37,6 +37,7 @@ models/label-with-color-dto.ts
 models/period-controller-get-periods200-response.ts
 models/period.ts
 models/populated-task-apply-dto.ts
+models/project-controller-get-projects200-response.ts
 models/project.ts
 models/receipt.ts
 models/reward-detail.ts
