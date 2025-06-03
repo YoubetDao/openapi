@@ -12,7 +12,13 @@ paths:
   /auth/github/callback:
     get:
       operationId: AuthController_githubAuthRedirect
-      parameters: []
+      parameters:
+        - name: code
+          required: true
+          in: query
+          description: GitHub OAuth2 code
+          schema:
+            type: string
       responses:
         "200":
           description: ""

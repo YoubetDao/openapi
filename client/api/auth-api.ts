@@ -60,10 +60,13 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
+         * @param {string} code GitHub OAuth2 code
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerGithubAuthRedirect: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        authControllerGithubAuthRedirect: async (code: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'code' is not null or undefined
+            assertParamExists('authControllerGithubAuthRedirect', 'code', code)
             const localVarPath = `/auth/github/callback`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -75,6 +78,10 @@ export const AuthApiAxiosParamCreator = function (configuration?: Configuration)
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (code !== undefined) {
+                localVarQueryParameter['code'] = code;
+            }
 
 
     
@@ -110,11 +117,12 @@ export const AuthApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {string} code GitHub OAuth2 code
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerGithubAuthRedirect(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserAuthDto>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGithubAuthRedirect(options);
+        async authControllerGithubAuthRedirect(code: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserAuthDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGithubAuthRedirect(code, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerGithubAuthRedirect']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -139,11 +147,12 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
+         * @param {string} code GitHub OAuth2 code
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerGithubAuthRedirect(options?: RawAxiosRequestConfig): AxiosPromise<UserAuthDto> {
-            return localVarFp.authControllerGithubAuthRedirect(options).then((request) => request(axios, basePath));
+        authControllerGithubAuthRedirect(code: string, options?: RawAxiosRequestConfig): AxiosPromise<UserAuthDto> {
+            return localVarFp.authControllerGithubAuthRedirect(code, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -164,11 +173,12 @@ export interface AuthApiInterface {
 
     /**
      * 
+     * @param {string} code GitHub OAuth2 code
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApiInterface
      */
-    authControllerGithubAuthRedirect(options?: RawAxiosRequestConfig): AxiosPromise<UserAuthDto>;
+    authControllerGithubAuthRedirect(code: string, options?: RawAxiosRequestConfig): AxiosPromise<UserAuthDto>;
 
 }
 
@@ -191,12 +201,13 @@ export class AuthApi extends BaseAPI implements AuthApiInterface {
 
     /**
      * 
+     * @param {string} code GitHub OAuth2 code
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof AuthApi
      */
-    public authControllerGithubAuthRedirect(options?: RawAxiosRequestConfig) {
-        return AuthApiFp(this.configuration).authControllerGithubAuthRedirect(options).then((request) => request(this.axios, this.basePath));
+    public authControllerGithubAuthRedirect(code: string, options?: RawAxiosRequestConfig) {
+        return AuthApiFp(this.configuration).authControllerGithubAuthRedirect(code, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
