@@ -902,14 +902,12 @@ paths:
           description: 搜索关键字
           schema:
             type: string
-        - name: sorting
+        - name: sort
           required: false
           in: query
-          description: 排序字段，格式如 sorting=field,desc
+          description: 排序字段，格式如 sort=field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
           schema:
-            type: array
-            items:
-              type: string
+            type: string
         - name: offset
           required: false
           in: query
