@@ -23,6 +23,7 @@ export * from './task-controller-get-tasks200-response';
 export * from './update-report-dto';
 export * from './update-task-dto';
 export * from './user';
+export * from './user-auth-dto';
 export * from './user-controller-leaderboard200-response';
 export * from './user-controller-leaderboard200-response-pagination';
 export * from './user-task-completion-dto';

@@ -16,6 +16,10 @@ paths:
       responses:
         "200":
           description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserAuthDto"
       tags: *a1
   /:
     get:
@@ -1060,6 +1064,60 @@ tags: []
 servers: []
 components:
   schemas:
+    UserAuthDto:
+      type: object
+      properties:
+        id:
+          type: string
+        username:
+          type: string
+        displayName:
+          type: string
+        photos:
+          type: array
+          items:
+            type: string
+        emails:
+          type: array
+          items:
+            type: string
+        jwt:
+          type: string
+        location:
+          type: string
+        bio:
+          type: string
+        followers:
+          type: number
+        following:
+          type: number
+        twitterUsername:
+          type: string
+        githubAccessToken:
+          type: string
+        adminNamespaces:
+          type: array
+          items:
+            type: string
+        adminProjects:
+          type: array
+          items:
+            type: string
+      required:
+        - id
+        - username
+        - displayName
+        - photos
+        - emails
+        - jwt
+        - location
+        - bio
+        - followers
+        - following
+        - twitterUsername
+        - githubAccessToken
+        - adminNamespaces
+        - adminProjects
     SchemaObjectId:
       type: object
       properties: {}

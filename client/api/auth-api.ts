@@ -21,6 +21,8 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+// @ts-ignore
+import type { UserAuthDto } from '../models';
 /**
  * AuthApi - axios parameter creator
  * @export
@@ -111,7 +113,7 @@ export const AuthApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async authControllerGithubAuthRedirect(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async authControllerGithubAuthRedirect(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserAuthDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.authControllerGithubAuthRedirect(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['AuthApi.authControllerGithubAuthRedirect']?.[localVarOperationServerIndex]?.url;
@@ -140,7 +142,7 @@ export const AuthApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        authControllerGithubAuthRedirect(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        authControllerGithubAuthRedirect(options?: RawAxiosRequestConfig): AxiosPromise<UserAuthDto> {
             return localVarFp.authControllerGithubAuthRedirect(options).then((request) => request(axios, basePath));
         },
     };
@@ -166,7 +168,7 @@ export interface AuthApiInterface {
      * @throws {RequiredError}
      * @memberof AuthApiInterface
      */
-    authControllerGithubAuthRedirect(options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    authControllerGithubAuthRedirect(options?: RawAxiosRequestConfig): AxiosPromise<UserAuthDto>;
 
 }
 
