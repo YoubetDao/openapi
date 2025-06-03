@@ -896,6 +896,20 @@ paths:
           in: query
           schema:
             type: string
+        - name: search
+          required: false
+          in: query
+          description: 搜索关键字
+          schema:
+            type: string
+        - name: sorting
+          required: false
+          in: query
+          description: 排序字段，格式如 sorting=field,desc
+          schema:
+            type: array
+            items:
+              type: string
         - name: offset
           required: false
           in: query

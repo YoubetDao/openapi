@@ -67,12 +67,14 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} tags 
          * @param {string} namespace 
          * @param {string} onlyPeriodicReward 
+         * @param {string} [search] 搜索关键字
+         * @param {Array<string>} [sorting] 排序字段，格式如 sorting&#x3D;field,desc
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectControllerGetProjects: async (tags: string, namespace: string, onlyPeriodicReward: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectControllerGetProjects: async (tags: string, namespace: string, onlyPeriodicReward: string, search?: string, sorting?: Array<string>, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'tags' is not null or undefined
             assertParamExists('projectControllerGetProjects', 'tags', tags)
             // verify required parameter 'namespace' is not null or undefined
@@ -101,6 +103,14 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
 
             if (onlyPeriodicReward !== undefined) {
                 localVarQueryParameter['onlyPeriodicReward'] = onlyPeriodicReward;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sorting) {
+                localVarQueryParameter['sorting'] = sorting;
             }
 
             if (offset !== undefined) {
@@ -211,13 +221,15 @@ export const ProjectApiFp = function(configuration?: Configuration) {
          * @param {string} tags 
          * @param {string} namespace 
          * @param {string} onlyPeriodicReward 
+         * @param {string} [search] 搜索关键字
+         * @param {Array<string>} [sorting] 排序字段，格式如 sorting&#x3D;field,desc
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectControllerGetProjects200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectControllerGetProjects(tags, namespace, onlyPeriodicReward, offset, limit, options);
+        async projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, search?: string, sorting?: Array<string>, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectControllerGetProjects200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectControllerGetProjects(tags, namespace, onlyPeriodicReward, search, sorting, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProjectApi.projectControllerGetProjects']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -269,13 +281,15 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
          * @param {string} tags 
          * @param {string} namespace 
          * @param {string} onlyPeriodicReward 
+         * @param {string} [search] 搜索关键字
+         * @param {Array<string>} [sorting] 排序字段，格式如 sorting&#x3D;field,desc
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProjectControllerGetProjects200Response> {
-            return localVarFp.projectControllerGetProjects(tags, namespace, onlyPeriodicReward, offset, limit, options).then((request) => request(axios, basePath));
+        projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, search?: string, sorting?: Array<string>, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProjectControllerGetProjects200Response> {
+            return localVarFp.projectControllerGetProjects(tags, namespace, onlyPeriodicReward, search, sorting, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -317,13 +331,15 @@ export interface ProjectApiInterface {
      * @param {string} tags 
      * @param {string} namespace 
      * @param {string} onlyPeriodicReward 
+     * @param {string} [search] 搜索关键字
+     * @param {Array<string>} [sorting] 排序字段，格式如 sorting&#x3D;field,desc
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectApiInterface
      */
-    projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProjectControllerGetProjects200Response>;
+    projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, search?: string, sorting?: Array<string>, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProjectControllerGetProjects200Response>;
 
     /**
      * 
@@ -367,14 +383,16 @@ export class ProjectApi extends BaseAPI implements ProjectApiInterface {
      * @param {string} tags 
      * @param {string} namespace 
      * @param {string} onlyPeriodicReward 
+     * @param {string} [search] 搜索关键字
+     * @param {Array<string>} [sorting] 排序字段，格式如 sorting&#x3D;field,desc
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectApi
      */
-    public projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
-        return ProjectApiFp(this.configuration).projectControllerGetProjects(tags, namespace, onlyPeriodicReward, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    public projectControllerGetProjects(tags: string, namespace: string, onlyPeriodicReward: string, search?: string, sorting?: Array<string>, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return ProjectApiFp(this.configuration).projectControllerGetProjects(tags, namespace, onlyPeriodicReward, search, sorting, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
