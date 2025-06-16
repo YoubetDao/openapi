@@ -22,6 +22,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import type { ImportProjectDto } from '../models';
+// @ts-ignore
 import type { ProjectControllerGetProjects200Response } from '../models';
 /**
  * ProjectApi - axios parameter creator
@@ -134,10 +136,13 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
+         * @param {ImportProjectDto} importProjectDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectControllerImportProjectForUser: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        projectControllerImportProjectForUser: async (importProjectDto: ImportProjectDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'importProjectDto' is not null or undefined
+            assertParamExists('projectControllerImportProjectForUser', 'importProjectDto', importProjectDto)
             const localVarPath = `/projects/import`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -152,9 +157,12 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(importProjectDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -236,11 +244,12 @@ export const ProjectApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {ImportProjectDto} importProjectDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectControllerImportProjectForUser(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectControllerImportProjectForUser(options);
+        async projectControllerImportProjectForUser(importProjectDto: ImportProjectDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectControllerImportProjectForUser(importProjectDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProjectApi.projectControllerImportProjectForUser']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -293,11 +302,12 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
         },
         /**
          * 
+         * @param {ImportProjectDto} importProjectDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectControllerImportProjectForUser(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.projectControllerImportProjectForUser(options).then((request) => request(axios, basePath));
+        projectControllerImportProjectForUser(importProjectDto: ImportProjectDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.projectControllerImportProjectForUser(importProjectDto, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -343,11 +353,12 @@ export interface ProjectApiInterface {
 
     /**
      * 
+     * @param {ImportProjectDto} importProjectDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectApiInterface
      */
-    projectControllerImportProjectForUser(options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    projectControllerImportProjectForUser(importProjectDto: ImportProjectDto, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
     /**
      * 
@@ -397,12 +408,13 @@ export class ProjectApi extends BaseAPI implements ProjectApiInterface {
 
     /**
      * 
+     * @param {ImportProjectDto} importProjectDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectApi
      */
-    public projectControllerImportProjectForUser(options?: RawAxiosRequestConfig) {
-        return ProjectApiFp(this.configuration).projectControllerImportProjectForUser(options).then((request) => request(this.axios, this.basePath));
+    public projectControllerImportProjectForUser(importProjectDto: ImportProjectDto, options?: RawAxiosRequestConfig) {
+        return ProjectApiFp(this.configuration).projectControllerImportProjectForUser(importProjectDto, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

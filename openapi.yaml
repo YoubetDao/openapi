@@ -978,6 +978,12 @@ paths:
     post:
       operationId: ProjectController_importProjectForUser
       parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/ImportProjectDto"
       responses:
         "201":
           description: ""
@@ -1544,6 +1550,9 @@ components:
         - rewardGranted
         - createdAt
         - updatedAt
+    Tutorial:
+      type: object
+      properties: {}
     YoubetExtra:
       type: object
       properties:
@@ -1587,7 +1596,7 @@ components:
           format: date-time
           type: string
         tutorial:
-          type: object
+          $ref: "#/components/schemas/Tutorial"
         youbetExtra:
           $ref: "#/components/schemas/YoubetExtra"
         namespace:
@@ -1898,6 +1907,25 @@ components:
       required:
         - taskGithubId
         - comment
+    ImportProjectDto:
+      type: object
+      properties:
+        org:
+          type: string
+        project:
+          type: string
+        namespace:
+          type: string
+        tutorial:
+          $ref: "#/components/schemas/Tutorial"
+        youbetExtra:
+          $ref: "#/components/schemas/YoubetExtra"
+      required:
+        - org
+        - project
+        - namespace
+        - tutorial
+        - youbetExtra
     ObjectId:
       type: object
       properties: {}
