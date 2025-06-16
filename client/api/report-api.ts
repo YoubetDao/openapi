@@ -22,6 +22,8 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
+import type { Report } from '../models';
+// @ts-ignore
 import type { UpdateReportDto } from '../models';
 /**
  * ReportApi - axios parameter creator
@@ -195,7 +197,7 @@ export const ReportApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async reportControllerListReports(projectId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async reportControllerListReports(projectId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<Report>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.reportControllerListReports(projectId, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReportApi.reportControllerListReports']?.[localVarOperationServerIndex]?.url;
@@ -251,7 +253,7 @@ export const ReportApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        reportControllerListReports(projectId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        reportControllerListReports(projectId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Report>> {
             return localVarFp.reportControllerListReports(projectId, options).then((request) => request(axios, basePath));
         },
         /**
@@ -298,7 +300,7 @@ export interface ReportApiInterface {
      * @throws {RequiredError}
      * @memberof ReportApiInterface
      */
-    reportControllerListReports(projectId: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    reportControllerListReports(projectId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<Report>>;
 
     /**
      * 

@@ -15,6 +15,7 @@ export * from './populated-task-apply-dto';
 export * from './project';
 export * from './project-controller-get-projects200-response';
 export * from './receipt';
+export * from './report';
 export * from './reward-detail';
 export * from './task';
 export * from './task-apply';

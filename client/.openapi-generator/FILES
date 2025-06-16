@@ -40,6 +40,7 @@ models/populated-task-apply-dto.ts
 models/project-controller-get-projects200-response.ts
 models/project.ts
 models/receipt.ts
+models/report.ts
 models/reward-detail.ts
 models/task-apply-controller-get-task-applies200-response.ts
 models/task-apply-controller-my-task-applies200-response.ts

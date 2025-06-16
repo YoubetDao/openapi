@@ -1062,6 +1062,12 @@ paths:
       responses:
         "200":
           description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/Report"
       tags: &a13
         - Report
   /reports/{reportId}:
@@ -1892,6 +1898,49 @@ components:
       required:
         - taskGithubId
         - comment
+    ObjectId:
+      type: object
+      properties: {}
+    Report:
+      type: object
+      properties:
+        _id:
+          type: string
+        projectId:
+          $ref: "#/components/schemas/ObjectId"
+        from:
+          format: date-time
+          type: string
+        to:
+          format: date-time
+          type: string
+        issueCount:
+          type: number
+        users:
+          type: array
+          items:
+            $ref: "#/components/schemas/GithubUser"
+        title:
+          type: string
+        summary:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - _id
+        - projectId
+        - from
+        - to
+        - issueCount
+        - users
+        - title
+        - summary
+        - createdAt
+        - updatedAt
     UpdateReportDto:
       type: object
       properties:
