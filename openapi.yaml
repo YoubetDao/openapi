@@ -1923,7 +1923,6 @@ components:
       required:
         - org
         - project
-        - tutorial
     ObjectId:
       type: object
       properties: {}

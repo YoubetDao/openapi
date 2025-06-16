@@ -46,7 +46,7 @@ export interface ImportProjectDto {
      * @type {object}
      * @memberof ImportProjectDto
      */
-    'tutorial': object;
+    'tutorial'?: object;
     /**
      * 
      * @type {YoubetExtra}
