@@ -40,7 +40,7 @@ export interface ImportProjectDto {
      * @type {string}
      * @memberof ImportProjectDto
      */
-    'namespace': string;
+    'namespace'?: string;
     /**
      * 
      * @type {object}
@@ -52,6 +52,6 @@ export interface ImportProjectDto {
      * @type {YoubetExtra}
      * @memberof ImportProjectDto
      */
-    'youbetExtra': YoubetExtra;
+    'youbetExtra'?: YoubetExtra;
 }
 

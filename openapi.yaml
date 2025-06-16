@@ -1923,9 +1923,7 @@ components:
       required:
         - org
         - project
-        - namespace
         - tutorial
-        - youbetExtra
     ObjectId:
       type: object
       properties: {}
