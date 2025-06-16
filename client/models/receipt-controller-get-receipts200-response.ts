@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Period } from './period';
+import type { Receipt } from './receipt';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { ReceiptControllerGetReceipts200ResponsePagination } from './receipt-controller-get-receipts200-response-pagination';
@@ -23,20 +23,20 @@ import type { ReceiptControllerGetReceipts200ResponsePagination } from './receip
 /**
  * 
  * @export
- * @interface PeriodControllerGetPeriods200Response
+ * @interface ReceiptControllerGetReceipts200Response
  */
-export interface PeriodControllerGetPeriods200Response {
+export interface ReceiptControllerGetReceipts200Response {
     /**
      * 
      * @type {ReceiptControllerGetReceipts200ResponsePagination}
-     * @memberof PeriodControllerGetPeriods200Response
+     * @memberof ReceiptControllerGetReceipts200Response
      */
     'pagination'?: ReceiptControllerGetReceipts200ResponsePagination;
     /**
      * 
-     * @type {Array<Period>}
-     * @memberof PeriodControllerGetPeriods200Response
+     * @type {Array<Receipt>}
+     * @memberof ReceiptControllerGetReceipts200Response
      */
-    'data'?: Array<Period>;
+    'data'?: Array<Receipt>;
 }
 

@@ -21,6 +21,8 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+// @ts-ignore
+import type { ReceiptControllerGetReceipts200Response } from '../models';
 /**
  * ReceiptApi - axios parameter creator
  * @export
@@ -29,16 +31,16 @@ export const ReceiptApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
-         * @param {string} namespace 
-         * @param {string} periodId 
+         * @param {string} [namespace] Filter by namespace
+         * @param {string} [periodId] Filter by periodId
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
+         * @param {string} [search] 搜索关键字
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        receiptControllerGetReceipts: async (namespace: string, periodId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'namespace' is not null or undefined
-            assertParamExists('receiptControllerGetReceipts', 'namespace', namespace)
-            // verify required parameter 'periodId' is not null or undefined
-            assertParamExists('receiptControllerGetReceipts', 'periodId', periodId)
+        receiptControllerGetReceipts: async (namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/receipts`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -57,6 +59,22 @@ export const ReceiptApiAxiosParamCreator = function (configuration?: Configurati
 
             if (periodId !== undefined) {
                 localVarQueryParameter['periodId'] = periodId;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
             }
 
 
@@ -118,13 +136,17 @@ export const ReceiptApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
-         * @param {string} namespace 
-         * @param {string} periodId 
+         * @param {string} [namespace] Filter by namespace
+         * @param {string} [periodId] Filter by periodId
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
+         * @param {string} [search] 搜索关键字
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async receiptControllerGetReceipts(namespace: string, periodId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.receiptControllerGetReceipts(namespace, periodId, options);
+        async receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReceiptControllerGetReceipts200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.receiptControllerGetReceipts(namespace, periodId, offset, limit, search, sort, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReceiptApi.receiptControllerGetReceipts']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -153,13 +175,17 @@ export const ReceiptApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
-         * @param {string} namespace 
-         * @param {string} periodId 
+         * @param {string} [namespace] Filter by namespace
+         * @param {string} [periodId] Filter by periodId
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
+         * @param {string} [search] 搜索关键字
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        receiptControllerGetReceipts(namespace: string, periodId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.receiptControllerGetReceipts(namespace, periodId, options).then((request) => request(axios, basePath));
+        receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<ReceiptControllerGetReceipts200Response> {
+            return localVarFp.receiptControllerGetReceipts(namespace, periodId, offset, limit, search, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -181,13 +207,17 @@ export const ReceiptApiFactory = function (configuration?: Configuration, basePa
 export interface ReceiptApiInterface {
     /**
      * 
-     * @param {string} namespace 
-     * @param {string} periodId 
+     * @param {string} [namespace] Filter by namespace
+     * @param {string} [periodId] Filter by periodId
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
+     * @param {string} [search] 搜索关键字
+     * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReceiptApiInterface
      */
-    receiptControllerGetReceipts(namespace: string, periodId: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<ReceiptControllerGetReceipts200Response>;
 
     /**
      * 
@@ -209,14 +239,18 @@ export interface ReceiptApiInterface {
 export class ReceiptApi extends BaseAPI implements ReceiptApiInterface {
     /**
      * 
-     * @param {string} namespace 
-     * @param {string} periodId 
+     * @param {string} [namespace] Filter by namespace
+     * @param {string} [periodId] Filter by periodId
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
+     * @param {string} [search] 搜索关键字
+     * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReceiptApi
      */
-    public receiptControllerGetReceipts(namespace: string, periodId: string, options?: RawAxiosRequestConfig) {
-        return ReceiptApiFp(this.configuration).receiptControllerGetReceipts(namespace, periodId, options).then((request) => request(this.axios, this.basePath));
+    public receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig) {
+        return ReceiptApiFp(this.configuration).receiptControllerGetReceipts(namespace, periodId, offset, limit, search, sort, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

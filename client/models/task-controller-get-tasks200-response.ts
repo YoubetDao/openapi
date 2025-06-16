@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Task } from './task';
+import type { ReceiptControllerGetReceipts200ResponsePagination } from './receipt-controller-get-receipts200-response-pagination';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { UserControllerLeaderboard200ResponsePagination } from './user-controller-leaderboard200-response-pagination';
+import type { Task } from './task';
 
 /**
  * 
@@ -28,10 +28,10 @@ import type { UserControllerLeaderboard200ResponsePagination } from './user-cont
 export interface TaskControllerGetTasks200Response {
     /**
      * 
-     * @type {UserControllerLeaderboard200ResponsePagination}
+     * @type {ReceiptControllerGetReceipts200ResponsePagination}
      * @memberof TaskControllerGetTasks200Response
      */
-    'pagination'?: UserControllerLeaderboard200ResponsePagination;
+    'pagination'?: ReceiptControllerGetReceipts200ResponsePagination;
     /**
      * 
      * @type {Array<Task>}

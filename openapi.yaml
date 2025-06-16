@@ -64,18 +64,67 @@ paths:
       operationId: ReceiptController_getReceipts
       parameters:
         - name: namespace
-          required: true
+          required: false
           in: query
+          description: Filter by namespace
           schema:
             type: string
         - name: periodId
-          required: true
+          required: false
           in: query
+          description: Filter by periodId
+          schema:
+            type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
+        - name: search
+          required: false
+          in: query
+          description: 搜索关键字
+          schema:
+            type: string
+        - name: sort
+          required: false
+          in: query
+          description: 排序字段，格式如 sort=field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
           schema:
             type: string
       responses:
         "200":
           description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                      totalPages:
+                        type: number
+                      currentPage:
+                        type: number
+                      hasNextPage:
+                        type: boolean
+                      hasPrevPage:
+                        type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Receipt"
       tags: *a2
   /youbet/wallet:
     get:
@@ -1183,6 +1232,36 @@ components:
         - githubAccessToken
         - adminNamespaces
         - adminProjects
+    Receipt:
+      type: object
+      properties:
+        user:
+          type: string
+        source:
+          type: object
+        type:
+          type: string
+        detail:
+          type: object
+        transactionInfo:
+          type: object
+        status:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - user
+        - source
+        - type
+        - detail
+        - transactionInfo
+        - status
+        - createdAt
+        - updatedAt
     SchemaObjectId:
       type: object
       properties: {}
@@ -1817,36 +1896,6 @@ components:
             $ref: "#/components/schemas/ContributorRewardDto"
       required:
         - contributorRewards
-    Receipt:
-      type: object
-      properties:
-        user:
-          type: string
-        source:
-          type: object
-        type:
-          type: string
-        detail:
-          type: object
-        transactionInfo:
-          type: object
-        status:
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-      required:
-        - user
-        - source
-        - type
-        - detail
-        - transactionInfo
-        - status
-        - createdAt
-        - updatedAt
     PopulatedTaskApplyDto:
       type: object
       properties:
