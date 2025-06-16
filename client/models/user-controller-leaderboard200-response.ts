@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ReceiptControllerGetReceipts200ResponsePagination } from './receipt-controller-get-receipts200-response-pagination';
+import type { ReceiptControllerMyReceipts200ResponsePagination } from './receipt-controller-my-receipts200-response-pagination';
 // May contain unused imports in some cases
 // @ts-ignore
 import type { UserTaskCompletionDto } from './user-task-completion-dto';
@@ -28,10 +28,10 @@ import type { UserTaskCompletionDto } from './user-task-completion-dto';
 export interface UserControllerLeaderboard200Response {
     /**
      * 
-     * @type {ReceiptControllerGetReceipts200ResponsePagination}
+     * @type {ReceiptControllerMyReceipts200ResponsePagination}
      * @memberof UserControllerLeaderboard200Response
      */
-    'pagination'?: ReceiptControllerGetReceipts200ResponsePagination;
+    'pagination'?: ReceiptControllerMyReceipts200ResponsePagination;
     /**
      * 
      * @type {Array<UserTaskCompletionDto>}

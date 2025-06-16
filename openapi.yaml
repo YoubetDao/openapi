@@ -50,13 +50,53 @@ paths:
       operationId: ReceiptController_myReceipts
       parameters:
         - name: type
-          required: true
+          required: false
           in: query
+          description: "Filter by receipt type: all, reward, rewardClaimed"
           schema:
+            enum:
+              - task
+              - period
+              - all
             type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
       responses:
         "200":
           description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                      totalPages:
+                        type: number
+                      currentPage:
+                        type: number
+                      hasNextPage:
+                        type: boolean
+                      hasPrevPage:
+                        type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Receipt"
       tags: &a2
         - Receipt
   /receipts:

@@ -15,28 +15,28 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ReceiptControllerMyReceipts200ResponsePagination } from './receipt-controller-my-receipts200-response-pagination';
+import type { Receipt } from './receipt';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TaskApply } from './task-apply';
+import type { ReceiptControllerMyReceipts200ResponsePagination } from './receipt-controller-my-receipts200-response-pagination';
 
 /**
  * 
  * @export
- * @interface TaskApplyControllerMyTaskApplies200Response
+ * @interface ReceiptControllerMyReceipts200Response
  */
-export interface TaskApplyControllerMyTaskApplies200Response {
+export interface ReceiptControllerMyReceipts200Response {
     /**
      * 
      * @type {ReceiptControllerMyReceipts200ResponsePagination}
-     * @memberof TaskApplyControllerMyTaskApplies200Response
+     * @memberof ReceiptControllerMyReceipts200Response
      */
     'pagination'?: ReceiptControllerMyReceipts200ResponsePagination;
     /**
      * 
-     * @type {Array<TaskApply>}
-     * @memberof TaskApplyControllerMyTaskApplies200Response
+     * @type {Array<Receipt>}
+     * @memberof ReceiptControllerMyReceipts200Response
      */
-    'data'?: Array<TaskApply>;
+    'data'?: Array<Receipt>;
 }
 

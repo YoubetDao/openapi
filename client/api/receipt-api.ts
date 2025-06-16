@@ -22,7 +22,7 @@ import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObj
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
 // @ts-ignore
-import type { ReceiptControllerGetReceipts200Response } from '../models';
+import type { ReceiptControllerMyReceipts200Response } from '../models';
 /**
  * ReceiptApi - axios parameter creator
  * @export
@@ -90,13 +90,13 @@ export const ReceiptApiAxiosParamCreator = function (configuration?: Configurati
         },
         /**
          * 
-         * @param {string} type 
+         * @param {ReceiptControllerMyReceiptsTypeEnum} [type] Filter by receipt type: all, reward, rewardClaimed
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        receiptControllerMyReceipts: async (type: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'type' is not null or undefined
-            assertParamExists('receiptControllerMyReceipts', 'type', type)
+        receiptControllerMyReceipts: async (type?: ReceiptControllerMyReceiptsTypeEnum, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/receipts/mine`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -111,6 +111,14 @@ export const ReceiptApiAxiosParamCreator = function (configuration?: Configurati
 
             if (type !== undefined) {
                 localVarQueryParameter['type'] = type;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
             }
 
 
@@ -145,7 +153,7 @@ export const ReceiptApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReceiptControllerGetReceipts200Response>> {
+        async receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReceiptControllerMyReceipts200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.receiptControllerGetReceipts(namespace, periodId, offset, limit, search, sort, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReceiptApi.receiptControllerGetReceipts']?.[localVarOperationServerIndex]?.url;
@@ -153,12 +161,14 @@ export const ReceiptApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} type 
+         * @param {ReceiptControllerMyReceiptsTypeEnum} [type] Filter by receipt type: all, reward, rewardClaimed
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async receiptControllerMyReceipts(type: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.receiptControllerMyReceipts(type, options);
+        async receiptControllerMyReceipts(type?: ReceiptControllerMyReceiptsTypeEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReceiptControllerMyReceipts200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.receiptControllerMyReceipts(type, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReceiptApi.receiptControllerMyReceipts']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -184,17 +194,19 @@ export const ReceiptApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<ReceiptControllerGetReceipts200Response> {
+        receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<ReceiptControllerMyReceipts200Response> {
             return localVarFp.receiptControllerGetReceipts(namespace, periodId, offset, limit, search, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * 
-         * @param {string} type 
+         * @param {ReceiptControllerMyReceiptsTypeEnum} [type] Filter by receipt type: all, reward, rewardClaimed
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        receiptControllerMyReceipts(type: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.receiptControllerMyReceipts(type, options).then((request) => request(axios, basePath));
+        receiptControllerMyReceipts(type?: ReceiptControllerMyReceiptsTypeEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ReceiptControllerMyReceipts200Response> {
+            return localVarFp.receiptControllerMyReceipts(type, offset, limit, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -217,16 +229,18 @@ export interface ReceiptApiInterface {
      * @throws {RequiredError}
      * @memberof ReceiptApiInterface
      */
-    receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<ReceiptControllerGetReceipts200Response>;
+    receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<ReceiptControllerMyReceipts200Response>;
 
     /**
      * 
-     * @param {string} type 
+     * @param {ReceiptControllerMyReceiptsTypeEnum} [type] Filter by receipt type: all, reward, rewardClaimed
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReceiptApiInterface
      */
-    receiptControllerMyReceipts(type: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    receiptControllerMyReceipts(type?: ReceiptControllerMyReceiptsTypeEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ReceiptControllerMyReceipts200Response>;
 
 }
 
@@ -255,13 +269,24 @@ export class ReceiptApi extends BaseAPI implements ReceiptApiInterface {
 
     /**
      * 
-     * @param {string} type 
+     * @param {ReceiptControllerMyReceiptsTypeEnum} [type] Filter by receipt type: all, reward, rewardClaimed
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ReceiptApi
      */
-    public receiptControllerMyReceipts(type: string, options?: RawAxiosRequestConfig) {
-        return ReceiptApiFp(this.configuration).receiptControllerMyReceipts(type, options).then((request) => request(this.axios, this.basePath));
+    public receiptControllerMyReceipts(type?: ReceiptControllerMyReceiptsTypeEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return ReceiptApiFp(this.configuration).receiptControllerMyReceipts(type, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
+/**
+ * @export
+ */
+export const ReceiptControllerMyReceiptsTypeEnum = {
+    Task: 'task',
+    Period: 'period',
+    All: 'all'
+} as const;
+export type ReceiptControllerMyReceiptsTypeEnum = typeof ReceiptControllerMyReceiptsTypeEnum[keyof typeof ReceiptControllerMyReceiptsTypeEnum];

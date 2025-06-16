@@ -18,7 +18,7 @@
 import type { Project } from './project';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ReceiptControllerGetReceipts200ResponsePagination } from './receipt-controller-get-receipts200-response-pagination';
+import type { ReceiptControllerMyReceipts200ResponsePagination } from './receipt-controller-my-receipts200-response-pagination';
 
 /**
  * 
@@ -28,10 +28,10 @@ import type { ReceiptControllerGetReceipts200ResponsePagination } from './receip
 export interface ProjectControllerGetProjects200Response {
     /**
      * 
-     * @type {ReceiptControllerGetReceipts200ResponsePagination}
+     * @type {ReceiptControllerMyReceipts200ResponsePagination}
      * @memberof ProjectControllerGetProjects200Response
      */
-    'pagination'?: ReceiptControllerGetReceipts200ResponsePagination;
+    'pagination'?: ReceiptControllerMyReceipts200ResponsePagination;
     /**
      * 
      * @type {Array<Project>}
