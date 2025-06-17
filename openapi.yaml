@@ -1542,6 +1542,8 @@ components:
     ReceiptDto:
       type: object
       properties:
+        _id:
+          type: string
         user:
           type: string
         source:
@@ -1567,6 +1569,7 @@ components:
           format: date-time
           type: string
       required:
+        - _id
         - user
         - source
         - type

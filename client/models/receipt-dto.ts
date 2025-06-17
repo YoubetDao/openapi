@@ -34,6 +34,12 @@ export interface ReceiptDto {
      * @type {string}
      * @memberof ReceiptDto
      */
+    '_id': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof ReceiptDto
+     */
     'user': string;
     /**
      * 
