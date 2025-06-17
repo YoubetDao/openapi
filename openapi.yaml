@@ -386,6 +386,12 @@ paths:
       responses:
         "200":
           description: ""
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: "#/components/schemas/GithubRepoDto"
       tags: &a6
         - Org
   /github/orgs:
@@ -1698,6 +1704,34 @@ components:
           type: string
       required:
         - signature
+    GithubRepoDto:
+      type: object
+      properties:
+        id:
+          type: number
+        name:
+          type: string
+        full_name:
+          type: string
+        private:
+          type: boolean
+        owner:
+          $ref: "#/components/schemas/User"
+        html_url:
+          type: string
+        description:
+          type: string
+        created_at:
+          type: string
+      required:
+        - id
+        - name
+        - full_name
+        - private
+        - owner
+        - html_url
+        - description
+        - created_at
     GithubOrganizationDto:
       type: object
       properties:

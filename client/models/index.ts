@@ -7,6 +7,7 @@ export * from './github-label-dto';
 export * from './github-milestone-dto';
 export * from './github-organization-dto';
 export * from './github-pull-request-ref-dto';
+export * from './github-repo-dto';
 export * from './github-user';
 export * from './github-user-dto';
 export * from './import-project-dto';
