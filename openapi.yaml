@@ -1704,6 +1704,28 @@ components:
           type: string
       required:
         - signature
+    GithubUserDto:
+      type: object
+      properties:
+        login:
+          type: string
+        username:
+          type: string
+        htmlUrl:
+          type: string
+        avatarUrl:
+          type: string
+        rewards:
+          type: number
+        _id:
+          type: string
+      required:
+        - login
+        - username
+        - htmlUrl
+        - avatarUrl
+        - rewards
+        - _id
     GithubRepoDto:
       type: object
       properties:
@@ -1716,7 +1738,7 @@ components:
         private:
           type: boolean
         owner:
-          $ref: "#/components/schemas/User"
+          $ref: "#/components/schemas/GithubUserDto"
         html_url:
           type: string
         description:
@@ -1798,36 +1820,6 @@ components:
         - body
         - labels
         - assignees
-    GithubUserDto:
-      type: object
-      properties:
-        login:
-          type: string
-        id:
-          type: number
-        node_id:
-          type: string
-        avatar_url:
-          type: string
-        gravatar_id:
-          type: string
-        url:
-          type: string
-        html_url:
-          type: string
-        type:
-          type: string
-        site_admin:
-          type: boolean
-      required:
-        - login
-        - id
-        - node_id
-        - avatar_url
-        - url
-        - html_url
-        - type
-        - site_admin
     GithubLabelDto:
       type: object
       properties:

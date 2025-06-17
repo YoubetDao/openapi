@@ -28,51 +28,33 @@ export interface GithubUserDto {
     'login': string;
     /**
      * 
+     * @type {string}
+     * @memberof GithubUserDto
+     */
+    'username': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GithubUserDto
+     */
+    'htmlUrl': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof GithubUserDto
+     */
+    'avatarUrl': string;
+    /**
+     * 
      * @type {number}
      * @memberof GithubUserDto
      */
-    'id': number;
+    'rewards': number;
     /**
      * 
      * @type {string}
      * @memberof GithubUserDto
      */
-    'node_id': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GithubUserDto
-     */
-    'avatar_url': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GithubUserDto
-     */
-    'gravatar_id'?: string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GithubUserDto
-     */
-    'url': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GithubUserDto
-     */
-    'html_url': string;
-    /**
-     * 
-     * @type {string}
-     * @memberof GithubUserDto
-     */
-    'type': string;
-    /**
-     * 
-     * @type {boolean}
-     * @memberof GithubUserDto
-     */
-    'site_admin': boolean;
+    '_id': string;
 }
 

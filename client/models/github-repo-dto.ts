@@ -15,7 +15,7 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { User } from './user';
+import type { GithubUserDto } from './github-user-dto';
 
 /**
  * 
@@ -49,10 +49,10 @@ export interface GithubRepoDto {
     'private': boolean;
     /**
      * 
-     * @type {User}
+     * @type {GithubUserDto}
      * @memberof GithubRepoDto
      */
-    'owner': User;
+    'owner': GithubUserDto;
     /**
      * 
      * @type {string}
