@@ -21,6 +21,8 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+// @ts-ignore
+import type { RewardSignatureDto } from '../models';
 /**
  * RewardApi - axios parameter creator
  * @export
@@ -229,7 +231,7 @@ export const RewardApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async rewardControllerGetRewardSignature(uuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async rewardControllerGetRewardSignature(uuid: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<RewardSignatureDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.rewardControllerGetRewardSignature(uuid, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['RewardApi.rewardControllerGetRewardSignature']?.[localVarOperationServerIndex]?.url;
@@ -284,7 +286,7 @@ export const RewardApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        rewardControllerGetRewardSignature(uuid: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        rewardControllerGetRewardSignature(uuid: string, options?: RawAxiosRequestConfig): AxiosPromise<RewardSignatureDto> {
             return localVarFp.rewardControllerGetRewardSignature(uuid, options).then((request) => request(axios, basePath));
         },
         /**
@@ -333,7 +335,7 @@ export interface RewardApiInterface {
      * @throws {RequiredError}
      * @memberof RewardApiInterface
      */
-    rewardControllerGetRewardSignature(uuid: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    rewardControllerGetRewardSignature(uuid: string, options?: RawAxiosRequestConfig): AxiosPromise<RewardSignatureDto>;
 
     /**
      * 

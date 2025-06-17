@@ -369,6 +369,10 @@ paths:
       responses:
         "200":
           description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/RewardSignatureDto"
       tags: *a5
   /github/orgs/{org}/repos:
     get:
@@ -1681,6 +1685,13 @@ components:
     CreateRewardDto:
       type: object
       properties: {}
+    RewardSignatureDto:
+      type: object
+      properties:
+        signature:
+          type: string
+      required:
+        - signature
     CreateIssueDto:
       type: object
       properties:

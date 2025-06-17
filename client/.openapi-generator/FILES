@@ -49,6 +49,7 @@ models/receipt-transaction-info.ts
 models/receipt.ts
 models/report.ts
 models/reward-detail.ts
+models/reward-signature-dto.ts
 models/task-apply-controller-get-task-applies200-response.ts
 models/task-apply-controller-my-task-applies200-response.ts
 models/task-apply.ts

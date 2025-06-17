@@ -24,6 +24,7 @@ export * from './receipt-source';
 export * from './receipt-transaction-info';
 export * from './report';
 export * from './reward-detail';
+export * from './reward-signature-dto';
 export * from './task';
 export * from './task-apply';
 export * from './task-apply-controller-get-task-applies200-response';
