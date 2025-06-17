@@ -395,6 +395,10 @@ paths:
       responses:
         "200":
           description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/GithubOrganizationDto"
       tags: *a6
   /issues:
     post:
@@ -1692,6 +1696,46 @@ components:
           type: string
       required:
         - signature
+    GithubOrganizationDto:
+      type: object
+      properties:
+        login:
+          type: string
+        id:
+          type: number
+        node_id:
+          type: string
+        url:
+          type: string
+        repos_url:
+          type: string
+        events_url:
+          type: string
+        hooks_url:
+          type: string
+        issues_url:
+          type: string
+        members_url:
+          type: string
+        public_members_url:
+          type: string
+        avatar_url:
+          type: string
+        description:
+          type: string
+      required:
+        - login
+        - id
+        - node_id
+        - url
+        - repos_url
+        - events_url
+        - hooks_url
+        - issues_url
+        - members_url
+        - public_members_url
+        - avatar_url
+        - description
     CreateIssueDto:
       type: object
       properties:

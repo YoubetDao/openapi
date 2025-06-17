@@ -29,6 +29,7 @@ models/create-issue-dto.ts
 models/github-issue-dto.ts
 models/github-label-dto.ts
 models/github-milestone-dto.ts
+models/github-organization-dto.ts
 models/github-pull-request-ref-dto.ts
 models/github-user-dto.ts
 models/github-user.ts

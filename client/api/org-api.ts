@@ -21,6 +21,8 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+// @ts-ignore
+import type { GithubOrganizationDto } from '../models';
 /**
  * OrgApi - axios parameter creator
  * @export
@@ -116,7 +118,7 @@ export const OrgApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GithubOrganizationDto>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.orgControllerGetUserOrgs(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrgApi.orgControllerGetUserOrgs']?.[localVarOperationServerIndex]?.url;
@@ -146,7 +148,7 @@ export const OrgApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): AxiosPromise<GithubOrganizationDto> {
             return localVarFp.orgControllerGetUserOrgs(options).then((request) => request(axios, basePath));
         },
     };
@@ -173,7 +175,7 @@ export interface OrgApiInterface {
      * @throws {RequiredError}
      * @memberof OrgApiInterface
      */
-    orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): AxiosPromise<GithubOrganizationDto>;
 
 }
 
