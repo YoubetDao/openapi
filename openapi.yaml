@@ -398,7 +398,9 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/GithubOrganizationDto"
+                type: array
+                items:
+                  $ref: "#/components/schemas/GithubOrganizationDto"
       tags: *a6
   /issues:
     post:

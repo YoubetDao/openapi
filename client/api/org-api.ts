@@ -118,7 +118,7 @@ export const OrgApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<GithubOrganizationDto>> {
+        async orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<GithubOrganizationDto>>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.orgControllerGetUserOrgs(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['OrgApi.orgControllerGetUserOrgs']?.[localVarOperationServerIndex]?.url;
@@ -148,7 +148,7 @@ export const OrgApiFactory = function (configuration?: Configuration, basePath?:
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): AxiosPromise<GithubOrganizationDto> {
+        orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): AxiosPromise<Array<GithubOrganizationDto>> {
             return localVarFp.orgControllerGetUserOrgs(options).then((request) => request(axios, basePath));
         },
     };
@@ -175,7 +175,7 @@ export interface OrgApiInterface {
      * @throws {RequiredError}
      * @memberof OrgApiInterface
      */
-    orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): AxiosPromise<GithubOrganizationDto>;
+    orgControllerGetUserOrgs(options?: RawAxiosRequestConfig): AxiosPromise<Array<GithubOrganizationDto>>;
 
 }
 
