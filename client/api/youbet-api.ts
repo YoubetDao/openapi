@@ -192,7 +192,7 @@ export const YoubetApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async youbetControllerGetLinkedWallet(github: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async youbetControllerGetLinkedWallet(github: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<string>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.youbetControllerGetLinkedWallet(github, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['YoubetApi.youbetControllerGetLinkedWallet']?.[localVarOperationServerIndex]?.url;
@@ -246,7 +246,7 @@ export const YoubetApiFactory = function (configuration?: Configuration, basePat
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        youbetControllerGetLinkedWallet(github: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        youbetControllerGetLinkedWallet(github: string, options?: RawAxiosRequestConfig): AxiosPromise<string> {
             return localVarFp.youbetControllerGetLinkedWallet(github, options).then((request) => request(axios, basePath));
         },
         /**
@@ -291,7 +291,7 @@ export interface YoubetApiInterface {
      * @throws {RequiredError}
      * @memberof YoubetApiInterface
      */
-    youbetControllerGetLinkedWallet(github: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    youbetControllerGetLinkedWallet(github: string, options?: RawAxiosRequestConfig): AxiosPromise<string>;
 
     /**
      * 
