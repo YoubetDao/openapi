@@ -37,6 +37,7 @@ models/github-user.ts
 models/import-project-dto.ts
 models/index.ts
 models/label-with-color-dto.ts
+models/link-wallet-dto.ts
 models/period-controller-get-periods200-response.ts
 models/period.ts
 models/populated-task-apply-dto.ts

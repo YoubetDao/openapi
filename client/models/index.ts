@@ -12,6 +12,7 @@ export * from './github-user';
 export * from './github-user-dto';
 export * from './import-project-dto';
 export * from './label-with-color-dto';
+export * from './link-wallet-dto';
 export * from './period';
 export * from './period-controller-get-periods200-response';
 export * from './populated-task-apply-dto';

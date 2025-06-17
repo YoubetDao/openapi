@@ -183,6 +183,12 @@ paths:
     post:
       operationId: YoubetController_linkWallet
       parameters: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/LinkWalletDto"
       responses:
         "201":
           description: ""
@@ -1614,6 +1620,13 @@ components:
         - status
         - createdAt
         - updatedAt
+    LinkWalletDto:
+      type: object
+      properties:
+        address:
+          type: string
+      required:
+        - address
     User:
       type: object
       properties:

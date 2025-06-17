@@ -21,6 +21,8 @@ import globalAxios from 'axios';
 import { DUMMY_BASE_URL, assertParamExists, setApiKeyToObject, setBasicAuthToObject, setBearerAuthToObject, setOAuthToObject, setSearchParams, serializeDataIfNeeded, toPathString, createRequestFunction } from '../common';
 // @ts-ignore
 import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError, operationServerMap } from '../base';
+// @ts-ignore
+import type { LinkWalletDto } from '../models';
 /**
  * YoubetApi - axios parameter creator
  * @export
@@ -130,10 +132,13 @@ export const YoubetApiAxiosParamCreator = function (configuration?: Configuratio
         },
         /**
          * 
+         * @param {LinkWalletDto} linkWalletDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        youbetControllerLinkWallet: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        youbetControllerLinkWallet: async (linkWalletDto: LinkWalletDto, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            // verify required parameter 'linkWalletDto' is not null or undefined
+            assertParamExists('youbetControllerLinkWallet', 'linkWalletDto', linkWalletDto)
             const localVarPath = `/youbet/wallet`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -148,9 +153,12 @@ export const YoubetApiAxiosParamCreator = function (configuration?: Configuratio
 
 
     
+            localVarHeaderParameter['Content-Type'] = 'application/json';
+
             setSearchParams(localVarUrlObj, localVarQueryParameter);
             let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
             localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+            localVarRequestOptions.data = serializeDataIfNeeded(linkWalletDto, localVarRequestOptions, configuration)
 
             return {
                 url: toPathString(localVarUrlObj),
@@ -204,11 +212,12 @@ export const YoubetApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
+         * @param {LinkWalletDto} linkWalletDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async youbetControllerLinkWallet(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.youbetControllerLinkWallet(options);
+        async youbetControllerLinkWallet(linkWalletDto: LinkWalletDto, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.youbetControllerLinkWallet(linkWalletDto, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['YoubetApi.youbetControllerLinkWallet']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -251,11 +260,12 @@ export const YoubetApiFactory = function (configuration?: Configuration, basePat
         },
         /**
          * 
+         * @param {LinkWalletDto} linkWalletDto 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        youbetControllerLinkWallet(options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.youbetControllerLinkWallet(options).then((request) => request(axios, basePath));
+        youbetControllerLinkWallet(linkWalletDto: LinkWalletDto, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+            return localVarFp.youbetControllerLinkWallet(linkWalletDto, options).then((request) => request(axios, basePath));
         },
     };
 };
@@ -294,11 +304,12 @@ export interface YoubetApiInterface {
 
     /**
      * 
+     * @param {LinkWalletDto} linkWalletDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof YoubetApiInterface
      */
-    youbetControllerLinkWallet(options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    youbetControllerLinkWallet(linkWalletDto: LinkWalletDto, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
 }
 
@@ -343,12 +354,13 @@ export class YoubetApi extends BaseAPI implements YoubetApiInterface {
 
     /**
      * 
+     * @param {LinkWalletDto} linkWalletDto 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof YoubetApi
      */
-    public youbetControllerLinkWallet(options?: RawAxiosRequestConfig) {
-        return YoubetApiFp(this.configuration).youbetControllerLinkWallet(options).then((request) => request(this.axios, this.basePath));
+    public youbetControllerLinkWallet(linkWalletDto: LinkWalletDto, options?: RawAxiosRequestConfig) {
+        return YoubetApiFp(this.configuration).youbetControllerLinkWallet(linkWalletDto, options).then((request) => request(this.axios, this.basePath));
     }
 }
 
