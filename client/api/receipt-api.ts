@@ -153,7 +153,7 @@ export const ReceiptApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
+        async receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ReceiptControllerMyReceipts200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.receiptControllerGetReceipts(namespace, periodId, offset, limit, search, sort, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ReceiptApi.receiptControllerGetReceipts']?.[localVarOperationServerIndex]?.url;
@@ -194,7 +194,7 @@ export const ReceiptApiFactory = function (configuration?: Configuration, basePa
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
+        receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<ReceiptControllerMyReceipts200Response> {
             return localVarFp.receiptControllerGetReceipts(namespace, periodId, offset, limit, search, sort, options).then((request) => request(axios, basePath));
         },
         /**
@@ -229,7 +229,7 @@ export interface ReceiptApiInterface {
      * @throws {RequiredError}
      * @memberof ReceiptApiInterface
      */
-    receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
+    receiptControllerGetReceipts(namespace?: string, periodId?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<ReceiptControllerMyReceipts200Response>;
 
     /**
      * 
