@@ -164,7 +164,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Receipt"
+                      $ref: "#/components/schemas/ReceiptDto"
       tags: *a2
   /youbet/wallet:
     get:
@@ -1302,9 +1302,329 @@ components:
         - status
         - createdAt
         - updatedAt
+    GithubUser:
+      type: object
+      properties:
+        login:
+          type: string
+        htmlUrl:
+          type: string
+        avatarUrl:
+          type: string
+      required:
+        - login
+        - htmlUrl
+        - avatarUrl
+    Period:
+      type: object
+      properties:
+        _id:
+          type: string
+        projectId:
+          type: string
+        from:
+          format: date-time
+          type: string
+        to:
+          format: date-time
+          type: string
+        pullRequests:
+          type: array
+          items:
+            type: string
+        commits:
+          type: array
+          items:
+            type: string
+        contributors:
+          type: array
+          items:
+            $ref: "#/components/schemas/GithubUser"
+        rewardGranted:
+          type: boolean
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - _id
+        - projectId
+        - from
+        - to
+        - pullRequests
+        - commits
+        - contributors
+        - rewardGranted
+        - createdAt
+        - updatedAt
+    Tutorial:
+      type: object
+      properties: {}
+    YoubetExtra:
+      type: object
+      properties:
+        tags:
+          type: array
+          items:
+            type: string
+      required:
+        - tags
     SchemaObjectId:
       type: object
       properties: {}
+    Project:
+      type: object
+      properties:
+        _id:
+          type: string
+        githubId:
+          type: number
+        name:
+          type: string
+        fullName:
+          type: string
+        owner:
+          $ref: "#/components/schemas/GithubUser"
+        language:
+          type: string
+        openIssuesCount:
+          type: number
+        forksCount:
+          type: number
+        stargazersCount:
+          type: number
+        contributorsCount:
+          type: number
+        description:
+          type: string
+        htmlUrl:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        tutorial:
+          $ref: "#/components/schemas/Tutorial"
+        youbetExtra:
+          $ref: "#/components/schemas/YoubetExtra"
+        namespace:
+          $ref: "#/components/schemas/SchemaObjectId"
+        approvedAt:
+          format: date-time
+          type: string
+        deletedAt:
+          format: date-time
+          type: string
+        periodicReward:
+          type: object
+        priority:
+          type: number
+      required:
+        - _id
+        - githubId
+        - name
+        - fullName
+        - owner
+        - language
+        - openIssuesCount
+        - forksCount
+        - stargazersCount
+        - contributorsCount
+        - description
+        - htmlUrl
+        - createdAt
+        - updatedAt
+        - tutorial
+        - youbetExtra
+        - namespace
+        - approvedAt
+        - deletedAt
+        - periodicReward
+        - priority
+    LabelWithColorDto:
+      type: object
+      properties:
+        name:
+          type: string
+        color:
+          type: string
+      required:
+        - name
+        - color
+    RewardDetail:
+      type: object
+      properties:
+        amount:
+          type: number
+        decimals:
+          type: number
+        symbol:
+          type: string
+        tokenAddress:
+          type: string
+      required:
+        - amount
+        - decimals
+        - symbol
+        - tokenAddress
+    Task:
+      type: object
+      properties:
+        _id:
+          type: string
+        githubId:
+          type: number
+        project:
+          $ref: "#/components/schemas/Project"
+        title:
+          type: string
+        body:
+          type: string
+        state:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        closedAt:
+          format: date-time
+          type: string
+        assignee:
+          $ref: "#/components/schemas/GithubUser"
+        assignees:
+          type: array
+          items:
+            $ref: "#/components/schemas/GithubUser"
+        labels:
+          type: array
+          items:
+            type: string
+        user:
+          $ref: "#/components/schemas/GithubUser"
+        labelsWithColor:
+          type: array
+          items:
+            $ref: "#/components/schemas/LabelWithColorDto"
+        htmlUrl:
+          type: string
+        namespace:
+          $ref: "#/components/schemas/SchemaObjectId"
+        reward:
+          $ref: "#/components/schemas/RewardDetail"
+        rewardGranted:
+          type: boolean
+        rewardClaimed:
+          type: boolean
+        level:
+          type: string
+      required:
+        - _id
+        - githubId
+        - project
+        - title
+        - body
+        - state
+        - createdAt
+        - updatedAt
+        - closedAt
+        - assignee
+        - assignees
+        - labels
+        - user
+        - labelsWithColor
+        - htmlUrl
+        - namespace
+        - reward
+        - rewardGranted
+        - rewardClaimed
+        - level
+    ReceiptSource:
+      type: object
+      properties:
+        period:
+          $ref: "#/components/schemas/Period"
+        task:
+          $ref: "#/components/schemas/Task"
+      required:
+        - period
+        - task
+    ReceiptDetail:
+      type: object
+      properties:
+        amount:
+          type: number
+        decimals:
+          type: number
+        symbol:
+          type: string
+      required:
+        - amount
+        - decimals
+        - symbol
+    ReceiptTransactionInfo:
+      type: object
+      properties:
+        chainId:
+          type: number
+        contractAddress:
+          type: string
+        from:
+          type: string
+        to:
+          type: string
+        txId:
+          type: string
+        txTimestamp:
+          format: date-time
+          type: string
+      required:
+        - chainId
+        - contractAddress
+        - from
+        - to
+        - txId
+        - txTimestamp
+    ReceiptDto:
+      type: object
+      properties:
+        user:
+          type: string
+        source:
+          $ref: "#/components/schemas/ReceiptSource"
+        type:
+          type: string
+        detail:
+          $ref: "#/components/schemas/ReceiptDetail"
+        transactionInfo:
+          $ref: "#/components/schemas/ReceiptTransactionInfo"
+        status:
+          type: string
+          enum:
+            - pending
+            - claimed
+            - granted
+            - failed
+            - refunded
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+      required:
+        - user
+        - source
+        - type
+        - detail
+        - status
+        - createdAt
+        - updatedAt
     User:
       type: object
       properties:
@@ -1612,245 +1932,6 @@ components:
         - created_at
         - updated_at
         - author_association
-    GithubUser:
-      type: object
-      properties:
-        login:
-          type: string
-        htmlUrl:
-          type: string
-        avatarUrl:
-          type: string
-      required:
-        - login
-        - htmlUrl
-        - avatarUrl
-    Period:
-      type: object
-      properties:
-        _id:
-          type: string
-        projectId:
-          type: string
-        from:
-          format: date-time
-          type: string
-        to:
-          format: date-time
-          type: string
-        pullRequests:
-          type: array
-          items:
-            type: string
-        commits:
-          type: array
-          items:
-            type: string
-        contributors:
-          type: array
-          items:
-            $ref: "#/components/schemas/GithubUser"
-        rewardGranted:
-          type: boolean
-        createdAt:
-          format: date-time
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-      required:
-        - _id
-        - projectId
-        - from
-        - to
-        - pullRequests
-        - commits
-        - contributors
-        - rewardGranted
-        - createdAt
-        - updatedAt
-    Tutorial:
-      type: object
-      properties: {}
-    YoubetExtra:
-      type: object
-      properties:
-        tags:
-          type: array
-          items:
-            type: string
-      required:
-        - tags
-    Project:
-      type: object
-      properties:
-        _id:
-          type: string
-        githubId:
-          type: number
-        name:
-          type: string
-        fullName:
-          type: string
-        owner:
-          $ref: "#/components/schemas/GithubUser"
-        language:
-          type: string
-        openIssuesCount:
-          type: number
-        forksCount:
-          type: number
-        stargazersCount:
-          type: number
-        contributorsCount:
-          type: number
-        description:
-          type: string
-        htmlUrl:
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        tutorial:
-          $ref: "#/components/schemas/Tutorial"
-        youbetExtra:
-          $ref: "#/components/schemas/YoubetExtra"
-        namespace:
-          $ref: "#/components/schemas/SchemaObjectId"
-        approvedAt:
-          format: date-time
-          type: string
-        deletedAt:
-          format: date-time
-          type: string
-        periodicReward:
-          type: object
-        priority:
-          type: number
-      required:
-        - _id
-        - githubId
-        - name
-        - fullName
-        - owner
-        - language
-        - openIssuesCount
-        - forksCount
-        - stargazersCount
-        - contributorsCount
-        - description
-        - htmlUrl
-        - createdAt
-        - updatedAt
-        - tutorial
-        - youbetExtra
-        - namespace
-        - approvedAt
-        - deletedAt
-        - periodicReward
-        - priority
-    LabelWithColorDto:
-      type: object
-      properties:
-        name:
-          type: string
-        color:
-          type: string
-      required:
-        - name
-        - color
-    RewardDetail:
-      type: object
-      properties:
-        amount:
-          type: number
-        decimals:
-          type: number
-        symbol:
-          type: string
-        tokenAddress:
-          type: string
-      required:
-        - amount
-        - decimals
-        - symbol
-        - tokenAddress
-    Task:
-      type: object
-      properties:
-        _id:
-          type: string
-        githubId:
-          type: number
-        project:
-          $ref: "#/components/schemas/Project"
-        title:
-          type: string
-        body:
-          type: string
-        state:
-          type: string
-        createdAt:
-          format: date-time
-          type: string
-        updatedAt:
-          format: date-time
-          type: string
-        closedAt:
-          format: date-time
-          type: string
-        assignee:
-          $ref: "#/components/schemas/GithubUser"
-        assignees:
-          type: array
-          items:
-            $ref: "#/components/schemas/GithubUser"
-        labels:
-          type: array
-          items:
-            type: string
-        user:
-          $ref: "#/components/schemas/GithubUser"
-        labelsWithColor:
-          type: array
-          items:
-            $ref: "#/components/schemas/LabelWithColorDto"
-        htmlUrl:
-          type: string
-        namespace:
-          $ref: "#/components/schemas/SchemaObjectId"
-        reward:
-          $ref: "#/components/schemas/RewardDetail"
-        rewardGranted:
-          type: boolean
-        rewardClaimed:
-          type: boolean
-        level:
-          type: string
-      required:
-        - _id
-        - githubId
-        - project
-        - title
-        - body
-        - state
-        - createdAt
-        - updatedAt
-        - closedAt
-        - assignee
-        - assignees
-        - labels
-        - user
-        - labelsWithColor
-        - htmlUrl
-        - namespace
-        - reward
-        - rewardGranted
-        - rewardClaimed
-        - level
     UpdateTaskDto:
       type: object
       properties:

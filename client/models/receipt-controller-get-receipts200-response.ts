@@ -15,10 +15,10 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { Receipt } from './receipt';
+import type { ReceiptControllerMyReceipts200ResponsePagination } from './receipt-controller-my-receipts200-response-pagination';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { ReceiptControllerGetReceipts200ResponsePagination } from './receipt-controller-get-receipts200-response-pagination';
+import type { ReceiptDto } from './receipt-dto';
 
 /**
  * 
@@ -28,15 +28,15 @@ import type { ReceiptControllerGetReceipts200ResponsePagination } from './receip
 export interface ReceiptControllerGetReceipts200Response {
     /**
      * 
-     * @type {ReceiptControllerGetReceipts200ResponsePagination}
+     * @type {ReceiptControllerMyReceipts200ResponsePagination}
      * @memberof ReceiptControllerGetReceipts200Response
      */
-    'pagination'?: ReceiptControllerGetReceipts200ResponsePagination;
+    'pagination'?: ReceiptControllerMyReceipts200ResponsePagination;
     /**
      * 
-     * @type {Array<Receipt>}
+     * @type {Array<ReceiptDto>}
      * @memberof ReceiptControllerGetReceipts200Response
      */
-    'data'?: Array<Receipt>;
+    'data'?: Array<ReceiptDto>;
 }
 
