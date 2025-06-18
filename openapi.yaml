@@ -228,7 +228,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/User"
+                $ref: "#/components/schemas/UserProfileDto"
       tags: &a4
         - User
   /users/leaderboard:
@@ -260,54 +260,10 @@ paths:
                     items:
                       $ref: "#/components/schemas/UserTaskCompletionDto"
       tags: *a4
-  /users/{username}/overview:
-    get:
-      operationId: UserController_getProfileOverview
-      parameters:
-        - name: username
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        "200":
-          description: ""
-      tags: *a4
-  /users/{username}/languages:
-    get:
-      operationId: UserController_getProfileLanguages
-      parameters:
-        - name: username
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        "200":
-          description: ""
-      tags: *a4
-  /users/{username}/skillsets:
-    get:
-      operationId: UserController_getProfileSkillsets
-      parameters:
-        - name: username
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        "200":
-          description: ""
-      tags: *a4
-  /users/{username}/achievements:
-    get:
-      operationId: UserController_getProfileAchievements
-      parameters:
-        - name: username
-          required: true
-          in: path
-          schema:
-            type: string
+  /users/profile/scan:
+    post:
+      operationId: UserController_scanProfile
+      parameters: []
       responses:
         "200":
           description: ""
@@ -1631,7 +1587,69 @@ components:
           type: string
       required:
         - address
-    User:
+    AchievementDto:
+      type: object
+      properties:
+        id:
+          type: string
+        name:
+          type: string
+        description:
+          type: string
+        stats:
+          type: string
+        date:
+          type: string
+        rarity:
+          type: string
+        icon:
+          type: string
+      required:
+        - id
+        - name
+        - description
+        - stats
+        - date
+        - rarity
+    SkillsetChildDto:
+      type: object
+      properties:
+        name:
+          type: string
+        percentage:
+          type: number
+      required:
+        - name
+        - percentage
+    SkillsetDto:
+      type: object
+      properties:
+        name:
+          type: string
+        percentage:
+          type: number
+        children:
+          type: array
+          items:
+            $ref: "#/components/schemas/SkillsetChildDto"
+      required:
+        - name
+        - percentage
+        - children
+    ContributedRepoDto:
+      type: object
+      properties:
+        fullName:
+          type: string
+        stargazerCount:
+          type: number
+        contributions:
+          type: number
+      required:
+        - fullName
+        - stargazerCount
+        - contributions
+    UserProfileDto:
       type: object
       properties:
         _id:
@@ -1672,6 +1690,33 @@ components:
           format: date-time
           type: string
         updatedAt:
+          format: date-time
+          type: string
+        languages:
+          type: object
+          description: Language statistics with language names as keys
+          example:
+            JavaScript:
+              percentage: 45.2
+            TypeScript:
+              percentage: 30.8
+            Python:
+              percentage: 24
+        achievements:
+          type: array
+          items:
+            $ref: "#/components/schemas/AchievementDto"
+        skillsets:
+          type: array
+          items:
+            $ref: "#/components/schemas/SkillsetDto"
+        contributedRepos:
+          type: array
+          items:
+            $ref: "#/components/schemas/ContributedRepoDto"
+        scanStatus:
+          type: string
+        scanUpdatedAt:
           format: date-time
           type: string
       required:
