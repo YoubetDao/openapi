@@ -101,14 +101,8 @@ paths:
         - Receipt
   /receipts:
     get:
-      operationId: ReceiptController_getReceipts
+      operationId: ReceiptController_getReceiptsByPeriodId
       parameters:
-        - name: namespace
-          required: false
-          in: query
-          description: Filter by namespace
-          schema:
-            type: string
         - name: periodId
           required: false
           in: query
@@ -129,18 +123,6 @@ paths:
           schema:
             example: 10
             type: number
-        - name: search
-          required: false
-          in: query
-          description: 搜索关键字
-          schema:
-            type: string
-        - name: sort
-          required: false
-          in: query
-          description: 排序字段，格式如 sort=field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
-          schema:
-            type: string
       responses:
         "200":
           description: ""
