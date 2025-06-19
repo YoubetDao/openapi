@@ -126,7 +126,7 @@ paths:
         - name: search
           required: false
           in: query
-          description: 搜索关键字
+          description: "搜索关键字 支持字段包括: recipient:wfnuser ...(TODO)"
           schema:
             type: string
         - name: sort
@@ -2193,6 +2193,12 @@ components:
           type: object
         status:
           type: string
+        grantedAt:
+          format: date-time
+          type: string
+        claimedAt:
+          format: date-time
+          type: string
         createdAt:
           format: date-time
           type: string
@@ -2206,6 +2212,8 @@ components:
         - detail
         - transactionInfo
         - status
+        - grantedAt
+        - claimedAt
         - createdAt
         - updatedAt
     PopulatedTaskApplyDto:

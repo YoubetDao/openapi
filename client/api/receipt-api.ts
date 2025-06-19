@@ -34,7 +34,7 @@ export const ReceiptApiAxiosParamCreator = function (configuration?: Configurati
          * @param {string} [namespace] Filter by namespace
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
-         * @param {string} [search] 搜索关键字
+         * @param {string} [search] 搜索关键字 支持字段包括: recipient:wfnuser ...(TODO)
          * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -186,7 +186,7 @@ export const ReceiptApiFp = function(configuration?: Configuration) {
          * @param {string} [namespace] Filter by namespace
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
-         * @param {string} [search] 搜索关键字
+         * @param {string} [search] 搜索关键字 支持字段包括: recipient:wfnuser ...(TODO)
          * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -240,7 +240,7 @@ export const ReceiptApiFactory = function (configuration?: Configuration, basePa
          * @param {string} [namespace] Filter by namespace
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
-         * @param {string} [search] 搜索关键字
+         * @param {string} [search] 搜索关键字 支持字段包括: recipient:wfnuser ...(TODO)
          * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -284,7 +284,7 @@ export interface ReceiptApiInterface {
      * @param {string} [namespace] Filter by namespace
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
-     * @param {string} [search] 搜索关键字
+     * @param {string} [search] 搜索关键字 支持字段包括: recipient:wfnuser ...(TODO)
      * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -328,7 +328,7 @@ export class ReceiptApi extends BaseAPI implements ReceiptApiInterface {
      * @param {string} [namespace] Filter by namespace
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
-     * @param {string} [search] 搜索关键字
+     * @param {string} [search] 搜索关键字 支持字段包括: recipient:wfnuser ...(TODO)
      * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}

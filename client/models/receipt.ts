@@ -61,6 +61,18 @@ export interface Receipt {
      * @type {string}
      * @memberof Receipt
      */
+    'grantedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Receipt
+     */
+    'claimedAt': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Receipt
+     */
     'createdAt': string;
     /**
      * 
