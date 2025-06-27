@@ -1749,7 +1749,7 @@ components:
           type: array
           items:
             $ref: "#/components/schemas/AchievementDto"
-        skillsets:
+        skillset:
           type: array
           items:
             $ref: "#/components/schemas/SkillsetDto"

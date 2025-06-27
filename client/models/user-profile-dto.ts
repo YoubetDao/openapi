@@ -148,7 +148,7 @@ export interface UserProfileDto {
      * @type {Array<SkillsetDto>}
      * @memberof UserProfileDto
      */
-    'skillsets'?: Array<SkillsetDto>;
+    'skillset'?: Array<SkillsetDto>;
     /**
      * 
      * @type {Array<ContributedRepoDto>}
