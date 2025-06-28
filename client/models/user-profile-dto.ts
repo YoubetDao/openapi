@@ -124,6 +124,12 @@ export interface UserProfileDto {
      * @type {string}
      * @memberof UserProfileDto
      */
+    'scanLatestJobId': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof UserProfileDto
+     */
     'createdAt': string;
     /**
      * 
