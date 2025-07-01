@@ -116,39 +116,6 @@ export const PeriodApiAxiosParamCreator = function (configuration?: Configuratio
                 options: localVarRequestOptions,
             };
         },
-        /**
-         * 
-         * @param {string} periodId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        periodControllerGrantRewards: async (periodId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'periodId' is not null or undefined
-            assertParamExists('periodControllerGrantRewards', 'periodId', periodId)
-            const localVarPath = `/periods/{periodId}/grant-rewards`
-                .replace(`{${"periodId"}}`, encodeURIComponent(String(periodId)));
-            // use dummy base URL string because the URL constructor only accepts absolute URLs.
-            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
-            let baseOptions;
-            if (configuration) {
-                baseOptions = configuration.baseOptions;
-            }
-
-            const localVarRequestOptions = { method: 'POST', ...baseOptions, ...options};
-            const localVarHeaderParameter = {} as any;
-            const localVarQueryParameter = {} as any;
-
-
-    
-            setSearchParams(localVarUrlObj, localVarQueryParameter);
-            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
-            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
-
-            return {
-                url: toPathString(localVarUrlObj),
-                options: localVarRequestOptions,
-            };
-        },
     }
 };
 
@@ -186,18 +153,6 @@ export const PeriodApiFp = function(configuration?: Configuration) {
             const localVarOperationServerBasePath = operationServerMap['PeriodApi.periodControllerGetPeriods']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
-        /**
-         * 
-         * @param {string} periodId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        async periodControllerGrantRewards(periodId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<void>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.periodControllerGrantRewards(periodId, options);
-            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
-            const localVarOperationServerBasePath = operationServerMap['PeriodApi.periodControllerGrantRewards']?.[localVarOperationServerIndex]?.url;
-            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
-        },
     }
 };
 
@@ -229,15 +184,6 @@ export const PeriodApiFactory = function (configuration?: Configuration, basePat
         periodControllerGetPeriods(projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<PeriodControllerGetPeriods200Response> {
             return localVarFp.periodControllerGetPeriods(projectId, sortDirection, rewardGranted, offset, limit, options).then((request) => request(axios, basePath));
         },
-        /**
-         * 
-         * @param {string} periodId 
-         * @param {*} [options] Override http request option.
-         * @throws {RequiredError}
-         */
-        periodControllerGrantRewards(periodId: string, options?: RawAxiosRequestConfig): AxiosPromise<void> {
-            return localVarFp.periodControllerGrantRewards(periodId, options).then((request) => request(axios, basePath));
-        },
     };
 };
 
@@ -267,15 +213,6 @@ export interface PeriodApiInterface {
      * @memberof PeriodApiInterface
      */
     periodControllerGetPeriods(projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<PeriodControllerGetPeriods200Response>;
-
-    /**
-     * 
-     * @param {string} periodId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeriodApiInterface
-     */
-    periodControllerGrantRewards(periodId: string, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
 }
 
@@ -309,17 +246,6 @@ export class PeriodApi extends BaseAPI implements PeriodApiInterface {
      */
     public periodControllerGetPeriods(projectId: string, sortDirection: string, rewardGranted?: PeriodControllerGetPeriodsRewardGrantedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
         return PeriodApiFp(this.configuration).periodControllerGetPeriods(projectId, sortDirection, rewardGranted, offset, limit, options).then((request) => request(this.axios, this.basePath));
-    }
-
-    /**
-     * 
-     * @param {string} periodId 
-     * @param {*} [options] Override http request option.
-     * @throws {RequiredError}
-     * @memberof PeriodApi
-     */
-    public periodControllerGrantRewards(periodId: string, options?: RawAxiosRequestConfig) {
-        return PeriodApiFp(this.configuration).periodControllerGrantRewards(periodId, options).then((request) => request(this.axios, this.basePath));
     }
 }
 

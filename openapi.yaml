@@ -508,19 +508,6 @@ paths:
                     items:
                       $ref: "#/components/schemas/Period"
       tags: *a7
-  /periods/{periodId}/grant-rewards:
-    post:
-      operationId: PeriodController_grantRewards
-      parameters:
-        - name: periodId
-          required: true
-          in: path
-          schema:
-            type: string
-      responses:
-        "201":
-          description: ""
-      tags: *a7
   /project/{projectGithubId}/pull-requests:
     get:
       operationId: PullRequestController_getProjectPullRequests
