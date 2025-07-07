@@ -27,7 +27,6 @@ export * from './api/report-api';
 export * from './api/reward-api';
 export * from './api/task-api';
 export * from './api/task-apply-api';
-export * from './api/tutorial-api';
 export * from './api/user-api';
 export * from './api/youbet-api';
 

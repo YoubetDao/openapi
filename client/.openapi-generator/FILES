@@ -14,7 +14,6 @@ api/report-api.ts
 api/reward-api.ts
 api/task-api.ts
 api/task-apply-api.ts
-api/tutorial-api.ts
 api/user-api.ts
 api/youbet-api.ts
 base.ts
