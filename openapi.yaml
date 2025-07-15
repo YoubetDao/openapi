@@ -1049,6 +1049,61 @@ paths:
                       $ref: "#/components/schemas/Project"
       tags: &a11
         - Project
+  /projects/mine:
+    get:
+      operationId: ProjectController_getOwnerProject
+      parameters:
+        - name: search
+          required: false
+          in: query
+          description: 搜索关键字
+          schema:
+            type: string
+        - name: sort
+          required: false
+          in: query
+          description: 排序字段，格式如 sort=field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
+          schema:
+            type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                      totalPages:
+                        type: number
+                      currentPage:
+                        type: number
+                      hasNextPage:
+                        type: boolean
+                      hasPrevPage:
+                        type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/Project"
+      tags: *a11
   /projects/{githubId}:
     get:
       operationId: ProjectController_getProjectDetail

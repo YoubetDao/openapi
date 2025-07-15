@@ -33,6 +33,55 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
     return {
         /**
          * 
+         * @param {string} [search] 搜索关键字
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectControllerGetOwnerProject: async (search?: string, sort?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/projects/mine`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+            if (search !== undefined) {
+                localVarQueryParameter['search'] = search;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
+        /**
+         * 
          * @param {number} githubId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -214,6 +263,21 @@ export const ProjectApiFp = function(configuration?: Configuration) {
     return {
         /**
          * 
+         * @param {string} [search] 搜索关键字
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        async projectControllerGetOwnerProject(search?: string, sort?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectControllerGetProjects200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectControllerGetOwnerProject(search, sort, offset, limit, options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['ProjectApi.projectControllerGetOwnerProject']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
          * @param {number} githubId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -278,6 +342,18 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
     return {
         /**
          * 
+         * @param {string} [search] 搜索关键字
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        projectControllerGetOwnerProject(search?: string, sort?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProjectControllerGetProjects200Response> {
+            return localVarFp.projectControllerGetOwnerProject(search, sort, offset, limit, options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
          * @param {number} githubId 
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
@@ -329,6 +405,18 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
 export interface ProjectApiInterface {
     /**
      * 
+     * @param {string} [search] 搜索关键字
+     * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectApiInterface
+     */
+    projectControllerGetOwnerProject(search?: string, sort?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProjectControllerGetProjects200Response>;
+
+    /**
+     * 
      * @param {number} githubId 
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
@@ -378,6 +466,20 @@ export interface ProjectApiInterface {
  * @extends {BaseAPI}
  */
 export class ProjectApi extends BaseAPI implements ProjectApiInterface {
+    /**
+     * 
+     * @param {string} [search] 搜索关键字
+     * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof ProjectApi
+     */
+    public projectControllerGetOwnerProject(search?: string, sort?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return ProjectApiFp(this.configuration).projectControllerGetOwnerProject(search, sort, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {number} githubId 
