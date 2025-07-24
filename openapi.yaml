@@ -1492,6 +1492,17 @@ components:
           type: boolean
         level:
           type: string
+        priority:
+          type: string
+          enum:
+            - p0
+            - p1
+            - p2
+        storyPoints:
+          type: number
+        due:
+          format: date-time
+          type: string
       required:
         - _id
         - githubId

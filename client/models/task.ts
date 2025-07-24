@@ -152,5 +152,32 @@ export interface Task {
      * @memberof Task
      */
     'level': string;
+    /**
+     * 
+     * @type {string}
+     * @memberof Task
+     */
+    'priority'?: TaskPriorityEnum;
+    /**
+     * 
+     * @type {number}
+     * @memberof Task
+     */
+    'storyPoints'?: number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Task
+     */
+    'due'?: string;
 }
+
+export const TaskPriorityEnum = {
+    P0: 'p0',
+    P1: 'p1',
+    P2: 'p2'
+} as const;
+
+export type TaskPriorityEnum = typeof TaskPriorityEnum[keyof typeof TaskPriorityEnum];
+
 
