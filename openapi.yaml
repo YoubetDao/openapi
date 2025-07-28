@@ -594,6 +594,14 @@ paths:
               - claimed
               - unclaimed
             type: string
+        - name: populate
+          required: false
+          in: query
+          description: "Comma-separated list of fields to populate. Allowed fields:
+            project, namespace"
+          schema:
+            example: project,namespace
+            type: string
         - name: offset
           required: false
           in: query
