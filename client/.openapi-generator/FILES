@@ -60,6 +60,9 @@ models/task-apply-controller-get-task-applies200-response.ts
 models/task-apply-controller-my-task-applies200-response.ts
 models/task-apply.ts
 models/task-controller-get-tasks200-response.ts
+models/task-controller-my-tasks200-response.ts
+models/task-dto.ts
+models/task-project-dto.ts
 models/task.ts
 models/update-report-dto.ts
 models/update-task-dto.ts

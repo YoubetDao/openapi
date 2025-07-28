@@ -32,6 +32,8 @@ import type { TaskApply } from '../models';
 // @ts-ignore
 import type { TaskControllerGetTasks200Response } from '../models';
 // @ts-ignore
+import type { TaskControllerMyTasks200Response } from '../models';
+// @ts-ignore
 import type { UpdateTaskDto } from '../models';
 /**
  * TaskApi - axios parameter creator
@@ -382,7 +384,7 @@ export const TaskApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+        async taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerMyTasks200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetCompletedTasks(projectList, rewardGranted, rewardClaimed, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerGetCompletedTasks']?.[localVarOperationServerIndex]?.url;
@@ -452,7 +454,7 @@ export const TaskApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerMyTasks(states: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+        async taskControllerMyTasks(states: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerMyTasks200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerMyTasks(states, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerMyTasks']?.[localVarOperationServerIndex]?.url;
@@ -491,7 +493,7 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+        taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerMyTasks200Response> {
             return localVarFp.taskControllerGetCompletedTasks(projectList, rewardGranted, rewardClaimed, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -546,7 +548,7 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerMyTasks(states: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+        taskControllerMyTasks(states: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerMyTasks200Response> {
             return localVarFp.taskControllerMyTasks(states, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
@@ -579,7 +581,7 @@ export interface TaskApiInterface {
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerMyTasks200Response>;
 
     /**
      * 
@@ -634,7 +636,7 @@ export interface TaskApiInterface {
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerMyTasks(states: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerMyTasks(states: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerMyTasks200Response>;
 
     /**
      * 

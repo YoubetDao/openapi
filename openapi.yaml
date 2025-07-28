@@ -631,7 +631,7 @@ paths:
                   data:
                     type: array
                     items:
-                      $ref: "#/components/schemas/Task"
+                      $ref: "#/components/schemas/TaskDto"
       tags: &a9
         - Task
   /tasks/mine:
@@ -1494,7 +1494,7 @@ components:
           type: string
         priority:
           type: string
-          enum:
+          enum: &a13
             - p0
             - p1
             - p2
@@ -2081,6 +2081,100 @@ components:
         - created_at
         - updated_at
         - author_association
+    TaskProjectDto:
+      type: object
+      properties:
+        _id:
+          type: string
+        name:
+          type: string
+        htmlUrl:
+          type: string
+      required:
+        - _id
+        - name
+        - htmlUrl
+    TaskDto:
+      type: object
+      properties:
+        _id:
+          type: string
+        githubId:
+          type: number
+        title:
+          type: string
+        body:
+          type: string
+        state:
+          type: string
+        createdAt:
+          format: date-time
+          type: string
+        updatedAt:
+          format: date-time
+          type: string
+        closedAt:
+          format: date-time
+          type: string
+        assignee:
+          $ref: "#/components/schemas/GithubUser"
+        assignees:
+          type: array
+          items:
+            $ref: "#/components/schemas/GithubUser"
+        labels:
+          type: array
+          items:
+            type: string
+        user:
+          $ref: "#/components/schemas/GithubUser"
+        labelsWithColor:
+          type: array
+          items:
+            $ref: "#/components/schemas/LabelWithColorDto"
+        htmlUrl:
+          type: string
+        namespace:
+          $ref: "#/components/schemas/SchemaObjectId"
+        reward:
+          $ref: "#/components/schemas/RewardDetail"
+        rewardGranted:
+          type: boolean
+        rewardClaimed:
+          type: boolean
+        level:
+          type: string
+        priority:
+          type: string
+          enum: *a13
+        storyPoints:
+          type: number
+        due:
+          format: date-time
+          type: string
+        project:
+          $ref: "#/components/schemas/TaskProjectDto"
+      required:
+        - _id
+        - githubId
+        - title
+        - body
+        - state
+        - createdAt
+        - updatedAt
+        - closedAt
+        - assignee
+        - assignees
+        - labels
+        - user
+        - labelsWithColor
+        - htmlUrl
+        - namespace
+        - reward
+        - rewardGranted
+        - rewardClaimed
+        - level
+        - project
     UpdateTaskDto:
       type: object
       properties:

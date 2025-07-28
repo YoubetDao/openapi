@@ -18,25 +18,25 @@
 import type { ReceiptControllerMyReceipts200ResponsePagination } from './receipt-controller-my-receipts200-response-pagination';
 // May contain unused imports in some cases
 // @ts-ignore
-import type { TaskDto } from './task-dto';
+import type { Task } from './task';
 
 /**
  * 
  * @export
- * @interface TaskControllerGetTasks200Response
+ * @interface TaskControllerMyTasks200Response
  */
-export interface TaskControllerGetTasks200Response {
+export interface TaskControllerMyTasks200Response {
     /**
      * 
      * @type {ReceiptControllerMyReceipts200ResponsePagination}
-     * @memberof TaskControllerGetTasks200Response
+     * @memberof TaskControllerMyTasks200Response
      */
     'pagination'?: ReceiptControllerMyReceipts200ResponsePagination;
     /**
      * 
-     * @type {Array<TaskDto>}
-     * @memberof TaskControllerGetTasks200Response
+     * @type {Array<Task>}
+     * @memberof TaskControllerMyTasks200Response
      */
-    'data'?: Array<TaskDto>;
+    'data'?: Array<Task>;
 }
 
