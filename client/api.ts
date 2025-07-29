@@ -16,6 +16,7 @@
 
 export * from './api/app-api';
 export * from './api/auth-api';
+export * from './api/erc20-transfers-api';
 export * from './api/github-api';
 export * from './api/issue-api';
 export * from './api/org-api';

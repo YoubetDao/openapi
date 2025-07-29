@@ -1208,6 +1208,106 @@ paths:
         "201":
           description: ""
       tags: *a12
+  /erc20-transfers/transfers:
+    get:
+      operationId: ERC20TransferController_getTransfers
+      parameters:
+        - name: from
+          required: false
+          in: query
+          description: Filter by sender address
+          schema:
+            example: "0x1234567890123456789012345678901234567890"
+            type: string
+        - name: to
+          required: false
+          in: query
+          description: Filter by receiver address
+          schema:
+            example: "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
+            type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                      totalPages:
+                        type: number
+                      currentPage:
+                        type: number
+                      hasNextPage:
+                        type: boolean
+                      hasPrevPage:
+                        type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/ERC20Transfer"
+      summary: Get ERC20 transfers with optional from/to filtering
+      tags: &a13
+        - ERC20 Transfers
+  /erc20-transfers/stats:
+    get:
+      operationId: ERC20TransferController_getStats
+      parameters:
+        - name: from
+          required: false
+          in: query
+          description: Filter by sender address
+          schema:
+            example: "0x1234567890123456789012345678901234567890"
+            type: string
+        - name: to
+          required: false
+          in: query
+          description: Filter by receiver address
+          schema:
+            example: "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
+            type: string
+        - name: startTime
+          required: false
+          in: query
+          description: Start time filter (ISO string)
+          schema:
+            example: 2024-01-01T00:00:00.000Z
+            type: string
+        - name: endTime
+          required: false
+          in: query
+          description: End time filter (ISO string)
+          schema:
+            example: 2024-12-31T23:59:59.999Z
+            type: string
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/ERC20StatsDto"
+      summary: Get ERC20 transfer statistics with optional filtering
+      tags: *a13
 info:
   title: YouBet Task API
   description: YouBet Task RESTful API 文档
@@ -1494,7 +1594,7 @@ components:
           type: string
         priority:
           type: string
-          enum: &a13
+          enum: &a14
             - p0
             - p1
             - p2
@@ -2146,7 +2246,7 @@ components:
           type: string
         priority:
           type: string
-          enum: *a13
+          enum: *a14
         storyPoints:
           type: number
         due:
@@ -2427,3 +2527,140 @@ components:
       required:
         - title
         - summary
+    ERC20Transfer:
+      type: object
+      properties: {}
+    ERC20StatsFiltersDto:
+      type: object
+      properties:
+        from:
+          type: string
+          description: Sender address filter
+          example: "0x1234567890123456789012345678901234567890"
+        to:
+          type: string
+          description: Receiver address filter
+          example: "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
+        startTime:
+          format: date-time
+          type: string
+          description: Start time filter
+          example: 2024-01-01T00:00:00.000Z
+        endTime:
+          format: date-time
+          type: string
+          description: End time filter
+          example: 2024-12-31T23:59:59.999Z
+    TokenValueDto:
+      type: object
+      properties:
+        contractAddress:
+          type: string
+          description: Token contract address
+          example: "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
+        tokenSymbol:
+          type: string
+          description: Token symbol
+          example: USDT
+        tokenName:
+          type: string
+          description: Token name
+          example: Tether USD
+        tokenDecimal:
+          type: number
+          description: Token decimal places
+          example: 6
+        rawValue:
+          type: string
+          description: Raw total value (with decimals)
+          example: "1500000000"
+        formattedValue:
+          type: string
+          description: Formatted value (human readable)
+          example: "1500.000000"
+        transferCount:
+          type: number
+          description: Number of transfers for this token
+          example: 25
+      required:
+        - contractAddress
+        - tokenSymbol
+        - tokenName
+        - tokenDecimal
+        - rawValue
+        - formattedValue
+        - transferCount
+    ERC20TransferSummaryDto:
+      type: object
+      properties:
+        hash:
+          type: string
+          description: Transaction hash
+          example: 0xdef456...
+        timestamp:
+          format: date-time
+          type: string
+          description: Transaction timestamp
+          example: 2024-01-30T15:30:00.000Z
+        blockNumber:
+          type: number
+          description: Block number
+          example: 12345678
+        from:
+          type: string
+          description: Sender address
+          example: "0x1234567890123456789012345678901234567890"
+        to:
+          type: string
+          description: Receiver address
+          example: "0xabcdefabcdefabcdefabcdefabcdefabcdefabcd"
+      required:
+        - hash
+        - timestamp
+        - blockNumber
+        - from
+        - to
+    ERC20StatsDto:
+      type: object
+      properties:
+        filters:
+          description: Applied filters
+          allOf:
+            - $ref: "#/components/schemas/ERC20StatsFiltersDto"
+        totalTransfers:
+          type: number
+          description: Total number of transfers matching the filters
+          example: 150
+        tokenValues:
+          description: Value aggregated by token contract
+          type: array
+          items:
+            $ref: "#/components/schemas/TokenValueDto"
+        sentCount:
+          type: number
+          description: Number of transfers sent by the from address (only when from filter
+            is applied)
+          example: 75
+        sentTokenValues:
+          description: Value sent by token contract (only when from filter is applied)
+          type: array
+          items:
+            $ref: "#/components/schemas/TokenValueDto"
+        receivedCount:
+          type: number
+          description: Number of transfers received by the to address (only when to filter
+            is applied)
+          example: 80
+        receivedTokenValues:
+          description: Value received by token contract (only when to filter is applied)
+          type: array
+          items:
+            $ref: "#/components/schemas/TokenValueDto"
+        latestTransfer:
+          description: Latest transfer matching the filters
+          allOf:
+            - $ref: "#/components/schemas/ERC20TransferSummaryDto"
+      required:
+        - filters
+        - totalTransfers
+        - tokenValues

@@ -3,6 +3,7 @@
 api.ts
 api/app-api.ts
 api/auth-api.ts
+api/erc20-transfers-api.ts
 api/github-api.ts
 api/issue-api.ts
 api/org-api.ts
@@ -27,6 +28,10 @@ models/contributed-repo-dto.ts
 models/contributor-reward-body-dto.ts
 models/contributor-reward-dto.ts
 models/create-issue-dto.ts
+models/erc20-stats-dto.ts
+models/erc20-stats-filters-dto.ts
+models/erc20-transfer-controller-get-transfers200-response.ts
+models/erc20-transfer-summary-dto.ts
 models/github-issue-dto.ts
 models/github-label-dto.ts
 models/github-milestone-dto.ts
@@ -64,6 +69,7 @@ models/task-controller-my-tasks200-response.ts
 models/task-dto.ts
 models/task-project-dto.ts
 models/task.ts
+models/token-value-dto.ts
 models/update-report-dto.ts
 models/update-task-dto.ts
 models/user-auth-dto.ts
