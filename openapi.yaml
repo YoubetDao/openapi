@@ -1164,6 +1164,32 @@ paths:
         "201":
           description: ""
       tags: *a11
+  /projects/{projectId}/assignees/involved:
+    get:
+      description: Get distinct assignee.login list from all tasks under the specified
+        project
+      operationId: ProjectController_getProjectInvolvedAssignees
+      parameters:
+        - name: projectId
+          required: true
+          in: path
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Successfully retrieved assignee list
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: string
+        "403":
+          description: Forbidden - User does not have admin access to this project
+        "404":
+          description: Project not found
+      summary: Get all assignees involved in project tasks
+      tags: *a11
   /projects/{projectId}/reports:
     get:
       operationId: ReportController_listReports
