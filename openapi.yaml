@@ -555,24 +555,44 @@ paths:
       operationId: TaskController_getTasks
       parameters:
         - name: project
-          required: true
+          required: false
           in: query
+          description: Project ID to filter tasks
           schema:
             type: string
-        - name: assignee
-          required: true
+        - name: assignees
+          required: false
           in: query
+          description: Comma-separated list of assignee usernames (e.g., user1,user2)
           schema:
-            type: string
+            type: array
+            items:
+              type: string
+        - name: priority
+          required: false
+          in: query
+          description: Comma-separated list of priorities (p0,p1,p2)
+          schema:
+            type: array
+            items:
+              type: string
         - name: states
-          required: true
+          required: false
           in: query
+          description: Comma-separated list of task states (e.g., open,closed)
           schema:
-            type: string
+            type: array
+            items:
+              type: string
         - name: assignmentStatus
-          required: true
+          required: false
           in: query
+          description: Filter by assignment status
           schema:
+            enum:
+              - assigned
+              - unassigned
+              - all
             type: string
         - name: rewardGranted
           required: false

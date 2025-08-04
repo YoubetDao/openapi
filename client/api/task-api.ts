@@ -132,10 +132,11 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
         },
         /**
          * 
-         * @param {string} project 
-         * @param {string} assignee 
-         * @param {string} states 
-         * @param {string} assignmentStatus 
+         * @param {string} [project] Project ID to filter tasks
+         * @param {Array<string>} [assignees] Comma-separated list of assignee usernames (e.g., user1,user2)
+         * @param {Array<string>} [priority] Comma-separated list of priorities (p0,p1,p2)
+         * @param {Array<string>} [states] Comma-separated list of task states (e.g., open,closed)
+         * @param {TaskControllerGetTasksAssignmentStatusEnum} [assignmentStatus] Filter by assignment status
          * @param {TaskControllerGetTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {number} [offset] 分页偏移量
@@ -143,15 +144,7 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetTasks: async (project: string, assignee: string, states: string, assignmentStatus: string, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'project' is not null or undefined
-            assertParamExists('taskControllerGetTasks', 'project', project)
-            // verify required parameter 'assignee' is not null or undefined
-            assertParamExists('taskControllerGetTasks', 'assignee', assignee)
-            // verify required parameter 'states' is not null or undefined
-            assertParamExists('taskControllerGetTasks', 'states', states)
-            // verify required parameter 'assignmentStatus' is not null or undefined
-            assertParamExists('taskControllerGetTasks', 'assignmentStatus', assignmentStatus)
+        taskControllerGetTasks: async (project?: string, assignees?: Array<string>, priority?: Array<string>, states?: Array<string>, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/tasks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -168,11 +161,15 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
                 localVarQueryParameter['project'] = project;
             }
 
-            if (assignee !== undefined) {
-                localVarQueryParameter['assignee'] = assignee;
+            if (assignees) {
+                localVarQueryParameter['assignees'] = assignees;
             }
 
-            if (states !== undefined) {
+            if (priority) {
+                localVarQueryParameter['priority'] = priority;
+            }
+
+            if (states) {
                 localVarQueryParameter['states'] = states;
             }
 
@@ -404,10 +401,11 @@ export const TaskApiFp = function(configuration?: Configuration) {
         },
         /**
          * 
-         * @param {string} project 
-         * @param {string} assignee 
-         * @param {string} states 
-         * @param {string} assignmentStatus 
+         * @param {string} [project] Project ID to filter tasks
+         * @param {Array<string>} [assignees] Comma-separated list of assignee usernames (e.g., user1,user2)
+         * @param {Array<string>} [priority] Comma-separated list of priorities (p0,p1,p2)
+         * @param {Array<string>} [states] Comma-separated list of task states (e.g., open,closed)
+         * @param {TaskControllerGetTasksAssignmentStatusEnum} [assignmentStatus] Filter by assignment status
          * @param {TaskControllerGetTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {number} [offset] 分页偏移量
@@ -415,8 +413,8 @@ export const TaskApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetTasks(project, assignee, states, assignmentStatus, rewardGranted, rewardClaimed, offset, limit, options);
+        async taskControllerGetTasks(project?: string, assignees?: Array<string>, priority?: Array<string>, states?: Array<string>, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerGetTasks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -507,10 +505,11 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
         },
         /**
          * 
-         * @param {string} project 
-         * @param {string} assignee 
-         * @param {string} states 
-         * @param {string} assignmentStatus 
+         * @param {string} [project] Project ID to filter tasks
+         * @param {Array<string>} [assignees] Comma-separated list of assignee usernames (e.g., user1,user2)
+         * @param {Array<string>} [priority] Comma-separated list of priorities (p0,p1,p2)
+         * @param {Array<string>} [states] Comma-separated list of task states (e.g., open,closed)
+         * @param {TaskControllerGetTasksAssignmentStatusEnum} [assignmentStatus] Filter by assignment status
          * @param {TaskControllerGetTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {number} [offset] 分页偏移量
@@ -518,8 +517,8 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
-            return localVarFp.taskControllerGetTasks(project, assignee, states, assignmentStatus, rewardGranted, rewardClaimed, offset, limit, options).then((request) => request(axios, basePath));
+        taskControllerGetTasks(project?: string, assignees?: Array<string>, priority?: Array<string>, states?: Array<string>, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+            return localVarFp.taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -594,10 +593,11 @@ export interface TaskApiInterface {
 
     /**
      * 
-     * @param {string} project 
-     * @param {string} assignee 
-     * @param {string} states 
-     * @param {string} assignmentStatus 
+     * @param {string} [project] Project ID to filter tasks
+     * @param {Array<string>} [assignees] Comma-separated list of assignee usernames (e.g., user1,user2)
+     * @param {Array<string>} [priority] Comma-separated list of priorities (p0,p1,p2)
+     * @param {Array<string>} [states] Comma-separated list of task states (e.g., open,closed)
+     * @param {TaskControllerGetTasksAssignmentStatusEnum} [assignmentStatus] Filter by assignment status
      * @param {TaskControllerGetTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
      * @param {TaskControllerGetTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
      * @param {number} [offset] 分页偏移量
@@ -606,7 +606,7 @@ export interface TaskApiInterface {
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerGetTasks(project?: string, assignees?: Array<string>, priority?: Array<string>, states?: Array<string>, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -685,10 +685,11 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
 
     /**
      * 
-     * @param {string} project 
-     * @param {string} assignee 
-     * @param {string} states 
-     * @param {string} assignmentStatus 
+     * @param {string} [project] Project ID to filter tasks
+     * @param {Array<string>} [assignees] Comma-separated list of assignee usernames (e.g., user1,user2)
+     * @param {Array<string>} [priority] Comma-separated list of priorities (p0,p1,p2)
+     * @param {Array<string>} [states] Comma-separated list of task states (e.g., open,closed)
+     * @param {TaskControllerGetTasksAssignmentStatusEnum} [assignmentStatus] Filter by assignment status
      * @param {TaskControllerGetTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
      * @param {TaskControllerGetTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
      * @param {number} [offset] 分页偏移量
@@ -697,8 +698,8 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
      * @throws {RequiredError}
      * @memberof TaskApi
      */
-    public taskControllerGetTasks(project: string, assignee: string, states: string, assignmentStatus: string, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
-        return TaskApiFp(this.configuration).taskControllerGetTasks(project, assignee, states, assignmentStatus, rewardGranted, rewardClaimed, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerGetTasks(project?: string, assignees?: Array<string>, priority?: Array<string>, states?: Array<string>, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -768,6 +769,15 @@ export const TaskControllerGetCompletedTasksRewardClaimedEnum = {
     Unclaimed: 'unclaimed'
 } as const;
 export type TaskControllerGetCompletedTasksRewardClaimedEnum = typeof TaskControllerGetCompletedTasksRewardClaimedEnum[keyof typeof TaskControllerGetCompletedTasksRewardClaimedEnum];
+/**
+ * @export
+ */
+export const TaskControllerGetTasksAssignmentStatusEnum = {
+    Assigned: 'assigned',
+    Unassigned: 'unassigned',
+    All: 'all'
+} as const;
+export type TaskControllerGetTasksAssignmentStatusEnum = typeof TaskControllerGetTasksAssignmentStatusEnum[keyof typeof TaskControllerGetTasksAssignmentStatusEnum];
 /**
  * @export
  */
