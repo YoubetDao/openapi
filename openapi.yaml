@@ -565,25 +565,22 @@ paths:
           in: query
           description: Comma-separated list of assignee usernames (e.g., user1,user2)
           schema:
-            type: array
-            items:
-              type: string
+            example: user1,user2
+            type: string
         - name: priority
           required: false
           in: query
           description: Comma-separated list of priorities (p0,p1,p2)
           schema:
-            type: array
-            items:
-              type: string
+            example: p0,p1,p2
+            type: string
         - name: states
           required: false
           in: query
           description: Comma-separated list of task states (e.g., open,closed)
           schema:
-            type: array
-            items:
-              type: string
+            example: open,closed
+            type: string
         - name: assignmentStatus
           required: false
           in: query
