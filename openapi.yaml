@@ -614,6 +614,17 @@ paths:
               - claimed
               - unclaimed
             type: string
+        - name: noGrantNeeded
+          required: false
+          in: query
+          description: "Filter by no grant needed status: all, no-grant-needed,
+            grant-needed"
+          schema:
+            enum:
+              - all
+              - no-grant-needed
+              - grant-needed
+            type: string
         - name: offset
           required: false
           in: query
@@ -801,6 +812,19 @@ paths:
           application/json:
             schema:
               $ref: "#/components/schemas/UpdateTaskDto"
+      responses:
+        "200":
+          description: ""
+      tags: *a9
+  /tasks/{githubId}/no-grant-needed:
+    patch:
+      operationId: TaskController_markTaskAsNoGrantNeeded
+      parameters:
+        - name: githubId
+          required: true
+          in: path
+          schema:
+            type: number
       responses:
         "200":
           description: ""
@@ -1636,6 +1660,8 @@ components:
           type: boolean
         rewardClaimed:
           type: boolean
+        noGrantNeeded:
+          type: boolean
         level:
           type: string
         priority:
@@ -1669,6 +1695,7 @@ components:
         - reward
         - rewardGranted
         - rewardClaimed
+        - noGrantNeeded
         - level
     ReceiptSource:
       type: object
@@ -2288,6 +2315,8 @@ components:
           type: boolean
         rewardClaimed:
           type: boolean
+        noGrantNeeded:
+          type: boolean
         level:
           type: string
         priority:
@@ -2319,6 +2348,7 @@ components:
         - reward
         - rewardGranted
         - rewardClaimed
+        - noGrantNeeded
         - level
         - project
     UpdateTaskDto:

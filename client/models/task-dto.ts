@@ -142,6 +142,12 @@ export interface TaskDto {
     'rewardClaimed': boolean;
     /**
      * 
+     * @type {boolean}
+     * @memberof TaskDto
+     */
+    'noGrantNeeded': boolean;
+    /**
+     * 
      * @type {string}
      * @memberof TaskDto
      */

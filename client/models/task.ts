@@ -148,6 +148,12 @@ export interface Task {
     'rewardClaimed': boolean;
     /**
      * 
+     * @type {boolean}
+     * @memberof Task
+     */
+    'noGrantNeeded': boolean;
+    /**
+     * 
      * @type {string}
      * @memberof Task
      */
