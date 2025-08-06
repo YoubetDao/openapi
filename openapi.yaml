@@ -1713,10 +1713,16 @@ components:
           type: number
         symbol:
           type: string
+        chainId:
+          type: number
+        contractAddress:
+          type: string
       required:
         - amount
         - decimals
         - symbol
+        - chainId
+        - contractAddress
     ReceiptTransactionInfo:
       type: object
       properties:

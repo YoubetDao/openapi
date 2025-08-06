@@ -38,5 +38,17 @@ export interface ReceiptDetail {
      * @memberof ReceiptDetail
      */
     'symbol': string;
+    /**
+     * 
+     * @type {number}
+     * @memberof ReceiptDetail
+     */
+    'chainId': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof ReceiptDetail
+     */
+    'contractAddress': string;
 }
 
