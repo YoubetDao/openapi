@@ -811,7 +811,7 @@ paths:
               $ref: "#/components/schemas/UpdateTaskDto"
       responses:
         "200":
-          description: ""
+          description: Task updated successfully
       tags: *a9
   /tasks/{githubId}/no-grant-needed:
     patch:
@@ -2352,12 +2352,26 @@ components:
       type: object
       properties:
         reward:
-          $ref: "#/components/schemas/RewardDetail"
+          description: Task reward details
+          allOf:
+            - $ref: "#/components/schemas/RewardDetail"
         level:
           type: string
-      required:
-        - reward
-        - level
+          description: Task level
+        priority:
+          type: string
+          enum:
+            - p0
+            - p1
+            - p2
+          description: Task priority (p0, p1, p2)
+        storyPoints:
+          type: number
+          description: Story points for the task
+        due:
+          format: date-time
+          type: string
+          description: Due date for the task
     TaskApply:
       type: object
       properties:

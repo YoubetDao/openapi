@@ -24,16 +24,43 @@ import type { RewardDetail } from './reward-detail';
  */
 export interface UpdateTaskDto {
     /**
-     * 
+     * Task reward details
      * @type {RewardDetail}
      * @memberof UpdateTaskDto
      */
-    'reward': RewardDetail;
+    'reward'?: RewardDetail;
     /**
-     * 
+     * Task level
      * @type {string}
      * @memberof UpdateTaskDto
      */
-    'level': string;
+    'level'?: string;
+    /**
+     * Task priority (p0, p1, p2)
+     * @type {string}
+     * @memberof UpdateTaskDto
+     */
+    'priority'?: UpdateTaskDtoPriorityEnum;
+    /**
+     * Story points for the task
+     * @type {number}
+     * @memberof UpdateTaskDto
+     */
+    'storyPoints'?: number;
+    /**
+     * Due date for the task
+     * @type {string}
+     * @memberof UpdateTaskDto
+     */
+    'due'?: string;
 }
+
+export const UpdateTaskDtoPriorityEnum = {
+    P0: 'p0',
+    P1: 'p1',
+    P2: 'p2'
+} as const;
+
+export type UpdateTaskDtoPriorityEnum = typeof UpdateTaskDtoPriorityEnum[keyof typeof UpdateTaskDtoPriorityEnum];
+
 
