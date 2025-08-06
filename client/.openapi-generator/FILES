@@ -47,6 +47,7 @@ models/link-wallet-dto.ts
 models/period-controller-get-periods200-response.ts
 models/period.ts
 models/populated-task-apply-dto.ts
+models/project-controller-get-project-involved-assignees200-response.ts
 models/project-controller-get-projects200-response.ts
 models/project.ts
 models/receipt-controller-my-receipts200-response-pagination.ts

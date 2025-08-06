@@ -24,6 +24,8 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 // @ts-ignore
 import type { ImportProjectDto } from '../models';
 // @ts-ignore
+import type { ProjectControllerGetProjectInvolvedAssignees200Response } from '../models';
+// @ts-ignore
 import type { ProjectControllerGetProjects200Response } from '../models';
 /**
  * ProjectApi - axios parameter creator
@@ -114,17 +116,16 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
             };
         },
         /**
-         * Get distinct assignee.login list from all tasks under the specified project
+         * Get distinct assignees from all tasks under the specified projects
          * @summary Get all assignees involved in project tasks
-         * @param {string} projectId 
+         * @param {string} [projects] Comma-separated list of project IDs
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectControllerGetProjectInvolvedAssignees: async (projectId: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
-            // verify required parameter 'projectId' is not null or undefined
-            assertParamExists('projectControllerGetProjectInvolvedAssignees', 'projectId', projectId)
-            const localVarPath = `/projects/{projectId}/assignees/involved`
-                .replace(`{${"projectId"}}`, encodeURIComponent(String(projectId)));
+        projectControllerGetProjectInvolvedAssignees: async (projects?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/projects/assignees/involved`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
             let baseOptions;
@@ -135,6 +136,18 @@ export const ProjectApiAxiosParamCreator = function (configuration?: Configurati
             const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
             const localVarHeaderParameter = {} as any;
             const localVarQueryParameter = {} as any;
+
+            if (projects !== undefined) {
+                localVarQueryParameter['projects'] = projects;
+            }
+
+            if (offset !== undefined) {
+                localVarQueryParameter['offset'] = offset;
+            }
+
+            if (limit !== undefined) {
+                localVarQueryParameter['limit'] = limit;
+            }
 
 
     
@@ -323,14 +336,16 @@ export const ProjectApiFp = function(configuration?: Configuration) {
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
         },
         /**
-         * Get distinct assignee.login list from all tasks under the specified project
+         * Get distinct assignees from all tasks under the specified projects
          * @summary Get all assignees involved in project tasks
-         * @param {string} projectId 
+         * @param {string} [projects] Comma-separated list of project IDs
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async projectControllerGetProjectInvolvedAssignees(projectId: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<Array<string>>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.projectControllerGetProjectInvolvedAssignees(projectId, options);
+        async projectControllerGetProjectInvolvedAssignees(projects?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<ProjectControllerGetProjectInvolvedAssignees200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.projectControllerGetProjectInvolvedAssignees(projects, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['ProjectApi.projectControllerGetProjectInvolvedAssignees']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -409,14 +424,16 @@ export const ProjectApiFactory = function (configuration?: Configuration, basePa
             return localVarFp.projectControllerGetProjectDetail(githubId, options).then((request) => request(axios, basePath));
         },
         /**
-         * Get distinct assignee.login list from all tasks under the specified project
+         * Get distinct assignees from all tasks under the specified projects
          * @summary Get all assignees involved in project tasks
-         * @param {string} projectId 
+         * @param {string} [projects] Comma-separated list of project IDs
+         * @param {number} [offset] 分页偏移量
+         * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        projectControllerGetProjectInvolvedAssignees(projectId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>> {
-            return localVarFp.projectControllerGetProjectInvolvedAssignees(projectId, options).then((request) => request(axios, basePath));
+        projectControllerGetProjectInvolvedAssignees(projects?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProjectControllerGetProjectInvolvedAssignees200Response> {
+            return localVarFp.projectControllerGetProjectInvolvedAssignees(projects, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -482,14 +499,16 @@ export interface ProjectApiInterface {
     projectControllerGetProjectDetail(githubId: number, options?: RawAxiosRequestConfig): AxiosPromise<void>;
 
     /**
-     * Get distinct assignee.login list from all tasks under the specified project
+     * Get distinct assignees from all tasks under the specified projects
      * @summary Get all assignees involved in project tasks
-     * @param {string} projectId 
+     * @param {string} [projects] Comma-separated list of project IDs
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectApiInterface
      */
-    projectControllerGetProjectInvolvedAssignees(projectId: string, options?: RawAxiosRequestConfig): AxiosPromise<Array<string>>;
+    projectControllerGetProjectInvolvedAssignees(projects?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<ProjectControllerGetProjectInvolvedAssignees200Response>;
 
     /**
      * 
@@ -559,15 +578,17 @@ export class ProjectApi extends BaseAPI implements ProjectApiInterface {
     }
 
     /**
-     * Get distinct assignee.login list from all tasks under the specified project
+     * Get distinct assignees from all tasks under the specified projects
      * @summary Get all assignees involved in project tasks
-     * @param {string} projectId 
+     * @param {string} [projects] Comma-separated list of project IDs
+     * @param {number} [offset] 分页偏移量
+     * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof ProjectApi
      */
-    public projectControllerGetProjectInvolvedAssignees(projectId: string, options?: RawAxiosRequestConfig) {
-        return ProjectApiFp(this.configuration).projectControllerGetProjectInvolvedAssignees(projectId, options).then((request) => request(this.axios, this.basePath));
+    public projectControllerGetProjectInvolvedAssignees(projects?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return ProjectApiFp(this.configuration).projectControllerGetProjectInvolvedAssignees(projects, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**

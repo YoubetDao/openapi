@@ -23,6 +23,7 @@ export * from './period';
 export * from './period-controller-get-periods200-response';
 export * from './populated-task-apply-dto';
 export * from './project';
+export * from './project-controller-get-project-involved-assignees200-response';
 export * from './project-controller-get-projects200-response';
 export * from './receipt';
 export * from './receipt-controller-my-receipts200-response';

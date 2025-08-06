@@ -1185,30 +1185,56 @@ paths:
         "201":
           description: ""
       tags: *a11
-  /projects/{projectId}/assignees/involved:
+  /projects/assignees/involved:
     get:
-      description: Get distinct assignee.login list from all tasks under the specified
-        project
+      description: Get distinct assignees from all tasks under the specified projects
       operationId: ProjectController_getProjectInvolvedAssignees
       parameters:
-        - name: projectId
-          required: true
-          in: path
+        - name: projects
+          required: false
+          in: query
+          description: Comma-separated list of project IDs
           schema:
+            example: projectId1,projectId2
             type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
       responses:
         "200":
-          description: Successfully retrieved assignee list
+          description: ""
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  type: string
-        "403":
-          description: Forbidden - User does not have admin access to this project
-        "404":
-          description: Project not found
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                      totalPages:
+                        type: number
+                      currentPage:
+                        type: number
+                      hasNextPage:
+                        type: boolean
+                      hasPrevPage:
+                        type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/GithubUser"
       summary: Get all assignees involved in project tasks
       tags: *a11
   /projects/{projectId}/reports:
