@@ -710,6 +710,118 @@ paths:
                     items:
                       $ref: "#/components/schemas/Task"
       tags: *a9
+  /tasks/managed:
+    get:
+      operationId: TaskController_getManagedTasks
+      parameters:
+        - name: projects
+          required: false
+          in: query
+          description: Comma-separated list of project IDs to filter tasks
+          schema:
+            example: projectId1,projectId2
+            type: string
+        - name: assignees
+          required: false
+          in: query
+          description: Comma-separated list of assignee usernames (e.g., user1,user2)
+          schema:
+            example: user1,user2
+            type: string
+        - name: priority
+          required: false
+          in: query
+          description: Comma-separated list of priorities (p0,p1,p2)
+          schema:
+            example: p0,p1,p2
+            type: string
+        - name: states
+          required: false
+          in: query
+          description: Comma-separated list of task states (e.g., open,closed)
+          schema:
+            example: open,closed
+            type: string
+        - name: assignmentStatus
+          required: false
+          in: query
+          description: Filter by assignment status
+          schema:
+            enum:
+              - assigned
+              - unassigned
+              - all
+            type: string
+        - name: rewardGranted
+          required: false
+          in: query
+          description: "Filter by reward granted status: all, granted, ungranted"
+          schema:
+            enum:
+              - all
+              - granted
+              - ungranted
+            type: string
+        - name: rewardClaimed
+          required: false
+          in: query
+          description: "Filter by reward claimed status: all, claimed, unclaimed"
+          schema:
+            enum:
+              - all
+              - claimed
+              - unclaimed
+            type: string
+        - name: noGrantNeeded
+          required: false
+          in: query
+          description: "Filter by no grant needed status: all, no-grant-needed,
+            grant-needed"
+          schema:
+            enum:
+              - all
+              - no-grant-needed
+              - grant-needed
+            type: string
+        - name: offset
+          required: false
+          in: query
+          description: 分页偏移量
+          schema:
+            example: 0
+            type: number
+        - name: limit
+          required: false
+          in: query
+          description: 每页数量
+          schema:
+            example: 10
+            type: number
+      responses:
+        "200":
+          description: ""
+          content:
+            application/json:
+              schema:
+                properties:
+                  pagination:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: number
+                      totalPages:
+                        type: number
+                      currentPage:
+                        type: number
+                      hasNextPage:
+                        type: boolean
+                      hasPrevPage:
+                        type: boolean
+                  data:
+                    type: array
+                    items:
+                      $ref: "#/components/schemas/TaskDto"
+      tags: *a9
   /tasks/completed:
     get:
       operationId: TaskController_getCompletedTasks
