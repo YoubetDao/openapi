@@ -46,12 +46,13 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {string} projectList 
          * @param {TaskControllerGetCompletedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetCompletedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetCompletedTasks: async (projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskControllerGetCompletedTasks: async (projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, sort?: string, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             // verify required parameter 'projectList' is not null or undefined
             assertParamExists('taskControllerGetCompletedTasks', 'projectList', projectList)
             const localVarPath = `/tasks/completed`;
@@ -76,6 +77,10 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (rewardClaimed !== undefined) {
                 localVarQueryParameter['rewardClaimed'] = rewardClaimed;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
             }
 
             if (offset !== undefined) {
@@ -109,10 +114,11 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {TaskControllerGetManagedTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetManagedTasks: async (projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskControllerGetManagedTasks: async (projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/tasks/managed`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -163,6 +169,10 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
             }
 
 
@@ -221,10 +231,11 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {TaskControllerGetTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetTasks: async (project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskControllerGetTasks: async (project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/tasks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -275,6 +286,10 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (limit !== undefined) {
                 localVarQueryParameter['limit'] = limit;
+            }
+
+            if (sort !== undefined) {
+                localVarQueryParameter['sort'] = sort;
             }
 
 
@@ -493,13 +508,14 @@ export const TaskApiFp = function(configuration?: Configuration) {
          * @param {string} projectList 
          * @param {TaskControllerGetCompletedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetCompletedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerMyTasks200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetCompletedTasks(projectList, rewardGranted, rewardClaimed, offset, limit, options);
+        async taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, sort?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerMyTasks200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetCompletedTasks(projectList, rewardGranted, rewardClaimed, sort, offset, limit, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerGetCompletedTasks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -516,11 +532,12 @@ export const TaskApiFp = function(configuration?: Configuration) {
          * @param {TaskControllerGetManagedTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, options);
+        async taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, sort, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerGetManagedTasks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -549,11 +566,12 @@ export const TaskApiFp = function(configuration?: Configuration) {
          * @param {TaskControllerGetTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, options);
+        async taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, sort, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerGetTasks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -637,13 +655,14 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
          * @param {string} projectList 
          * @param {TaskControllerGetCompletedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetCompletedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerMyTasks200Response> {
-            return localVarFp.taskControllerGetCompletedTasks(projectList, rewardGranted, rewardClaimed, offset, limit, options).then((request) => request(axios, basePath));
+        taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, sort?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerMyTasks200Response> {
+            return localVarFp.taskControllerGetCompletedTasks(projectList, rewardGranted, rewardClaimed, sort, offset, limit, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -657,11 +676,12 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
          * @param {TaskControllerGetManagedTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
-            return localVarFp.taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, options).then((request) => request(axios, basePath));
+        taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+            return localVarFp.taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -684,11 +704,12 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
          * @param {TaskControllerGetTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
+         * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
-            return localVarFp.taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, options).then((request) => request(axios, basePath));
+        taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+            return localVarFp.taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -753,13 +774,14 @@ export interface TaskApiInterface {
      * @param {string} projectList 
      * @param {TaskControllerGetCompletedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
      * @param {TaskControllerGetCompletedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
+     * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerMyTasks200Response>;
+    taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, sort?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerMyTasks200Response>;
 
     /**
      * 
@@ -773,11 +795,12 @@ export interface TaskApiInterface {
      * @param {TaskControllerGetManagedTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
+     * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -800,11 +823,12 @@ export interface TaskApiInterface {
      * @param {TaskControllerGetTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
+     * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -869,14 +893,15 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
      * @param {string} projectList 
      * @param {TaskControllerGetCompletedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
      * @param {TaskControllerGetCompletedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
+     * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApi
      */
-    public taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
-        return TaskApiFp(this.configuration).taskControllerGetCompletedTasks(projectList, rewardGranted, rewardClaimed, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerGetCompletedTasks(projectList: string, rewardGranted?: TaskControllerGetCompletedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetCompletedTasksRewardClaimedEnum, sort?: string, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskControllerGetCompletedTasks(projectList, rewardGranted, rewardClaimed, sort, offset, limit, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -891,12 +916,13 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
      * @param {TaskControllerGetManagedTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
+     * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApi
      */
-    public taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
-        return TaskApiFp(this.configuration).taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, sort?: string, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, sort, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -922,12 +948,13 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
      * @param {TaskControllerGetTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
+     * @param {string} [sort] 排序字段，格式如 sort&#x3D;field1:asc,field2:desc（多个排序用逗号分隔，方向为asc或desc）
      * @param {*} [options] Override http request option.
      * @throws {RequiredError}
      * @memberof TaskApi
      */
-    public taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, options?: RawAxiosRequestConfig) {
-        return TaskApiFp(this.configuration).taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, sort?: string, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, sort, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
