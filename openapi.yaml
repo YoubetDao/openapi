@@ -2513,6 +2513,9 @@ components:
     UpdateTaskDto:
       type: object
       properties:
+        title:
+          type: string
+          description: Task title
         reward:
           description: Task reward details
           allOf:

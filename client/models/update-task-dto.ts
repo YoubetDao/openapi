@@ -24,6 +24,12 @@ import type { RewardDetail } from './reward-detail';
  */
 export interface UpdateTaskDto {
     /**
+     * Task title
+     * @type {string}
+     * @memberof UpdateTaskDto
+     */
+    'title'?: string;
+    /**
      * Task reward details
      * @type {RewardDetail}
      * @memberof UpdateTaskDto
