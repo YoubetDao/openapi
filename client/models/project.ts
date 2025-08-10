@@ -152,5 +152,11 @@ export interface Project {
      * @memberof Project
      */
     'priority': number;
+    /**
+     * 
+     * @type {string}
+     * @memberof Project
+     */
+    'webhookUrl': string;
 }
 

@@ -1715,6 +1715,8 @@ components:
           type: object
         priority:
           type: number
+        webhookUrl:
+          type: string
       required:
         - _id
         - githubId
@@ -1737,6 +1739,7 @@ components:
         - deletedAt
         - periodicReward
         - priority
+        - webhookUrl
     LabelWithColorDto:
       type: object
       properties:
