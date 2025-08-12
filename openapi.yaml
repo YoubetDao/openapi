@@ -636,6 +636,12 @@ paths:
           schema:
             example: 10
             type: number
+        - name: search
+          required: false
+          in: query
+          description: 搜索关键字
+          schema:
+            type: string
         - name: sort
           required: false
           in: query
@@ -803,6 +809,12 @@ paths:
           schema:
             example: 10
             type: number
+        - name: search
+          required: false
+          in: query
+          description: 搜索关键字
+          schema:
+            type: string
         - name: sort
           required: false
           in: query
