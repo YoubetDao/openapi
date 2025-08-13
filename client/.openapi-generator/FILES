@@ -58,6 +58,7 @@ models/receipt-source.ts
 models/receipt-transaction-info.ts
 models/receipt.ts
 models/report.ts
+models/reputation-details-dto.ts
 models/reward-detail.ts
 models/reward-signature-dto.ts
 models/skillset-child-dto.ts
@@ -76,5 +77,6 @@ models/update-task-dto.ts
 models/user-auth-dto.ts
 models/user-controller-leaderboard200-response.ts
 models/user-profile-dto.ts
+models/user-reputation-dto.ts
 models/user-task-completion-dto.ts
 models/youbet-extra.ts

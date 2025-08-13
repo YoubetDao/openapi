@@ -25,12 +25,43 @@ import { BASE_PATH, COLLECTION_FORMATS, type RequestArgs, BaseAPI, RequiredError
 import type { UserControllerLeaderboard200Response } from '../models';
 // @ts-ignore
 import type { UserProfileDto } from '../models';
+// @ts-ignore
+import type { UserReputationDto } from '../models';
 /**
  * UserApi - axios parameter creator
  * @export
  */
 export const UserApiAxiosParamCreator = function (configuration?: Configuration) {
     return {
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
+        userControllerGetMyReputation: async (options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+            const localVarPath = `/users/me/reputation`;
+            // use dummy base URL string because the URL constructor only accepts absolute URLs.
+            const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
+            let baseOptions;
+            if (configuration) {
+                baseOptions = configuration.baseOptions;
+            }
+
+            const localVarRequestOptions = { method: 'GET', ...baseOptions, ...options};
+            const localVarHeaderParameter = {} as any;
+            const localVarQueryParameter = {} as any;
+
+
+    
+            setSearchParams(localVarUrlObj, localVarQueryParameter);
+            let headersFromBaseOptions = baseOptions && baseOptions.headers ? baseOptions.headers : {};
+            localVarRequestOptions.headers = {...localVarHeaderParameter, ...headersFromBaseOptions, ...options.headers};
+
+            return {
+                url: toPathString(localVarUrlObj),
+                options: localVarRequestOptions,
+            };
+        },
         /**
          * 
          * @param {*} [options] Override http request option.
@@ -133,6 +164,17 @@ export const UserApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        async userControllerGetMyReputation(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserReputationDto>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerGetMyReputation(options);
+            const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
+            const localVarOperationServerBasePath = operationServerMap['UserApi.userControllerGetMyReputation']?.[localVarOperationServerIndex]?.url;
+            return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         async userControllerLeaderboard(options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<UserControllerLeaderboard200Response>> {
             const localVarAxiosArgs = await localVarAxiosParamCreator.userControllerLeaderboard(options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
@@ -176,6 +218,14 @@ export const UserApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
+        userControllerGetMyReputation(options?: RawAxiosRequestConfig): AxiosPromise<UserReputationDto> {
+            return localVarFp.userControllerGetMyReputation(options).then((request) => request(axios, basePath));
+        },
+        /**
+         * 
+         * @param {*} [options] Override http request option.
+         * @throws {RequiredError}
+         */
         userControllerLeaderboard(options?: RawAxiosRequestConfig): AxiosPromise<UserControllerLeaderboard200Response> {
             return localVarFp.userControllerLeaderboard(options).then((request) => request(axios, basePath));
         },
@@ -210,6 +260,14 @@ export interface UserApiInterface {
      * @throws {RequiredError}
      * @memberof UserApiInterface
      */
+    userControllerGetMyReputation(options?: RawAxiosRequestConfig): AxiosPromise<UserReputationDto>;
+
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApiInterface
+     */
     userControllerLeaderboard(options?: RawAxiosRequestConfig): AxiosPromise<UserControllerLeaderboard200Response>;
 
     /**
@@ -237,6 +295,16 @@ export interface UserApiInterface {
  * @extends {BaseAPI}
  */
 export class UserApi extends BaseAPI implements UserApiInterface {
+    /**
+     * 
+     * @param {*} [options] Override http request option.
+     * @throws {RequiredError}
+     * @memberof UserApi
+     */
+    public userControllerGetMyReputation(options?: RawAxiosRequestConfig) {
+        return UserApiFp(this.configuration).userControllerGetMyReputation(options).then((request) => request(this.axios, this.basePath));
+    }
+
     /**
      * 
      * @param {*} [options] Override http request option.

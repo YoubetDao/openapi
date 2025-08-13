@@ -311,6 +311,18 @@ paths:
         "200":
           description: ""
       tags: *a4
+  /users/me/reputation:
+    get:
+      operationId: UserController_getMyReputation
+      parameters: []
+      responses:
+        "200":
+          description: Get current user reputation score
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserReputationDto"
+      tags: *a4
   /rewards:
     get:
       operationId: RewardController_getRewards
@@ -2134,6 +2146,47 @@ components:
         - displayName
         - avatarUrl
         - bio
+    ReputationDetailsDto:
+      type: object
+      properties:
+        completed:
+          type: number
+          description: Number of tasks completed on time
+        delayedCompleted:
+          type: number
+          description: Number of tasks completed after deadline
+        earlyAbandoned:
+          type: number
+          description: Number of tasks abandoned before deadline
+        delayedAbandoned:
+          type: number
+          description: Number of tasks abandoned after deadline
+      required:
+        - completed
+        - delayedCompleted
+        - earlyAbandoned
+        - delayedAbandoned
+    UserReputationDto:
+      type: object
+      properties:
+        score:
+          type: number
+          description: User reputation score (0-10)
+          minimum: 0
+          maximum: 10
+          example: 7.5
+        taskCount:
+          type: number
+          description: Number of tasks used for reputation calculation
+          example: 20
+        details:
+          description: Breakdown of task completion details
+          allOf:
+            - $ref: "#/components/schemas/ReputationDetailsDto"
+      required:
+        - score
+        - taskCount
+        - details
     CreateRewardDto:
       type: object
       properties: {}
