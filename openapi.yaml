@@ -634,6 +634,22 @@ paths:
               - no-grant-needed
               - grant-needed
             type: string
+        - name: createdAtFrom
+          required: false
+          in: query
+          description: Filter tasks created from this date (ISO 8601 format)
+          schema:
+            format: date-time
+            example: 2024-01-01T00:00:00Z
+            type: string
+        - name: createdAtTo
+          required: false
+          in: query
+          description: Filter tasks created until this date (ISO 8601 format)
+          schema:
+            format: date-time
+            example: 2024-12-31T23:59:59Z
+            type: string
         - name: offset
           required: false
           in: query
@@ -806,6 +822,22 @@ paths:
               - all
               - no-grant-needed
               - grant-needed
+            type: string
+        - name: createdAtFrom
+          required: false
+          in: query
+          description: Filter tasks created from this date (ISO 8601 format)
+          schema:
+            format: date-time
+            example: 2024-01-01T00:00:00Z
+            type: string
+        - name: createdAtTo
+          required: false
+          in: query
+          description: Filter tasks created until this date (ISO 8601 format)
+          schema:
+            format: date-time
+            example: 2024-12-31T23:59:59Z
             type: string
         - name: offset
           required: false

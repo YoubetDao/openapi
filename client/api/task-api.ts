@@ -112,6 +112,8 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {TaskControllerGetManagedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetManagedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {TaskControllerGetManagedTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
+         * @param {string} [createdAtFrom] Filter tasks created from this date (ISO 8601 format)
+         * @param {string} [createdAtTo] Filter tasks created until this date (ISO 8601 format)
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {string} [search] 搜索关键字
@@ -119,7 +121,7 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetManagedTasks: async (projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, search?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskControllerGetManagedTasks: async (projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, createdAtFrom?: string, createdAtTo?: string, offset?: number, limit?: number, search?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/tasks/managed`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -162,6 +164,18 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (noGrantNeeded !== undefined) {
                 localVarQueryParameter['noGrantNeeded'] = noGrantNeeded;
+            }
+
+            if (createdAtFrom !== undefined) {
+                localVarQueryParameter['createdAtFrom'] = (createdAtFrom as any instanceof Date) ?
+                    (createdAtFrom as any).toISOString() :
+                    createdAtFrom;
+            }
+
+            if (createdAtTo !== undefined) {
+                localVarQueryParameter['createdAtTo'] = (createdAtTo as any instanceof Date) ?
+                    (createdAtTo as any).toISOString() :
+                    createdAtTo;
             }
 
             if (offset !== undefined) {
@@ -234,6 +248,8 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {TaskControllerGetTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {TaskControllerGetTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
+         * @param {string} [createdAtFrom] Filter tasks created from this date (ISO 8601 format)
+         * @param {string} [createdAtTo] Filter tasks created until this date (ISO 8601 format)
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {string} [search] 搜索关键字
@@ -241,7 +257,7 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetTasks: async (project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, search?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
+        taskControllerGetTasks: async (project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, createdAtFrom?: string, createdAtTo?: string, offset?: number, limit?: number, search?: string, sort?: string, options: RawAxiosRequestConfig = {}): Promise<RequestArgs> => {
             const localVarPath = `/tasks`;
             // use dummy base URL string because the URL constructor only accepts absolute URLs.
             const localVarUrlObj = new URL(localVarPath, DUMMY_BASE_URL);
@@ -284,6 +300,18 @@ export const TaskApiAxiosParamCreator = function (configuration?: Configuration)
 
             if (noGrantNeeded !== undefined) {
                 localVarQueryParameter['noGrantNeeded'] = noGrantNeeded;
+            }
+
+            if (createdAtFrom !== undefined) {
+                localVarQueryParameter['createdAtFrom'] = (createdAtFrom as any instanceof Date) ?
+                    (createdAtFrom as any).toISOString() :
+                    createdAtFrom;
+            }
+
+            if (createdAtTo !== undefined) {
+                localVarQueryParameter['createdAtTo'] = (createdAtTo as any instanceof Date) ?
+                    (createdAtTo as any).toISOString() :
+                    createdAtTo;
             }
 
             if (offset !== undefined) {
@@ -540,6 +568,8 @@ export const TaskApiFp = function(configuration?: Configuration) {
          * @param {TaskControllerGetManagedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetManagedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {TaskControllerGetManagedTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
+         * @param {string} [createdAtFrom] Filter tasks created from this date (ISO 8601 format)
+         * @param {string} [createdAtTo] Filter tasks created until this date (ISO 8601 format)
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {string} [search] 搜索关键字
@@ -547,8 +577,8 @@ export const TaskApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, search, sort, options);
+        async taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, createdAtFrom?: string, createdAtTo?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, createdAtFrom, createdAtTo, offset, limit, search, sort, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerGetManagedTasks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -575,6 +605,8 @@ export const TaskApiFp = function(configuration?: Configuration) {
          * @param {TaskControllerGetTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {TaskControllerGetTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
+         * @param {string} [createdAtFrom] Filter tasks created from this date (ISO 8601 format)
+         * @param {string} [createdAtTo] Filter tasks created until this date (ISO 8601 format)
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {string} [search] 搜索关键字
@@ -582,8 +614,8 @@ export const TaskApiFp = function(configuration?: Configuration) {
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        async taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
-            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, search, sort, options);
+        async taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, createdAtFrom?: string, createdAtTo?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): Promise<(axios?: AxiosInstance, basePath?: string) => AxiosPromise<TaskControllerGetTasks200Response>> {
+            const localVarAxiosArgs = await localVarAxiosParamCreator.taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, createdAtFrom, createdAtTo, offset, limit, search, sort, options);
             const localVarOperationServerIndex = configuration?.serverIndex ?? 0;
             const localVarOperationServerBasePath = operationServerMap['TaskApi.taskControllerGetTasks']?.[localVarOperationServerIndex]?.url;
             return (axios, basePath) => createRequestFunction(localVarAxiosArgs, globalAxios, BASE_PATH, configuration)(axios, localVarOperationServerBasePath || basePath);
@@ -686,6 +718,8 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
          * @param {TaskControllerGetManagedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetManagedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {TaskControllerGetManagedTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
+         * @param {string} [createdAtFrom] Filter tasks created from this date (ISO 8601 format)
+         * @param {string} [createdAtTo] Filter tasks created until this date (ISO 8601 format)
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {string} [search] 搜索关键字
@@ -693,8 +727,8 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
-            return localVarFp.taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, search, sort, options).then((request) => request(axios, basePath));
+        taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, createdAtFrom?: string, createdAtTo?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+            return localVarFp.taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, createdAtFrom, createdAtTo, offset, limit, search, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -715,6 +749,8 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
          * @param {TaskControllerGetTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
          * @param {TaskControllerGetTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
          * @param {TaskControllerGetTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
+         * @param {string} [createdAtFrom] Filter tasks created from this date (ISO 8601 format)
+         * @param {string} [createdAtTo] Filter tasks created until this date (ISO 8601 format)
          * @param {number} [offset] 分页偏移量
          * @param {number} [limit] 每页数量
          * @param {string} [search] 搜索关键字
@@ -722,8 +758,8 @@ export const TaskApiFactory = function (configuration?: Configuration, basePath?
          * @param {*} [options] Override http request option.
          * @throws {RequiredError}
          */
-        taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
-            return localVarFp.taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, search, sort, options).then((request) => request(axios, basePath));
+        taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, createdAtFrom?: string, createdAtTo?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response> {
+            return localVarFp.taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, createdAtFrom, createdAtTo, offset, limit, search, sort, options).then((request) => request(axios, basePath));
         },
         /**
          * 
@@ -807,6 +843,8 @@ export interface TaskApiInterface {
      * @param {TaskControllerGetManagedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
      * @param {TaskControllerGetManagedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
      * @param {TaskControllerGetManagedTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
+     * @param {string} [createdAtFrom] Filter tasks created from this date (ISO 8601 format)
+     * @param {string} [createdAtTo] Filter tasks created until this date (ISO 8601 format)
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
      * @param {string} [search] 搜索关键字
@@ -815,7 +853,7 @@ export interface TaskApiInterface {
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, createdAtFrom?: string, createdAtTo?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -836,6 +874,8 @@ export interface TaskApiInterface {
      * @param {TaskControllerGetTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
      * @param {TaskControllerGetTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
      * @param {TaskControllerGetTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
+     * @param {string} [createdAtFrom] Filter tasks created from this date (ISO 8601 format)
+     * @param {string} [createdAtTo] Filter tasks created until this date (ISO 8601 format)
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
      * @param {string} [search] 搜索关键字
@@ -844,7 +884,7 @@ export interface TaskApiInterface {
      * @throws {RequiredError}
      * @memberof TaskApiInterface
      */
-    taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
+    taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, createdAtFrom?: string, createdAtTo?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig): AxiosPromise<TaskControllerGetTasks200Response>;
 
     /**
      * 
@@ -930,6 +970,8 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
      * @param {TaskControllerGetManagedTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
      * @param {TaskControllerGetManagedTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
      * @param {TaskControllerGetManagedTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
+     * @param {string} [createdAtFrom] Filter tasks created from this date (ISO 8601 format)
+     * @param {string} [createdAtTo] Filter tasks created until this date (ISO 8601 format)
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
      * @param {string} [search] 搜索关键字
@@ -938,8 +980,8 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
      * @throws {RequiredError}
      * @memberof TaskApi
      */
-    public taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig) {
-        return TaskApiFp(this.configuration).taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, search, sort, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerGetManagedTasks(projects?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetManagedTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetManagedTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetManagedTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetManagedTasksNoGrantNeededEnum, createdAtFrom?: string, createdAtTo?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskControllerGetManagedTasks(projects, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, createdAtFrom, createdAtTo, offset, limit, search, sort, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
@@ -963,6 +1005,8 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
      * @param {TaskControllerGetTasksRewardGrantedEnum} [rewardGranted] Filter by reward granted status: all, granted, ungranted
      * @param {TaskControllerGetTasksRewardClaimedEnum} [rewardClaimed] Filter by reward claimed status: all, claimed, unclaimed
      * @param {TaskControllerGetTasksNoGrantNeededEnum} [noGrantNeeded] Filter by no grant needed status: all, no-grant-needed, grant-needed
+     * @param {string} [createdAtFrom] Filter tasks created from this date (ISO 8601 format)
+     * @param {string} [createdAtTo] Filter tasks created until this date (ISO 8601 format)
      * @param {number} [offset] 分页偏移量
      * @param {number} [limit] 每页数量
      * @param {string} [search] 搜索关键字
@@ -971,8 +1015,8 @@ export class TaskApi extends BaseAPI implements TaskApiInterface {
      * @throws {RequiredError}
      * @memberof TaskApi
      */
-    public taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig) {
-        return TaskApiFp(this.configuration).taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, offset, limit, search, sort, options).then((request) => request(this.axios, this.basePath));
+    public taskControllerGetTasks(project?: string, assignees?: string, priority?: string, states?: string, assignmentStatus?: TaskControllerGetTasksAssignmentStatusEnum, rewardGranted?: TaskControllerGetTasksRewardGrantedEnum, rewardClaimed?: TaskControllerGetTasksRewardClaimedEnum, noGrantNeeded?: TaskControllerGetTasksNoGrantNeededEnum, createdAtFrom?: string, createdAtTo?: string, offset?: number, limit?: number, search?: string, sort?: string, options?: RawAxiosRequestConfig) {
+        return TaskApiFp(this.configuration).taskControllerGetTasks(project, assignees, priority, states, assignmentStatus, rewardGranted, rewardClaimed, noGrantNeeded, createdAtFrom, createdAtTo, offset, limit, search, sort, options).then((request) => request(this.axios, this.basePath));
     }
 
     /**
