@@ -15,9 +15,6 @@
 
 // May contain unused imports in some cases
 // @ts-ignore
-import type { GithubUser } from './github-user';
-// May contain unused imports in some cases
-// @ts-ignore
 import type { RewardDetail } from './reward-detail';
 
 /**
@@ -62,12 +59,6 @@ export interface UpdateTaskDto {
      * @memberof UpdateTaskDto
      */
     'due'?: string;
-    /**
-     * Task assignees list
-     * @type {Array<GithubUser>}
-     * @memberof UpdateTaskDto
-     */
-    'assignees'?: Array<GithubUser>;
 }
 
 export const UpdateTaskDtoPriorityEnum = {
