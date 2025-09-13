@@ -2637,6 +2637,11 @@ components:
           format: date-time
           type: string
           description: Due date for the task
+        assignees:
+          description: Task assignees list
+          type: array
+          items:
+            $ref: "#/components/schemas/GithubUser"
     TaskApply:
       type: object
       properties:
